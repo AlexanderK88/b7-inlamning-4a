@@ -6,7 +6,6 @@ const screeningSchema = new mongoose.Schema({
     movieID: { type: Number, required: true },
     date: { type: Date, required: true },
     startTime: { type: Date, required: true },
-    seats: { type: Array, required: true },
   },
 });
 
