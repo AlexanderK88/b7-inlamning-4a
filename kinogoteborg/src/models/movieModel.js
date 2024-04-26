@@ -10,11 +10,9 @@ const movieSchema = new mongoose.Schema({
       url: { type: String, required: true },
       alt: { type: String, required: true },
     },
-    releaseDate: { type: Date, required: true },
+    releaseDate: { type: String, required: true },
     genre: { type: Array, required: true },
   },
 });
 
-const Movie = mongoose.model("movies", movieSchema);
-
-export default Movie;
+export default mongoose.models.Movie || mongoose.model("Movie", movieSchema);
