@@ -31,8 +31,10 @@ export default function Page() {
 
   return (
     <div className="flex flex-col border h-screen m-0">
-      <div className="md:grid md:grid-cols-4 md:grid-rows-8 gap-4">
-        <div className="col-span-3 flex flex-row align-center justify-evenly border p-2 ">
+      <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
+        <div className="md:row-span-6 md:col-start-4 md:row-start-2 border">movie data</div>
+
+        <div className="md:col-span-3 flex flex-row align-center justify-evenly border p-2 ">
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
@@ -42,16 +44,17 @@ export default function Page() {
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
         </div>
 
-        <div className="row-span-5 col-start-4 border">movie data</div>
-        <div className="col-span-2 col-start-1 row-start-2 flex flex-row align-center justify-evenly p-2 border">
+        <div className="md:col-span-2 md:col-start-1 md:row-start-2 flex flex-row align-center justify-evenly p-2 border">
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
         </div>
-        <div className="col-start-3 row-start-2 border">amount of guests</div>
-        <div className="col-span-3 row-span-6 col-start-1 row-start-3 border">saloon render</div>
-        <div className="col-start-4 row-start-6 border">
+        <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
+        <div className="md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border">
+          saloon render
+        </div>
+        <div className="md:col-start-4 md:row-start-8 border">
           <Button onClick={() => setBookNow(true)} className={"w-[10em]"}>
             Book Now
           </Button>
