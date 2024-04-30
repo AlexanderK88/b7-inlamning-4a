@@ -7,3 +7,6 @@
     text-wrap: balance;
   }
 }
+input {
+  @apply w-full border border-gray-300 rounded-md px-6 py-2 bg-zinc-100/40;
+}
