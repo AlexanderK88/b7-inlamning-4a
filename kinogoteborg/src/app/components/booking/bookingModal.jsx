@@ -11,7 +11,9 @@ export default function BookingModal({ isComplete }) {
       return (
         <>
           <h2>Welcome to our booking system!</h2>
-          <Button onClick={() => setBookingState("bookingForm")}>first step</Button>
+          <Button onClick={() => setBookingState("bookingForm")} className={"w-[10em]"}>
+            first step
+          </Button>
           <p>test</p>
         </>
       );

@@ -12,12 +12,10 @@ import { Button } from "@/app/components/booking/button";
 
 const Modal = ({ isComplete }) => {
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto">
-      <div className="flex items-center justify-center min-h-[30em] border border-black pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 transition-opacity">
-          <div className="flex flex-col items-center justify-center">
-            <BookingModal isComplete={isComplete} />
-          </div>
+    <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
+      <div className="flex flex-col items-center justify-center w-full max-w-screen-lg mx-auto px-4 py-8">
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <BookingModal isComplete={isComplete} />
         </div>
       </div>
     </div>
@@ -32,24 +30,48 @@ export default function Page() {
   };
 
   return (
-    <>
-      <p>hello world</p>
-      <Button onClick={() => setBookNow(true)}>Book Now</Button>
+    <div className="flex flex-col border h-screen m-0">
+      <div className="md:grid md:grid-cols-4 md:grid-rows-8 gap-4">
+        <div className="col-span-3 flex flex-row align-center justify-evenly border p-2 ">
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+        </div>
+
+        <div className="row-span-5 col-start-4 border">movie data</div>
+        <div className="col-span-2 col-start-1 row-start-2 flex flex-row align-center justify-evenly p-2 border">
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+        </div>
+        <div className="col-start-3 row-start-2 border">amount of guests</div>
+        <div className="col-span-3 row-span-6 col-start-1 row-start-3 border">saloon render</div>
+        <div className="col-start-4 row-start-6 border">
+          <Button onClick={() => setBookNow(true)} className={"w-[10em]"}>
+            Book Now
+          </Button>
+        </div>
+      </div>
 
       {/* Looks better in the return statement but might be a bit harder to read compared to the part below */}
       {bookNow && <Modal isComplete={setBookNow} />}
 
       {/* { bookNow && 
-      <div className="">
-      <div className="fixed z-10 inset-0 overflow-y-auto">
-        <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <div className="fixed inset-0 transition-opacity">
-            <BookingModal isComplete={handleCompletedBooking}/>
-          </div>
-        </div>
-      </div>
+<div className="">
+<div className="fixed z-10 inset-0 overflow-y-auto">
+  <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div className="fixed inset-0 transition-opacity">
+      <BookingModal isComplete={handleCompletedBooking}/>
     </div>
-  } */}
-    </>
+  </div>
+</div>
+</div>
+} */}
+    </div>
   );
 }
