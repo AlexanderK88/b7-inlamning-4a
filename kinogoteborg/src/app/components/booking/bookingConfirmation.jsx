@@ -3,15 +3,13 @@ import { Button } from "./button";
 export default function BookingConfirmation({ setBookingState, nextState, isComplete }) {
   return (
     <>
-      <p>loginpage</p>
-      <Button onClick={() => setBookingState(nextState)}>Confirm Booking</Button>
-      <br></br>
+      <p>Booking confirmation</p>
       <Button
         onClick={() => {
           setBookingState("intro"), isComplete(false);
         }}
       >
-        Cancel
+        Enjoy your movie!
       </Button>
     </>
   );

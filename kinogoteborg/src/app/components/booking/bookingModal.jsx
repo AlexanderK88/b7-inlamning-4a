@@ -17,17 +17,13 @@ export default function BookingModal({ isComplete, knownUser }) {
   return (
     <>
       {bookingState === "login" ? (
-        <BookingLogin
-          setBookingState={setBookingState}
-          nextState={"bookingForm"}
-          isComplete={isComplete}
-        />
+        <BookingLogin setBookingState={setBookingState} isComplete={isComplete} />
       ) : null}
 
       {bookingState === "paymentAsUser" ? (
         <PaymentAsUser
           setBookingState={setBookingState}
-          nextState={"bookingForm"}
+          nextState={"controlOfBooking"}
           isComplete={isComplete}
         />
       ) : null}
@@ -51,17 +47,13 @@ export default function BookingModal({ isComplete, knownUser }) {
       {bookingState === "controlOfBooking" ? (
         <BookingControl
           setBookingState={setBookingState}
-          nextState={"bookingForm"}
+          nextState={"confirmationOfBooking"}
           isComplete={isComplete}
         />
       ) : null}
 
       {bookingState === "confirmationOfBooking" ? (
-        <BookingConfirmation
-          setBookingState={setBookingState}
-          nextState={"bookingForm"}
-          isComplete={isComplete}
-        />
+        <BookingConfirmation setBookingState={setBookingState} isComplete={isComplete} />
       ) : null}
 
       {bookingState === "validateSpecialNeeds" ? (
