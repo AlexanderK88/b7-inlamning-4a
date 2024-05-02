@@ -14,71 +14,63 @@ export default function BookingModal({ isComplete, knownUser }) {
 
   if (knownUser) setBookingState("paymentAsUser");
 
-  switch (bookingState) {
-    case "login":
-      return (
+  return (
+    <>
+      {bookingState === "login" ? (
         <BookingLogin
           setBookingState={setBookingState}
           nextState={"bookingForm"}
           isComplete={isComplete}
         />
-      );
+      ) : null}
 
-    case "paymentAsUser":
-      return (
+      {bookingState === "paymentAsUser" ? (
         <PaymentAsUser
           setBookingState={setBookingState}
           nextState={"bookingForm"}
           isComplete={isComplete}
         />
-      );
+      ) : null}
 
-    case "paymentAsGuest":
-      return (
+      {bookingState === "paymentAsGuest" ? (
         <PaymentAsGuest
           setBookingState={setBookingState}
           nextState={"bookingForm"}
           isComplete={isComplete}
         />
-      );
+      ) : null}
 
-    case "paymentOption":
-      return (
+      {bookingState === "paymentOption" ? (
         <PaymentAsUser
           setBookingState={setBookingState}
           nextState={"bookingForm"}
           isComplete={isComplete}
         />
-      );
+      ) : null}
 
-    case "controlOfBooking":
-      return (
+      {bookingState === "controlOfBooking" ? (
         <BookingControl
           setBookingState={setBookingState}
           nextState={"bookingForm"}
           isComplete={isComplete}
         />
-      );
+      ) : null}
 
-    case "confirmationOfBooking":
-      return (
+      {bookingState === "confirmationOfBooking" ? (
         <BookingConfirmation
           setBookingState={setBookingState}
           nextState={"bookingForm"}
           isComplete={isComplete}
         />
-      );
+      ) : null}
 
-    case "validateSpecialNeeds":
-      return (
+      {bookingState === "validateSpecialNeeds" ? (
         <ValidateSpecialNeeds
           setBookingState={setBookingState}
           nextState={"bookingForm"}
           isComplete={isComplete}
         />
-      );
-
-    default:
-      return null;
-  }
+      ) : null}
+    </>
+  );
 }
