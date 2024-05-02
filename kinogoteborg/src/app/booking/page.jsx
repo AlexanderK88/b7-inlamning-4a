@@ -30,13 +30,12 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col border h-screen m-0">
+    <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
-        <div className="md:row-span-6 md:col-start-4 md:row-start-2 border">movie data</div>
+        <div className="md:row-span-6 md:col-start-4 md:row-start-1 border">movie data</div>
 
         <div className="md:col-span-3 flex flex-row align-center justify-evenly border p-2 ">
-          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
-          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <p>screening date</p>
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
@@ -45,8 +44,7 @@ export default function Page() {
         </div>
 
         <div className="md:col-span-2 md:col-start-1 md:row-start-2 flex flex-row align-center justify-evenly p-2 border">
-          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
-          <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
+          <p>screening times</p>
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]"></div>
         </div>
@@ -54,7 +52,7 @@ export default function Page() {
         <div className="md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border">
           saloon render
         </div>
-        <div className="md:col-start-4 md:row-start-8 border">
+        <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">
           <Button onClick={() => setBookNow(true)} className={"w-[10em]"}>
             Book Now
           </Button>
