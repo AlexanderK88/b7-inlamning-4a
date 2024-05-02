@@ -7,6 +7,7 @@
 //   .then(cinema => console.log(cinema))
 //   .catch(error => console.error(error));
 import BookingModal from "@/app/components/booking/bookingModal";
+
 import React, { useState } from "react";
 import { Button } from "@/app/components/booking/button";
 
@@ -24,6 +25,7 @@ const Modal = ({ isComplete }) => {
 
 export default function Page() {
   const [bookNow, setBookNow] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleCompletedBooking = (value) => {
     setBookNow(value);
@@ -72,7 +74,7 @@ export default function Page() {
       </div>
 
       {/* Looks better in the return statement but might be a bit harder to read compared to the part below */}
-      {bookNow && <Modal isComplete={setBookNow} />}
+      {bookNow && <Modal isComplete={setBookNow} knownUser={isLogin} />}
 
       {/* { bookNow && 
 <div className="">
