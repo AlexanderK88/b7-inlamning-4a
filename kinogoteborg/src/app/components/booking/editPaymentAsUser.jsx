@@ -1,9 +1,9 @@
 import { Button } from "./button";
 
-export default function PaymentAsGuest({ setBookingState, nextState, isComplete }) {
+export default function EditPaymentAsuser({ setBookingState, nextState, isComplete }) {
   return (
     <>
-      <p>loginpage</p>
+      <p>Payment options as user</p>
       <Button onClick={() => setBookingState(nextState)}>Confirm Booking</Button>
       <br></br>
       <Button

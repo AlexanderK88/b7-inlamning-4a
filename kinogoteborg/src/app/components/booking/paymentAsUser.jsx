@@ -3,24 +3,41 @@ import { useState } from "react";
 import { ModalHeader } from "./bookingModal";
 
 export default function PaymentAsUser({ setBookingState, nextState, isComplete }) {
-  const [paymentOption, setPaymentOption] = useState(undefined);
-
-  const style = "flex flex-row w-full justify-evenly m-auto";
-
   const [newPayment, setNewPayment] = useState(false);
-  const [savedPayment, setSavedPayment] = useState(false);
+  const [savedPayment, setSavedPayment] = useState(true);
   const [updatePayment, setUpdatePayment] = useState(false);
 
   const NewPaymentForm = () => {
-    return <p>new payment</p>;
+    return (
+      <>
+        <p>new payment</p>
+        <Button onClick={() => setBookingState("controlOfBooking")} className={"mt-4"}>
+          Confirm Booking
+        </Button>
+      </>
+    );
   };
 
   const SavedPaymentForm = () => {
-    return <p>saved payment</p>;
+    return (
+      <>
+        <p>saved payment</p>
+        <Button onClick={() => setBookingState("controlOfBooking")} className={"mt-4"}>
+          Confirm Booking
+        </Button>
+      </>
+    );
   };
 
   const UpdatePaymentForm = () => {
-    return <p>update payment</p>;
+    return (
+      <>
+        <p>update payment</p>
+        <Button onClick={() => setBookingState("controlOfBooking")} className={"mt-4"}>
+          Confirm Booking
+        </Button>
+      </>
+    );
   };
 
   return (
@@ -43,7 +60,7 @@ export default function PaymentAsUser({ setBookingState, nextState, isComplete }
           <label className="mr-5">Betala med sparade uppgifter</label>
           <input
             type="radio"
-            className="w-[1em] h-[1em] rounded-lg"
+            className="w-[1em] h-[1em] rounded-lg active:bg-white"
             checked={savedPayment}
             onChange={() => {
               setNewPayment(false), setSavedPayment(true), setUpdatePayment(false);
@@ -73,9 +90,6 @@ export default function PaymentAsUser({ setBookingState, nextState, isComplete }
       {newPayment && <NewPaymentForm />}
       {savedPayment && <SavedPaymentForm />}
       {updatePayment && <UpdatePaymentForm />}
-      <Button onClick={() => setBookingState(nextState)} className={"mt-4"}>
-        Confirm Booking
-      </Button>
     </>
   );
 }
