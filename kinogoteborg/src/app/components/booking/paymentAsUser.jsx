@@ -11,7 +11,7 @@ export default function PaymentAsUser({ setBookingState, nextState, isComplete }
     return (
       <>
         <p>new payment</p>
-        <Button onClick={() => setBookingState("controlOfBooking")} className={"mt-4"}>
+        <Button onClick={() => setBookingState("ControlOfBooking")} className={"mt-4"}>
           Confirm Booking
         </Button>
       </>
@@ -22,7 +22,7 @@ export default function PaymentAsUser({ setBookingState, nextState, isComplete }
     return (
       <>
         <p>saved payment</p>
-        <Button onClick={() => setBookingState("controlOfBooking")} className={"mt-4"}>
+        <Button onClick={() => setBookingState("ControlOfBooking")} className={"mt-4"}>
           Confirm Booking
         </Button>
       </>
@@ -33,7 +33,7 @@ export default function PaymentAsUser({ setBookingState, nextState, isComplete }
     return (
       <>
         <p>update payment</p>
-        <Button onClick={() => setBookingState("controlOfBooking")} className={"mt-4"}>
+        <Button onClick={() => setBookingState("ControlOfBooking")} className={"mt-4"}>
           Confirm Booking
         </Button>
       </>

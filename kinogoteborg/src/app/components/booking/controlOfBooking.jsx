@@ -19,7 +19,7 @@ export default function BookingControl({ setBookingState, nextState, isComplete 
         <p>Betalsätt: {paymentMethod}</p>
       </div>
 
-      <Button onClick={() => setBookingState("confirmationOfBooking")}>Confirm Booking</Button>
+      <Button onClick={() => setBookingState("ConfirmationOfBooking")}>Confirm Booking</Button>
     </>
   );
 }

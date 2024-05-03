@@ -7,7 +7,7 @@ export default function BookingConfirmation({ setBookingState, nextState, isComp
   const totalPrice = "300kr";
   const paymentMethod = "Credit";
   const userName = "_USERNAME_";
-  const isLogin = false;
+  const isLogin = true;
 
   const ConfirmUser = () => {
     return (

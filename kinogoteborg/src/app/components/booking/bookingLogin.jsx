@@ -14,10 +14,10 @@ export default function BookingLogin({ setBookingState, nextState, isComplete })
           <input placeholder="Enter you password" className="bg-white m-3"></input>
         </div>
 
-        <Button onClick={() => setBookingState("paymentAsUser")} className={"mt-10"}>
+        <Button onClick={() => setBookingState("PaymentAsUser")} className={"mt-10"}>
           Logga in
         </Button>
-        <Button onClick={() => setBookingState("paymentAsGuest")} className={"my-3"}>
+        <Button onClick={() => setBookingState("PaymentAsGuest")} className={"my-3"}>
           Betala som gäst
         </Button>
       </form>

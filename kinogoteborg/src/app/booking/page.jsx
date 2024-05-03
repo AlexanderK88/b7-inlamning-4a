@@ -16,7 +16,12 @@ const Modal = ({ isComplete }) => {
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
       <div className="flex flex-col items-center justify-center w-full max-w-screen-lg mx-auto px-4 py-8">
         <div className="bg-[#7E6969] text-white rounded-lg shadow-lg p-6 w-[96vw] md:w-[50vw]">
-          <BookingModal isComplete={isComplete} />
+          <BookingModal
+            isComplete={isComplete}
+            isVerified={true}
+            isLogin={true}
+            specialNeeds={true}
+          />
         </div>
       </div>
     </div>
