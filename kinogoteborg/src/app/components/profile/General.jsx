@@ -1,4 +1,8 @@
+"use client";
+
+import { useSession } from "next-auth/react";
 export default function General() {
+  const { data: session } = useSession();
   return (
     <div className="h-full col-span-5 w-full bg-stone-700 flex flex-col items-center gap-8">
       <h1 className="text-2xl text-stone-200 text-center mt-8">General</h1>
@@ -6,16 +10,13 @@ export default function General() {
       <div className="border-2 border-solid border-stone-500 bg-stone-700 w-3/4 min-h-32 shadow-md rounded-md text-stone-200">
         <ul className="ml-8">
           <li className="p-2 my-4">
-            Name: <span>Name Surname</span>
+            Name: <span>{session?.user?.name}</span>
           </li>
           <li className="p-2 my-4">
-            Number: <span>+467012312345</span>
+            Number: <span>{session?.user?.phoneNumber}</span>
           </li>
           <li className="p-2 my-4">
-            Email: <span>email@outlook.com</span>
-          </li>
-          <li className="p-2 my-4">
-            Address: <span>Widows Alley, 90845 Stockholm</span>
+            Email: <span>{session?.user?.email}</span>
           </li>
         </ul>
       </div>

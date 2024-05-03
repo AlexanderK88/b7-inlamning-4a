@@ -19,8 +19,9 @@ export async function POST(req) {
         phoneNumber,
         admin: false,
         handicap: false,
+        bookings: [],
+        reviews: [],
       },
-      bookings: [],
     });
 
     return NextResponse.json({ message: "User registered successfully" }, { status: 200 });

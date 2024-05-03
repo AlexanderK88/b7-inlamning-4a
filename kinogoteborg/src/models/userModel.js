@@ -9,8 +9,9 @@ const userSchema = new mongoose.Schema({
     phoneNumber: { type: String, required: true },
     admin: { type: Boolean, required: true },
     handicap: { type: Boolean, required: true },
+    bookings: { type: Array, required: true },
+    reviews: { type: Array, required: true },
   },
-  bookings: { type: Array, required: true },
 });
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

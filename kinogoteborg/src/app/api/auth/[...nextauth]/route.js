@@ -26,7 +26,7 @@ export const authOptions = {
           if (!passWordmatch) {
             return null;
           }
-          return user;
+          return user.attributes;
         } catch (error) {
           console.log(error);
         }
@@ -35,6 +35,34 @@ export const authOptions = {
   ],
   session: {
     strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user, session }) {
+      console.log("jwt callback", { token, user, session });
+      if (user) {
+        //pass user id and number to token
+        return {
+          ...token,
+          phoneNumber: user.phoneNumber,
+          bookings: user.bookings,
+          reviews: user.reviews,
+        };
+      }
+      return token;
+    },
+    async session({ token, user, session }) {
+      console.log("session callback", { token, user, session });
+      //Pass user id and number to session
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          phoneNumber: token.phoneNumber,
+          bookings: token.bookings,
+          reviews: token.reviews,
+        },
+      };
+    },
   },
   secret: process.env.NEXTEAUTH_SECRET,
   pages: {
