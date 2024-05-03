@@ -1,13 +1,17 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function SignupForm({ setIsRegistered }) {
+export default function SignupForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState("");
+
+  const router = useRouter();
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -43,7 +47,7 @@ export default function SignupForm({ setIsRegistered }) {
         const form = e.target;
         form.reset();
         setError("");
-        setIsRegistered(true);
+        router.push("/login");
       } else {
         console.log("user registration failed");
       }
@@ -52,9 +56,6 @@ export default function SignupForm({ setIsRegistered }) {
     }
   }
 
-  const hasUserHandler = () => {
-    setIsRegistered(true);
-  };
   return (
     <div className="min-h-1/3 bg-slate-400 min-w-3/5 md:w-2/5 xl:w-1/4 rounded-md shadow-md p-6 ">
       <h1 className="text-center my-4 text-xl font-bold">Sign up</h1>
@@ -114,12 +115,11 @@ export default function SignupForm({ setIsRegistered }) {
         <div>
           <p className="text-right mt-4">
             Already have an account?
-            <span
-              className="font-bold underline hover:cursor-pointer ml-2 hover:text-stone-700"
-              onClick={hasUserHandler}
-            >
-              Login
-            </span>
+            <Link href="/login">
+              <span className="font-bold underline hover:cursor-pointer ml-2 hover:text-stone-700">
+                Login
+              </span>
+            </Link>
           </p>
         </div>
       </form>
