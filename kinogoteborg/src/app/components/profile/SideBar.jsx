@@ -3,16 +3,8 @@
 import { signOut, useSession } from "next-auth/react";
 
 export default function SideBar({ setPage }) {
-  const { data: session, status } = useSession();
-  console.log(session);
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
+  const { data: session } = useSession();
 
-  // If user is not authenticated, you can redirect them to the login page
-  if (!session) {
-    return <div>Please log in</div>;
-  }
   const handleMenuClick = (e) => {
     console.log(e.target.innerText);
     setPage(e.target.innerText);
