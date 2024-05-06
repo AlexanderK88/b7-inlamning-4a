@@ -19,6 +19,9 @@ export default function BookingControl({ setBookingState, isModalOpen }) {
         <p>Betalsätt: {paymentMethod}</p>
       </div>
 
+      <div className="text-xs font-extralight w-[80%]">
+        Kontrollera att alla uppgifter stämmer och konfirmera betalningen genom att klicka på betala
+      </div>
       <div className="flex flex-row mt-8 justify-evenly">
         <Button onClick={() => setBookingState("ConfirmationOfBooking")}>Confirm Booking</Button>
         <RedButton

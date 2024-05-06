@@ -21,9 +21,13 @@ export default function BookingLogin({ setBookingState, nextState, isModalOpen }
           Betala som gäst
         </Button>
       </form>
-      <div className="flex flex-col text-xs hover:text-red-400 underline">
-        <a href="/signup">Skapa nytt konto</a>
-        <a href="/forgottenpassword">Glömt lösenord</a>
+      <div className="flex flex-col text-xs ">
+        <a href="/signup" className="hover:text-red-400 underline">
+          Skapa nytt konto
+        </a>
+        <a href="/forgottenpassword" className="hover:text-red-400 underline">
+          Glömt lösenord
+        </a>
       </div>
     </>
   );
