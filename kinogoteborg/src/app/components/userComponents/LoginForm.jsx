@@ -51,7 +51,7 @@ export default function LoginForm() {
         <input
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="Password"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -59,6 +59,11 @@ export default function LoginForm() {
         <button className=" mt-4 bg-red-800 hover:bg-red-700 text-stone-300 font-bold cursor-pointer px-6 py-2 rounded-md">
           Login
         </button>
+        {error && (
+          <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+            {error}
+          </div>
+        )}
         <div>
           <p className="text-right mt-4">
             Don't have an account?
