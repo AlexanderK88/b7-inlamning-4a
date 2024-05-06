@@ -1,18 +1,21 @@
-import { Button } from "./button";
+import { Button, RedButton } from "./button";
 
-export default function PaymentAsGuest({ setBookingState, nextState, isComplete }) {
+export default function PaymentAsGuest({ setBookingState, isModalOpen }) {
   return (
     <>
       <p>Edit payment as guest test</p>
-      <Button onClick={() => setBookingState(nextState)}>Confirm Booking</Button>
-      <br></br>
-      <Button
-        onClick={() => {
-          setBookingState("Login"), isComplete(false);
-        }}
-      >
-        Cancel
-      </Button>
+
+      <div className="flex flex-row mt-10 justify-evenly">
+        <Button onClick={() => setBookingState("ControlOfBooking")}>Confirm Booking</Button>
+
+        <RedButton
+          onClick={() => {
+            setBookingState("Login"), isModalOpen(false);
+          }}
+        >
+          Cancel
+        </RedButton>
+      </div>
     </>
   );
 }

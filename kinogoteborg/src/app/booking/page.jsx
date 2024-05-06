@@ -9,18 +9,19 @@
 import BookingModal from "@/app/components/booking/bookingModal";
 
 import React, { useState } from "react";
-import { Button } from "@/app/components/booking/button";
+import { Button, RedButton } from "@/app/components/booking/button";
+import { set } from "mongoose";
 
-const Modal = ({ isComplete }) => {
+const Modal = ({ isModalOpen }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
       <div className="flex flex-col items-center justify-center w-full max-w-screen-lg mx-auto px-4 py-8">
         <div className="bg-[#7E6969] text-white rounded-lg shadow-lg p-6 w-[96vw] md:w-[50vw]">
           <BookingModal
-            isComplete={isComplete}
-            isVerified={true}
-            isLogin={true}
-            specialNeeds={true}
+            isModalOpen={isModalOpen}
+            isVerified={false}
+            isLogin={false}
+            specialNeeds={false}
           />
         </div>
       </div>
@@ -31,10 +32,6 @@ const Modal = ({ isComplete }) => {
 export default function Page() {
   const [bookNow, setBookNow] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-
-  const handleCompletedBooking = (value) => {
-    setBookNow(value);
-  };
 
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
@@ -78,20 +75,8 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Looks better in the return statement but might be a bit harder to read compared to the part below */}
-      {bookNow && <Modal isComplete={setBookNow} knownUser={isLogin} />}
-
-      {/* { bookNow && 
-<div className="">
-<div className="fixed z-10 inset-0 overflow-y-auto">
-  <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-    <div className="fixed inset-0 transition-opacity">
-      <BookingModal isComplete={handleCompletedBooking}/>
-    </div>
-  </div>
-</div>
-</div>
-} */}
+      {/* Opens the booking modal when isModalOpen = true. */}
+      {bookNow && <Modal isModalOpen={setBookNow} knownUser={isLogin} />}
     </div>
   );
 }

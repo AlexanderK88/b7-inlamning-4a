@@ -1,6 +1,6 @@
 import { Button } from "./button";
 
-export default function BookingControl({ setBookingState, nextState, isComplete }) {
+export default function BookingControl({ setBookingState, isModalOpen }) {
   const movieName = "Pulp Fiction";
   const seats = ["1", "2", "3"];
   const date = "14 februari";

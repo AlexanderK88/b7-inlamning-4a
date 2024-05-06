@@ -1,18 +1,20 @@
-import { Button } from "./button";
+import { Button, RedButton } from "./button";
 
-export default function EditPaymentAsuser({ setBookingState, nextState, isComplete }) {
+export default function EditPaymentAsuser({ setBookingState, nextState, isModalOpen }) {
   return (
     <>
       <p>Payment options as user</p>
-      <Button onClick={() => setBookingState(nextState)}>Confirm Booking</Button>
-      <br></br>
-      <Button
-        onClick={() => {
-          setBookingState("intro"), isComplete(false);
-        }}
-      >
-        Cancel
-      </Button>
+
+      <div className="flex flex-row mt-8 justify-evenly">
+        <Button onClick={() => setBookingState("ControlOfBooking")}>Confirm Booking</Button>
+        <RedButton
+          onClick={() => {
+            setBookingState("intro"), isModalOpen(false);
+          }}
+        >
+          Cancel
+        </RedButton>
+      </div>
     </>
   );
 }

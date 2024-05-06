@@ -1,13 +1,12 @@
 import { Button } from "./button";
 
-export default function BookingConfirmation({ setBookingState, nextState, isComplete }) {
+export default function BookingConfirmation({ setBookingState, nextState, isModalOpen, isLogin }) {
   const movieName = "Pulp Fiction";
   const seats = ["1", "2", "3"];
   const date = "14 februari";
   const totalPrice = "300kr";
   const paymentMethod = "Credit";
   const userName = "_USERNAME_";
-  const isLogin = true;
 
   const ConfirmUser = () => {
     return (
@@ -29,7 +28,7 @@ export default function BookingConfirmation({ setBookingState, nextState, isComp
       <>
         <h2 className="text-xl">Tack för din reservation</h2>
         <p className="text-sm w-3/4 mt-4 ">
-          Hämta och betala för dina biljetter i kassa nsenast 2 timmar före filmstart
+          Hämta och betala för dina biljetter i kassan senast 2 timmar före filmstart
         </p>
 
         <div className="mx-3 my-5 flex flex-col justify-start gap-2">
@@ -49,7 +48,7 @@ export default function BookingConfirmation({ setBookingState, nextState, isComp
       {!isLogin && <ConfirmGuest />}
       <Button
         onClick={() => {
-          setBookingState("intro"), isComplete(false);
+          setBookingState("Login"), isModalOpen(false);
         }}
       >
         Enjoy your movie!

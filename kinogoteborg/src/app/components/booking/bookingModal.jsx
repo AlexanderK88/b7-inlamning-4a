@@ -8,13 +8,14 @@ import BookingLogin from "@/app/components/booking/bookingLogin";
 import PaymentAsUser from "@/app/components/booking/paymentAsUser";
 import EditPaymentAsUser from "@/app/components/booking/editPaymentAsUser";
 // Steps as a guest
-import BookingAsGuest from "@/app/components/booking/bookingAsGuest";
+// import BookingAsGuest from "@/app/components/booking/bookingAsGuest";
 import PaymentAsGuest from "@/app/components/booking/paymentOptionAsGuest";
 // Endstep validation for all
 import BookingControl from "@/app/components/booking/controlOfBooking";
 import BookingConfirmation from "@/app/components/booking/bookingConfirmation";
 // Check for special needs
 import ValidateSpecialNeeds from "@/app/components/booking/validateSpecialNeeds";
+import SpecialNeedsLogin from "@/app/components/booking/specialNeedsLogin";
 
 export const ModalHeader = ({ input }) => {
   return (
@@ -24,7 +25,7 @@ export const ModalHeader = ({ input }) => {
   );
 };
 
-export default function BookingModal({ isComplete, isVerified, isLogin, specialNeeds }) {
+export default function BookingModal({ isModalOpen, isVerified, isLogin, specialNeeds }) {
   const [bookingState, setBookingState] = useState("Login");
 
   // if (isLogin) setBookingState("PaymentAsUser");
@@ -43,9 +44,8 @@ export default function BookingModal({ isComplete, isVerified, isLogin, specialN
     <>
       <div className="relative float-start top-0 left-[90%]">
         <Button
-          className={"p-0"}
           onClick={() => {
-            setBookingState("Login"), isComplete(false);
+            setBookingState("Login"), isModalOpen(false);
           }}
         >
           X
@@ -53,63 +53,43 @@ export default function BookingModal({ isComplete, isVerified, isLogin, specialN
       </div>
 
       {bookingState === "Login" ? (
-        <BookingLogin setBookingState={setBookingState} isComplete={isComplete} />
+        <BookingLogin setBookingState={setBookingState} isModalOpen={isModalOpen} />
       ) : null}
 
       {/* OPTIONS FOR USERS */}
       {bookingState === "PaymentAsUser" ? (
-        <PaymentAsUser
-          setBookingState={setBookingState}
-          nextState={"ControlOfBooking"}
-          isComplete={isComplete}
-        />
+        <PaymentAsUser setBookingState={setBookingState} isModalOpen={isModalOpen} />
       ) : null}
 
       {bookingState === "EditPaymentAsUser" ? (
-        <EditPaymentAsUser
-          setBookingState={setBookingState}
-          nextState={"ControlOfBooking"}
-          isComplete={isComplete}
-        />
+        <EditPaymentAsUser setBookingState={setBookingState} isModalOpen={isModalOpen} />
       ) : null}
 
       {/* OPTIONS FOR GUESTS */}
 
-      {bookingState === "BookingAsGuest" ? (
-        <BookingAsGuest
-          setBookingState={setBookingState}
-          nextState={"PaymentAsGuest"}
-          isComplete={isComplete}
-        />
-      ) : null}
-
       {bookingState === "PaymentAsGuest" ? (
-        <PaymentAsGuest
-          setBookingState={setBookingState}
-          nextState={"ControlOfBooking"}
-          isComplete={isComplete}
-        />
+        <PaymentAsGuest setBookingState={setBookingState} isModalOpen={isModalOpen} />
       ) : null}
 
       {/* ENDSTEP OF BOOKING  */}
       {bookingState === "ControlOfBooking" ? (
-        <BookingControl
-          setBookingState={setBookingState}
-          nextState={"ConfirmationOfBooking"}
-          isComplete={isComplete}
-        />
+        <BookingControl setBookingState={setBookingState} isModalOpen={isModalOpen} />
       ) : null}
 
       {bookingState === "ConfirmationOfBooking" ? (
-        <BookingConfirmation setBookingState={setBookingState} isComplete={isComplete} />
+        <BookingConfirmation
+          setBookingState={setBookingState}
+          isModalOpen={isModalOpen}
+          isLogin={isLogin}
+        />
       ) : null}
 
       {bookingState === "ValidateSpecialNeeds" ? (
-        <ValidateSpecialNeeds
-          setBookingState={setBookingState}
-          nextState={"bookingForm"}
-          isComplete={isComplete}
-        />
+        <ValidateSpecialNeeds setBookingState={setBookingState} isModalOpen={isModalOpen} />
+      ) : null}
+
+      {bookingState === "specialkNeedsLogin" ? (
+        <SpecialNeedsLogin setBookingState={setBookingState} isModalOpen={isModalOpen} />
       ) : null}
     </>
   );
