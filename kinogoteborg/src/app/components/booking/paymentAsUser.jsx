@@ -24,10 +24,22 @@ export default function PaymentAsUser({ setBookingState, isModalOpen }) {
     );
   }
 
+  const InputRadioButton = ({ inputId }) => {
+    return (
+      <label htmlFor={inputId}>
+        Swish:
+        <input type="radio" name={inputId} />
+      </label>
+    );
+  };
+
   const NewPaymentForm = () => {
     return (
       <>
         <p>new payment</p>
+        <form>
+          <InputRadioButton inputId={"test"} />
+        </form>
         {/* <Button onClick={() => setBookingState("ControlOfBooking")} className={"mt-4"}>
           Confirm Booking
         </Button> */}

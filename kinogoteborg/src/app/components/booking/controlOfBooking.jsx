@@ -1,4 +1,4 @@
-import { Button } from "./button";
+import { Button, RedButton } from "./button";
 
 export default function BookingControl({ setBookingState, isModalOpen }) {
   const movieName = "Pulp Fiction";
@@ -19,7 +19,16 @@ export default function BookingControl({ setBookingState, isModalOpen }) {
         <p>Betalsätt: {paymentMethod}</p>
       </div>
 
-      <Button onClick={() => setBookingState("ConfirmationOfBooking")}>Confirm Booking</Button>
+      <div className="flex flex-row mt-8 justify-evenly">
+        <Button onClick={() => setBookingState("ConfirmationOfBooking")}>Confirm Booking</Button>
+        <RedButton
+          onClick={() => {
+            setBookingState("intro"), isModalOpen(false);
+          }}
+        >
+          Cancel
+        </RedButton>
+      </div>
     </>
   );
 }
