@@ -3,8 +3,8 @@
       "saloon": 1,
       "seats": [
         { "row": "next", "type": "regular", "count": 10 },
-        { "row": "next", "type": "special", "count": 10 },
-        { "row": "same", "type": "regular", "count": 2 },
+        { "row": "next", "type": "regular", "count": 10 },
+        { "row": "same", "type": "special", "count": 2 },
         { "row": "same", "type": "regular", "count": 10 },
         { "row": "same", "type": "special", "count": 2 }
       ],
