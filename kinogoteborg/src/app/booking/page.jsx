@@ -7,7 +7,7 @@
 //   .then(cinema => console.log(cinema))
 //   .catch(error => console.error(error));
 import BookingModal from "@/app/components/booking/bookingModal";
-
+import clsx from "clsx";
 import React, { useState } from "react";
 import { Button, RedButton } from "@/app/components/booking/button";
 import { set } from "mongoose";
@@ -64,10 +64,19 @@ export default function Page() {
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
         </div>
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
-        <div className="grid md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border min-h-[30vh] ">
-          saloon render
-          <div className="h-2 w-[80%] bg-black m-auto rounded-md">content</div>
+        {/* <div className="grid md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border min-h-[30vh]">
+          <div
+            id="movieScreen"
+            className="h-2 bg-black col-span-5 col-start-1 rounded-md my-2 mx-6 border"></div>
+            <RenderBox />
+        </div> */}
+        <div className="grid md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border min-h-[30vh] flex justify-center items-center">
+          <div
+            id="movieScreen"
+            className="h-2 w-full bg-black col-span-5 col-start-1 rounded-md my-2 mx-6 border"
+          ></div>
         </div>
+
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">
           <Button onClick={() => setBookNow(true)} className={"w-[10em]"}>
             Book Now

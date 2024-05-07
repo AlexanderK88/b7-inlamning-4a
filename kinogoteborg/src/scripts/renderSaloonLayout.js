@@ -3,19 +3,19 @@ import fs from "fs";
 //Fetches data from "Saloon" collection-db to render the requested saloon.
 
 export default async function renderSaloon(saloonNumber) {
-  fs.readFile("./saloons.json", "utf8", (err, data) => {
+  fs.readFile("./kinogoteborg/src/scripts/saloons.json", "utf8", (err, data) => {
     if (err) {
       console.error("Error reading JSON file:", err);
       return;
     }
 
-    console.log("test");
+    // console.log(data)
 
     let currentRowSeats = [];
 
     try {
       const cinemaData = JSON.parse(data).filter((saloonData) => saloonData.saloon == saloonNumber);
-      console.log("test cinmea");
+      // console.log(cinemaData)
 
       for (const saloonData of cinemaData) {
         // if (saloonData.row === "next") {
@@ -49,9 +49,11 @@ export default async function renderSaloon(saloonNumber) {
 
     function printRow(seats) {
       if (seats.length > 0) {
-        // console.log(seats.join(""));
+        console.log(seats.join(""));
       }
       return currentRowSeats;
     }
   });
 }
+
+renderSaloon(1);
