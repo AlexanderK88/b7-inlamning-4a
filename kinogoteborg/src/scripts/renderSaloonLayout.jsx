@@ -74,9 +74,9 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-async function fetchSaloon(saloonNumber) {
+export async function fetchSaloon(saloonNumber) {
   try {
-    const response = await fetch(`api/booking?saloonNumber=${saloonNumber}`, {
+    const response = await fetch(`api/booking?saloon=${saloonNumber}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -85,6 +85,7 @@ async function fetchSaloon(saloonNumber) {
 
     if (!response.ok) {
       throw new Error(`Failed to fetch saloon data: ${response.statusText}`);
+      // console.log('error in fetch')
     }
 
     return await response.json();
@@ -94,7 +95,7 @@ async function fetchSaloon(saloonNumber) {
   }
 }
 
-async function RenderSaloon(saloonNumber) {
+export async function RenderSaloon(saloonNumber) {
   try {
     const cinemaData = JSON.parse(fetchSaloon(1));
     if (cinemaData.length === 0) {

@@ -1,15 +1,19 @@
 import connectToDb from "@/lib/connectToDb";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import Saloon from "@/models/saloonModel";
 
-export async function GET(input) {
+export async function GET(req) {
   await connectToDb();
 
   try {
-    const saloon = await Saloon.find(input);
-    console.log(saloon);
-    return NextResponse.json({ success: "true", data, saloon });
+    const reqSaloon = await Saloon.find(req.query);
+    console.log(reqSaloon);
+    return NextResponse.json({ success: true, data: reqSaloon });
   } catch (err) {
-    return NextResponse.json({ success: "false", error: err });
+    console.error("Error fetching saloon:", err);
+    return NextResponse.json({
+      success: false,
+      error: "Failed to fetch saloon data",
+    });
   }
 }

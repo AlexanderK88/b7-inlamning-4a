@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import RenderSaloon from "@/scripts/renderSaloonLayout";
+import { RenderSaloon } from "@/scripts/renderSaloonLayout";
 
 export default function Page() {
   const [saloonLayout, setSaloonLayout] = useState([]);
