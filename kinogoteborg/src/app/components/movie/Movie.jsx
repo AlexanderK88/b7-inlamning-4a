@@ -1,31 +1,46 @@
-export default async function Movie() {
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
+export default function Movies({ id }) {
+  const [movie, setMovie] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/movies/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(id);
+        console.log(data);
+        setMovie(data.data);
+      });
+  }, [id]);
+
   return (
-    <div className="flex flex-col-reverse lg:flex-row justify-center items-center gap-8 my-12">
-      <div className=" w-5/6 sm:w-4/6 lg:w-2/6 border-solid border-4 rounded-md border-red-900 hover:border-red-800">
-        <img src="" alt="" />
+    <div className="flex flex-col-reverse lg:flex-row justify-center items-center gap-8 my-12 pb-8">
+      <div className=" w-5/6 sm:w-4/6 lg:w-1/4  rounded-md ">
+        <img
+          className="rounded-md"
+          src={movie?.attributes?.image?.url}
+          alt={movie?.attributes?.image?.alt}
+        />
       </div>
-      <div className="text-stone-200 flex flex-col w-5/6 sm:w-4/6 lg:w-2/6 gap-8">
+      <div className="text-stone-200 flex flex-col mt-auto w-5/6 sm:w-4/6 lg:w-2/6 gap-8 ">
         <div>
-          <h1 className="text-3xl">Inception</h1>
-          <span>(2012)</span>
+          <h1 className="text-3xl">{movie?.attributes?.title}</h1>
+          <span>({movie?.attributes?.releaseDate})</span>
         </div>
 
         <ul className="flex flex-col gap-4">
-          <li>Genre: Science fiction, Thriller, Action</li>
-          <li>Spellängd: 2 timmar och 28 minuter</li>
-          <li>Åldersgräns: 16år</li>
+          <li>Genre: {movie?.attributes?.genre.join(", ")}</li>
+          <li>Imdb rating: {movie?.attributes?.imdbRating}</li>
         </ul>
-        <p>
-          Inception" är en film regisserad av Christopher Nolan och släppt år 2010. Handlingen
-          kretsar kring en professionell stöldman, som är skicklig på att stjäla information genom
-          att infiltrera människors drömmar. Han får i uppdrag att utföra omvänd uppgift - att
-          implantera en idé i en persons sinne genom drömmanipulation, vilket visar sig vara en
-          farlig och komplicerad uppgift. Filmen utforskar teman som verklighet och perception, och
-          är känd för sina visuella effekter och komplexa berättande struktur.
-        </p>
-        <button className="p-2 bg-red-900 w-3/4 rounded-md shadow-sm hover:bg-red-800 hover:shadow-md self-center">
-          Book Now
-        </button>
+        <p>{movie?.attributes?.description}</p>
+        <Link href={`http://localhost:3000/booking/${movie?.id}`}>
+          <button className="p-2 bg-red-900 w-3/4 rounded-md shadow-sm hover:bg-red-800 hover:shadow-md ">
+            Book Now
+          </button>
+        </Link>
       </div>
     </div>
   );
