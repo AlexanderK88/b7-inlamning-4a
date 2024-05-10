@@ -61,7 +61,7 @@ export async function RenderSaloon(data) {
       const classNames = clsx(
         "m-2",
         "bg-red-400",
-        "w-6",
+        "w-fit",
         "h-6",
         "border",
         "hover:bg-gray-400",
@@ -81,7 +81,7 @@ export async function RenderSaloon(data) {
       return (
         <div
           key={`seat_${i}`}
-          className="m-2 bg-blue-400 w-6 h-6 border hover:bg-blue-200 active:bg-black rounded-sm justify-center text-center align-middle"
+          className="m-2 bg-blue-400 w-fit h-6 border hover:bg-blue-200 active:bg-black rounded-sm justify-center text-center align-middle"
         >
           {seatNumber}
         </div>
@@ -92,17 +92,17 @@ export async function RenderSaloon(data) {
     for (const seat of cinemaData[0].seats) {
       for (let i = 0; i < seat.count; i++) {
         currentRowSeats.push(
-          seat.type === "regular" ? regular(counter, counter) : special(counter, counter),
+          seat.type === "regular" ? regular(counter, seat.row) : special(counter, seat.row),
         );
         counter++;
       }
 
-      const isLastSeat = cinemaData[0].seats.indexOf(seat) === cinemaData[0].seats.length - 1;
       if (
-        (currentRowSeats.length > 0 &&
-          (seat.row === "next" || !cinemaData[0].seats.includes(seat))) ||
-        isLastSeat ||
-        cinemaData[0].seats[seat + 1].row === "next"
+        cinemaData[0].seats.indexOf(seat) >= cinemaData[0].seats.length - 1 ||
+        (seat.row === "same" &&
+          cinemaData[0].seats.indexOf(seat) + 1 < cinemaData[0].seats.length &&
+          cinemaData[0].seats[cinemaData[0].seats.indexOf(seat) + 1].row !== "same") ||
+        seat.row === "next"
       ) {
         collectedSaloonSeats.push(
           <div

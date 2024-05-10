@@ -66,10 +66,10 @@ export default function Page() {
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
         </div>
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
-        <div className="grid md:col-span-full md:row-span-6 md:col-start-1 md:row-start-3 border items-center">
+        <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center">
           <div
             id="movieScreen"
-            className="h-2 w-full bg-black col-span-5 col-start-1 rounded-md my-2 mx-6 border"
+            className="h-2 w-full mt-8 bg-black col-start-1 rounded-md my-2 mx-6 border"
           ></div>
           <RenderSaloonComp saloonNumber={2} seatsToBook={seatsToBook} />
         </div>

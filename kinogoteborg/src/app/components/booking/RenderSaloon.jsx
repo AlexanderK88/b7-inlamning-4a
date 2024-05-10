@@ -20,7 +20,7 @@ export default function RenderSaloonComp({ saloonNumber, seatsToBook }) {
   }, []); // Run once on component mount
 
   return (
-    <div className="grid border w-full col-span-5 justify-items-start grid-flow-row justify-evenly">
+    <div className=" grid border max-w-full justify-items-start grid-flow-row justify-evenly overflow-auto mt-12">
       {saloonLayout.length === 0 ? <div>Loading...</div> : saloonLayout}
     </div>
   );
