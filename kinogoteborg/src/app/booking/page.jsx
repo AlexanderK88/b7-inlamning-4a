@@ -6,11 +6,13 @@
 // renderSaloon(2)
 //   .then(cinema => console.log(cinema))
 //   .catch(error => console.error(error));
-import BookingModal from "@/app/components/booking/bookingModal";
 import clsx from "clsx";
 import React, { useState } from "react";
 import { Button, RedButton } from "@/app/components/booking/button";
 import { set } from "mongoose";
+
+import BookingModal from "@/app/components/booking/bookingModal";
+import RenderSaloonComp from "../components/booking/RenderSaloon";
 
 const Modal = ({ isModalOpen }) => {
   return (
@@ -32,7 +34,7 @@ const Modal = ({ isModalOpen }) => {
 export default function Page() {
   const [bookNow, setBookNow] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-
+  const seatsToBook = 3;
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
@@ -64,17 +66,12 @@ export default function Page() {
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
         </div>
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
-        {/* <div className="grid md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border min-h-[30vh]">
-          <div
-            id="movieScreen"
-            className="h-2 bg-black col-span-5 col-start-1 rounded-md my-2 mx-6 border"></div>
-            <RenderBox />
-        </div> */}
-        <div className="grid md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border min-h-[30vh] flex justify-center items-center">
+        <div className="grid md:col-span-full md:row-span-6 md:col-start-1 md:row-start-3 border items-center">
           <div
             id="movieScreen"
             className="h-2 w-full bg-black col-span-5 col-start-1 rounded-md my-2 mx-6 border"
           ></div>
+          <RenderSaloonComp saloonNumber={2} seatsToBook={seatsToBook} />
         </div>
 
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">

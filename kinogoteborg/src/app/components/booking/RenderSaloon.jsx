@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { RenderSaloon } from "@/scripts/renderSaloonLayout";
+import { RenderProcess } from "@/scripts/renderSaloonLayout";
 
-export default function Page() {
+export default function RenderSaloonComp({ saloonNumber, seatsToBook }) {
   const [saloonLayout, setSaloonLayout] = useState([]);
 
   useEffect(() => {
     async function fetchSaloonLayout() {
       try {
-        const layout = await RenderSaloon(1); // Assuming saloon number 1
+        const layout = await RenderProcess(saloonNumber);
         setSaloonLayout(layout || []);
       } catch (error) {
         console.error("Error fetching saloon layout:", error);
@@ -20,7 +20,7 @@ export default function Page() {
   }, []); // Run once on component mount
 
   return (
-    <div className="flex flex-row flex-wrap justify-center w-3/4 h-screen border">
+    <div className="grid border w-full col-span-5 justify-items-start grid-flow-row justify-evenly">
       {saloonLayout.length === 0 ? <div>Loading...</div> : saloonLayout}
     </div>
   );

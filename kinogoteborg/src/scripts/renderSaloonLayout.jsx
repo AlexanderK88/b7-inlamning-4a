@@ -1,133 +1,123 @@
-// import fs from "fs";
+"use server";
+import clsx from "clsx";
 
-// //Fetches data from "Saloon" collection-db to render the requested saloon.
-
-// export default async function RenderSaloon(saloonNumber) {
-//   const saloon = fs.readFile("./src/scripts/saloons.json", "utf8", (err, data) => {
-//     if (err) {
-//       console.error("Error reading JSON file:", err);
-//       return;
-//     }
-
-//     // console.log(data)
-
-//     let currentRowSeats = [];
-
-//     try {
-//       const cinemaData = JSON.parse(data).filter((saloonData) => saloonData.saloon == saloonNumber);
-//       // cinemaData.map((item) => item.seats.map((seat) => console.log(seat)));
-
-//       for (const saloonData of cinemaData) {
-//         // if (saloonData.row === "next") {
-//         //   printRow(currentRowSeats);
-//         //   currentRowSeats = [];
-//         // }
-//         // console.log('saloonData', saloonData.seats.map((item) => console.log(item)))
-
-//         for (const seat of saloonData.seats) {
-//           // console.log('seat', seat)
-//           const regular = (i) => {
-//             return <div key={i} className="mx-2 bg-red-400 w-[2vw] h-[2vw] border"></div>;
-//           };
-//           const special = (i) => {
-//             return <div key={i} className="mx-2 bg-red-400 w-[2vw] h-[2vw] border"></div>;
-//           };
-//           let count = 0;
-//           for (let i = 0; i < seat.count; i++) {
-//             currentRowSeats.push(seat.type === "regular" ? regular(count) : special(count)); //LINE TO TEST SCRIPT WITH (remove later)
-//             count++;
-//           }
-//           //===============
-//           //input all the react components here
-//           //===============
-//           /*
-//           component or function to build a seat with movieid, screening details and seat number, bind that with a push to Db
-//           add parameter for 'regular' and 'special'
-//           */
-//           if (
-//             currentRowSeats.length > 0 &&
-//             (seat.row === "next" || !saloonData.seats.includes(seat))
-//           ) {
-//             currentRowSeats.push("\n");
-//           }
-//         }
-//       }
-
-//       printRow(currentRowSeats);
-//     } catch (parseError) {
-//       console.error("Error parsing JSON:", parseError);
-//     }
-//     // console.log(currentRowSeats)
-
-//     function printRow(seats) {
-//       if (seats.length > 0) {
-//         // console.log(seats.join(""));
-//       }
-//       return currentRowSeats;
-//     }
-//   });
-//   return saloon;
-// }
-
-// // renderSaloon(1);
-
-import React from "react";
-import { useRouter } from "next/router";
-
-export async function fetchSaloon(saloonNumber) {
+export async function RenderProcess(saloonNumber) {
   try {
-    const response = await fetch(`api/booking?saloon=${saloonNumber}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch saloon data: ${response.statusText}`);
-      // console.log('error in fetch')
-    }
-
-    return await response.json();
+    const data = await fetchSaloon(saloonNumber); // Wait for fetchSaloon to complete
+    return RenderSaloon(data);
   } catch (error) {
-    console.error("Error fetching saloon data:", error);
-    throw error; // Re-throw the error to handle it elsewhere
+    console.error("Error fetching data:", error);
   }
 }
 
-export async function RenderSaloon(saloonNumber) {
+async function fetchSaloon(saloonNumber) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    saloon: saloonNumber,
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  // Return the Promise chain
+  return fetch("http://localhost:3000/api/booking", requestOptions)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((result) => {
+      console.log(result);
+      return result;
+    })
+    .catch((error) => {
+      console.error("Error fetching saloon data:", error);
+      throw error; // Re-throw the error to handle it elsewhere
+    });
+}
+
+export async function RenderSaloon(data) {
   try {
-    const cinemaData = JSON.parse(fetchSaloon(1));
-    if (cinemaData.length === 0) {
+    // Fetch saloon data
+    const cinemaData = data.data;
+
+    // Check if saloon data is empty
+    if (!cinemaData || cinemaData.length === 0) {
       console.error("Saloon not found.");
       return null;
     }
 
+    let collectedSaloonSeats = [];
     let currentRowSeats = [];
 
-    for (const saloonData of cinemaData) {
-      for (const seat of saloonData.seats) {
-        const regular = (i) => {
-          return <div key={i} className="mx-2 bg-red-400 w-[2vw] h-[2vw] border"></div>;
-        };
-        const special = (i) => {
-          return <div key={i} className="mx-2 bg-red-400 w-[2vw] h-[2vw] border"></div>;
-        };
-        let count = 0;
-        for (let i = 0; i < seat.count; i++) {
-          currentRowSeats.push(seat.type === "regular" ? regular(count) : special(count));
-          count++;
-        }
-        if (
-          currentRowSeats.length > 0 &&
-          (seat.row === "next" || !saloonData.seats.includes(seat))
-        ) {
-          currentRowSeats.push(<br key={-1} />);
-        }
+    const regular = (i, seatNumber) => {
+      const classNames = clsx(
+        "m-2",
+        "bg-red-400",
+        "w-6",
+        "h-6",
+        "border",
+        "hover:bg-gray-400",
+        "rounded-sm",
+        "text-center",
+        "align-middle",
+        "justify-center",
+      );
+      return (
+        <div key={`seat_${i}`} className={classNames}>
+          {seatNumber}
+        </div>
+      );
+    };
+
+    const special = (i, seatNumber) => {
+      return (
+        <div
+          key={`seat_${i}`}
+          className="m-2 bg-blue-400 w-6 h-6 border hover:bg-blue-200 active:bg-black rounded-sm justify-center text-center align-middle"
+        >
+          {seatNumber}
+        </div>
+      );
+    };
+
+    let counter = 1;
+    for (const seat of cinemaData[0].seats) {
+      for (let i = 0; i < seat.count; i++) {
+        currentRowSeats.push(
+          seat.type === "regular" ? regular(counter, counter) : special(counter, counter),
+        );
+        counter++;
+      }
+
+      const isLastSeat = cinemaData[0].seats.indexOf(seat) === cinemaData[0].seats.length - 1;
+      if (
+        (currentRowSeats.length > 0 &&
+          (seat.row === "next" || !cinemaData[0].seats.includes(seat))) ||
+        isLastSeat ||
+        cinemaData[0].seats[seat + 1].row === "next"
+      ) {
+        collectedSaloonSeats.push(
+          <div
+            key={`layer_${collectedSaloonSeats.length}`}
+            className="flex flex-row w-full col-span-6 bg-gray-900 justify-center content-center items-center align-middle"
+          >
+            {currentRowSeats}
+          </div>,
+        );
+        currentRowSeats = [];
       }
     }
 
-    return currentRowSeats;
+    if (currentRowSeats.length > 0) console.log("success build");
+    return collectedSaloonSeats;
   } catch (error) {
     console.error("Error:", error);
     return null;
