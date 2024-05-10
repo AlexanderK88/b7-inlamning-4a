@@ -2,9 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Reviews from "./Reviews";
+import ReviewForm from "./ReviewForm";
 
 export default function Movies({ id }) {
   const [movie, setMovie] = useState(null);
+
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(null);
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/movies/${id}`)
@@ -15,6 +20,10 @@ export default function Movies({ id }) {
         setMovie(data.data);
       });
   }, [id]);
+
+  const reviewHandler = () => {
+    setShowReviewModal(true);
+  };
 
   return (
     <div className="flex flex-col-reverse lg:flex-row justify-center items-center gap-8 my-12 pb-8">
@@ -41,7 +50,20 @@ export default function Movies({ id }) {
             Book Now
           </button>
         </Link>
+        <p
+          className="text-lg text-stone-300 underline hover:cursor-pointer w-1/3 hover:text-stone-200"
+          onClick={reviewHandler}
+        >
+          See all reviews
+        </p>
       </div>
+      <Reviews
+        setShowReviewModal={setShowReviewModal}
+        setShowReviewForm={setShowReviewForm}
+        isVisible={showReviewModal}
+        onClose={() => setShowReviewModal(false)}
+      />
+      <ReviewForm isVisible={showReviewForm} onClose={() => setShowReviewForm(false)} />
     </div>
   );
 }
