@@ -1,7 +1,18 @@
-export default async function Movies() {
-  const res = await fetch("http://localhost:3000/api/movies");
-  const data = await res.json();
-  const movies = data.data;
+"use client";
+
+import { useEffect, useState } from "react";
+
+export default function Movies() {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/movies")
+      .then((res) => res.json())
+      .then((data) => {
+        setMovies(data.data);
+      });
+  }, []);
+
   return (
     <>
       {movies.map((movie) => {
