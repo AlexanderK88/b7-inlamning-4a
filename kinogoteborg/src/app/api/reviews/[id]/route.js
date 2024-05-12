@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
   const id = params.id;
-  console.log(id);
   try {
     await connectToDb();
     const reviews = await Review.find({ "attributes.movieID": id });
