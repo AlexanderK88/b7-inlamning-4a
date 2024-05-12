@@ -7,7 +7,7 @@ export async function GET() {
 
   try {
     const movies = await Movie.find();
-    console.log(movies);
+
     return NextResponse.json({ success: "true", data: movies });
   } catch (err) {
     return NextResponse.json({ success: "false", error: err });
