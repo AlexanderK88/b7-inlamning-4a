@@ -6,11 +6,13 @@
 // renderSaloon(2)
 //   .then(cinema => console.log(cinema))
 //   .catch(error => console.error(error));
-import BookingModal from "@/app/components/booking/bookingModal";
 
 import React, { useState } from "react";
 import { Button, RedButton } from "@/app/components/booking/button";
 import { set } from "mongoose";
+
+import BookingModal from "@/app/components/booking/bookingModal";
+import { ScreeningDates, ScreeningTimes } from "@/app/components/booking/screenings"
 
 const Modal = ({ isModalOpen }) => {
   return (
@@ -29,9 +31,12 @@ const Modal = ({ isModalOpen }) => {
   );
 };
 
-export default function Page() {
+export default function Page({ params }) { //inserted params for correct movie
   const [bookNow, setBookNow] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+
+  const movieID = params.id; //dynamic id for a movie
+  const [ScreeningTimes, setScreeningTimes] = useState(); //moove to component with the logic there????
 
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
@@ -56,12 +61,18 @@ export default function Page() {
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
+          <ScreeningDates id ={movieID} onClick={() => setScreeningTimes(true)} className={ "bg-gray-200 w-[8vw] h-[4vw]" }>
+            
+          </ScreeningDates>
         </div>
 
         <div className="md:col-span-2 md:col-start-1 md:row-start-2 flex flex-row align-center justify-evenly p-2 border">
           <p>screening times</p>
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
+          <ScreeningTimes className={ }>
+
+          </ScreeningTimes>
         </div>
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
         <div className="grid md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border min-h-[30vh] ">
