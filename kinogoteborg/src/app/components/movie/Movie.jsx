@@ -15,8 +15,6 @@ export default function Movies({ id }) {
     fetch(`http://localhost:3000/api/movies/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(id);
-        console.log(data);
         setMovie(data.data);
       });
   }, [id]);
@@ -62,8 +60,9 @@ export default function Movies({ id }) {
         setShowReviewForm={setShowReviewForm}
         isVisible={showReviewModal}
         onClose={() => setShowReviewModal(false)}
+        id={id}
       />
-      <ReviewForm isVisible={showReviewForm} onClose={() => setShowReviewForm(false)} />
+      <ReviewForm id={id} isVisible={showReviewForm} onClose={() => setShowReviewForm(false)} />
     </div>
   );
 }
