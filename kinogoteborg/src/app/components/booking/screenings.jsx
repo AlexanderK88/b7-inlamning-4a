@@ -1,34 +1,40 @@
-"use client"; 
+"use client";
 
 import { useEffect, useState } from "react";
 
-export default function ScreeningDates({ id }) {
-    const [screeningDates, setScreeningDates] = useState([]);
+export default function ScreeningDates({ id, onClick }) {
+  const [screeningDates, setScreeningDates] = useState([]);
+  //for indicator of chosen date
+  const [selectedDate, setSelectedDate] = useState(null);
 
-    useEffect(() => {
-        fetch(`http://localhost:3000/api/booking/${id}`)
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(id);
-            console.log(data);
-            setScreeningDates(data.data);
-        })
-    }, [id]);
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/booking/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(id);
+        console.log(data);
+        setScreeningDates(data.data);
+        setSelectedDate(data.data[0]);
+      });
+  }, [id]);
 
-    return (
-        <div>
-            {screeningDates.map((date, index) => (
-            <ScreeningDates key={index} date={date} />
-            ))}
+  const handleDateClick = (date) => {
+    setSelectedDate(date);
+    onClick(date);
+  };
+
+  return (
+    <div>
+      {screeningDates.map((date, index) => (
+        <div
+          key={index}
+          onClick={() => handleDateClick(date)}
+          className={`w-[8vw] h-[4vw] p-2 rounded text-center hover: bg-red-700 text-stone-300 font-bold cursor-pointer 
+                    ${date === selectedDate ? "bg-red-800 text-stone-300 font-bold" : "bg-gray-200 text-white"}`}
+        >
+          {date}
         </div>
-    );
-}
-
-export default function ScreeningTimes({ date }) {
-    
-    return (
-        <div>
-
-        </div>
-    )
+      ))}
+    </div>
+  );
 }
