@@ -27,7 +27,7 @@ export default function Movies({ id }) {
 
   return (
     <div className="flex flex-col-reverse lg:flex-row justify-center items-center gap-8 my-12 pb-8">
-      <div className=" w-5/6 sm:w-4/6 lg:w-1/4  rounded-md ">
+      <div className=" w-5/6 sm:w-4/6 lg:w-1/4 xl:w-1/4 2xl:w-1/6 rounded-md ">
         <img
           className="rounded-md"
           src={movie?.attributes?.image?.url}
