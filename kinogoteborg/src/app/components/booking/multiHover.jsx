@@ -9,11 +9,11 @@ import { useEffect, useState } from "react";
 //     setChosenSeat(fetchKeyData)
 // }
 
-const fetchKeyData = (event) => event.target.getAttribute("data-key").split("_")[1];
+const fetchKeyData = (Event) => Event.target.getAttribute("data-key").split("_")[1];
 
-const bookingHover = (event) => {
+const bookingHover = (Event) => {
   // const value = event.target.getAttribute('data-key').split('_')[1];
-  const halfValue = Number(fetchKeyData(event)) / 2;
+  const halfValue = Number(fetchKeyData(Event)) / 2;
 
   const lowValue = Math.floor(halfValue);
   const highValue = Math.ceil(halfValue);
@@ -21,8 +21,20 @@ const bookingHover = (event) => {
   return console.log("low: ", lowValue, "high: ", highValue, "sum: ", lowValue + highValue);
 };
 
-const hoverSeats = (event) => {
-  const seat = fetchKeyData(event);
+const hoverSeats = (Event, amountOfSeats) => {
+  const seat = fetchKeyData(Event);
+  const bookSeats = [];
+  // Generate an array of seat keys from seat to seat + amountOfSeats
+  for (let i = seat; i < amountOfSeats + Number(seat); i++) {
+    bookSeats.push(`seat_${i}`);
+  }
+  // Iterate over each seat key and apply hover effect
+  bookSeats.forEach((seatKey) => {
+    const element = document.querySelector(`[data-key="${seatKey}"]`);
+    if (element) {
+      element.classList.toggle("opacity-50");
+    }
+  });
 };
 
-export { bookingHover };
+export { bookingHover, hoverSeats };

@@ -2,11 +2,9 @@
 
 import React, { Suspense, useEffect, useState } from "react";
 import { fetchSaloon } from "@/scripts/fetchSaloonLayout";
-import { bookingHover } from "@/app/components/booking/multiHover";
-import clsx from "clsx";
-import { render } from "react-dom";
+import { bookingHover, hoverSeats } from "@/app/components/booking/multiHover";
 
-async function RenderSaloon(saloonNumber) {
+export async function RenderSaloon({ saloonNumber, seats }) {
   try {
     const data = await fetchSaloon(saloonNumber);
     // Fetch saloon data
@@ -62,9 +60,10 @@ async function RenderSaloon(saloonNumber) {
         <div
           key={`seat_${i}`}
           data-key={`seat_${i.toString()}`}
-          onMouseOver={bookingHover}
-          className={`m-2 w-6 h-6 border rounded-sm justify-center text-center align-middle
-          hover:bg-blue-200 active:bg-black
+          onMouseOver={(event) => hoverSeats(event, seats)}
+          onMouseOut={(event) => hoverSeats(event, seats)}
+          className={`m-1 w-6 h-6 border rounded-sm justify-center text-center align-middle
+
           ${isSpecial ? "bg-blue-400" : "bg-red-400"}
           `}
         >
@@ -104,35 +103,13 @@ async function RenderSaloon(saloonNumber) {
     }
 
     if (currentRowSeats.length > 0) console.log("success build");
-    return collectedSaloonSeats;
+    return (
+      <div className="grid w-full h-full justify-items-start grid-flow-row justify- overflow-auto m-0">
+        {collectedSaloonSeats}
+      </div>
+    );
   } catch (error) {
     console.error("Error:", error);
     return null;
   }
-}
-
-export default function RenderSaloonComp({ saloonNumber, seatsToBook, setSeat }) {
-  const [saloonLayout, setSaloonLayout] = useState([]);
-
-  useEffect(() => {
-    async function fetchSaloonLayout() {
-      try {
-        const layout = await RenderSaloon(saloonNumber);
-        setSaloonLayout(layout || []);
-      } catch (error) {
-        console.error("Error fetching saloon layout:", error);
-      }
-    }
-
-    fetchSaloonLayout();
-  }, []); // Run once on component mount
-
-  return (
-    <div className="grid w-full h-full justify-items-start grid-flow-row justify-evenly overflow-auto m-0">
-      {saloonLayout.length === 0 ? <div>Loading...</div> : saloonLayout}
-      {/* <Suspense fallback={<p>Loading...</p>}>
-        <RenderProcess saloonNumber={1}/>
-      </Suspense> */}
-    </div>
-  );
 }

@@ -7,12 +7,14 @@
 //   .then(cinema => console.log(cinema))
 //   .catch(error => console.error(error));
 import clsx from "clsx";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { Button, RedButton } from "@/app/components/booking/button";
 import { set } from "mongoose";
 
 import BookingModal from "@/app/components/booking/bookingModal";
 import RenderSaloonComp from "../components/booking/RenderSaloon";
+import { RenderSaloon } from "../components/booking/RenderSaloon";
+import { Loading } from "../components/booking/loading";
 
 const Modal = ({ isModalOpen }) => {
   return (
@@ -34,9 +36,7 @@ const Modal = ({ isModalOpen }) => {
 export default function Page() {
   const [bookNow, setBookNow] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-
-  const seatsToBook = 3;
-
+  const [amountOfSeats, setAmountOfSeats] = useState(4);
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
@@ -70,7 +70,9 @@ export default function Page() {
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
         <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
           <div id="movieScreen" className="h-2 w-full bg-black col-start-1 rounded-md border"></div>
-          <RenderSaloonComp saloonNumber={1} seatsToBook={seatsToBook} />
+          <Suspense fallback={<Loading />}>
+            <RenderSaloon saloonNumber={2} seats={amountOfSeats} />
+          </Suspense>
         </div>
 
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">
