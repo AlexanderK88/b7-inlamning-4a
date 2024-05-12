@@ -4,8 +4,8 @@ const screeningSchema = new mongoose.Schema({
   id: { type: Number, required: true },
   attributes: {
     movieID: { type: Number, required: true },
-    date: { type: Date, required: true },
-    startTime: { type: Date, required: true },
+    date: { type: String, required: true },
+    startTime: { type: String, required: true },
   },
 });
 
