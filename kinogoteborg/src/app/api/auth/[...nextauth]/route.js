@@ -46,6 +46,7 @@ export const authOptions = {
           phoneNumber: user.phoneNumber,
           bookings: user.bookings,
           reviews: user.reviews,
+          admin: user.admin,
         };
       }
       return token;
@@ -60,6 +61,7 @@ export const authOptions = {
           phoneNumber: token.phoneNumber,
           bookings: token.bookings,
           reviews: token.reviews,
+          admin: token.admin,
         },
       };
     },
