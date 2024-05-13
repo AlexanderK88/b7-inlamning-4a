@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+
+import React, { useState, useEffect } from "react";
 import { Button } from "@/app/components/booking/button";
 
 // first step: login
@@ -25,7 +26,7 @@ export const ModalHeader = ({ input }) => {
   );
 };
 
-export default function BookingModal({ isModalOpen, isVerified, isLogin, specialNeeds }) {
+export default function BookingModal({ isModalOpen, isLogin, isVerified, specialNeeds }) {
   const [bookingState, setBookingState] = useState("Login");
 
   // function useOnClickOutside(ref, handler) {
@@ -65,7 +66,7 @@ export default function BookingModal({ isModalOpen, isVerified, isLogin, special
     } else if (!isVerified && specialNeeds) {
       setBookingState("ValidateSpecialNeeds");
     }
-  }, [isLogin, isVerified, specialNeeds]);
+  }, [isLogin, specialNeeds, isVerified]);
 
   return (
     <>

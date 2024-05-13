@@ -1,5 +1,3 @@
-import clsx from "clsx";
-
 export async function fetchSaloon(saloonNumber) {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -24,7 +22,7 @@ export async function fetchSaloon(saloonNumber) {
       return response.json();
     })
     .then((result) => {
-      console.log(result);
+      console.log("result from fetschSaloon: ", result);
       return result;
     })
     .catch((error) => {

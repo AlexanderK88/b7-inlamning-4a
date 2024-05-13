@@ -22,9 +22,8 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
-  await connectToDb();
-
   try {
+    await connectToDb();
     // Extract data from the ReadableStream and parse it as JSON
     const saloonData = await parseStreamAsJSON(req.body);
     //   console.log("Saloon data:", saloonData);

@@ -1,15 +1,28 @@
 "use client";
 
-import next from "next";
-import React from "react";
-import ReactDOM from "react-dom";
-import { useEffect, useState } from "react";
+// import next from "next";
+// import React from "react";
+// import ReactDOM from "react-dom";
+// import { useEffect, useState } from "react";
 
 // const handleSetChosenSeat = () => {
 //     setChosenSeat(fetchKeyData)
 // }
 
 const fetchKeyData = (Event) => Event.target.getAttribute("data-key").split("_")[1];
+
+// CONTINUE TO FETCH MAX SEAT_KEY VALUE
+const fetchLayerKeyData = (Event) => {
+  let parentElement = Event.target;
+  while (parentElement !== null) {
+    if (parentElement.getAttribute("layer-key") !== null) {
+      return parentElement;
+    }
+    parentElement = parentElement.parentNode;
+  }
+  // Desired parent element not found, return null or handle appropriately
+  return null;
+};
 
 const bookingHover = (Event) => {
   // const value = event.target.getAttribute('data-key').split('_')[1];
@@ -23,6 +36,7 @@ const bookingHover = (Event) => {
 
 const hoverSeats = (Event, amountOfSeats) => {
   const seat = fetchKeyData(Event);
+  //   console.log("layer: ", fetchLayerKeyData(Event));
   const bookSeats = [];
   // Generate an array of seat keys from seat to seat + amountOfSeats
   for (let i = seat; i < amountOfSeats + Number(seat); i++) {

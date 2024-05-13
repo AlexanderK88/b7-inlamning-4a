@@ -1,20 +1,10 @@
 "use client";
 
-//import rendersaloon to render page.
-//build modal to use booking.js
-//add state for booking to use, might be better placed in booking.js
-// renderSaloon(2)
-//   .then(cinema => console.log(cinema))
-//   .catch(error => console.error(error));
-import clsx from "clsx";
 import React, { useState, useEffect, Suspense } from "react";
-import { Button, RedButton } from "@/app/components/booking/button";
-import { set } from "mongoose";
+import { Button } from "@/app/components/booking/button";
 
 import BookingModal from "@/app/components/booking/bookingModal";
-import RenderSaloonComp from "../components/booking/RenderSaloon";
-import { RenderSaloon } from "../components/booking/RenderSaloon";
-import { Loading } from "../components/booking/loading";
+import Saloon from "../components/booking/saloon";
 
 const Modal = ({ isModalOpen }) => {
   return (
@@ -22,10 +12,10 @@ const Modal = ({ isModalOpen }) => {
       <div className="flex flex-col items-center justify-center w-full max-w-screen-lg mx-auto px-4 py-8">
         <div className="bg-[#7E6969] text-white rounded-lg shadow-lg p-6 w-[96vw] md:w-[50vw]">
           <BookingModal
-            isModalOpen={isModalOpen}
-            isVerified={false}
-            isLogin={false}
-            specialNeeds={false}
+            isModalOpen={setBookNow}
+            isLogin={isLogin}
+            isVerified={isVerified}
+            specialNeeds={specialNeeds}
           />
         </div>
       </div>
@@ -37,6 +27,11 @@ export default function Page() {
   const [bookNow, setBookNow] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [amountOfSeats, setAmountOfSeats] = useState(4);
+  const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
+  const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
+
+  console.log("Page render");
+
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
@@ -70,9 +65,7 @@ export default function Page() {
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
         <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
           <div id="movieScreen" className="h-2 w-full bg-black col-start-1 rounded-md border"></div>
-          <Suspense fallback={<Loading />}>
-            <RenderSaloon saloonNumber={2} seats={amountOfSeats} />
-          </Suspense>
+          <Saloon saloonNumber={2} seats={amountOfSeats} />
         </div>
 
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">
@@ -83,7 +76,14 @@ export default function Page() {
       </div>
 
       {/* Opens the booking modal when isModalOpen = true. */}
-      {bookNow && <Modal isModalOpen={setBookNow} knownUser={isLogin} setSeat={setChosenSeat} />}
+      {bookNow && (
+        <Modal
+          isModalOpen={setBookNow}
+          isLogin={isLogin}
+          isVerified={isVerified}
+          specialNeeds={specialNeeds}
+        />
+      )}
     </div>
   );
 }
