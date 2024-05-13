@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/app/components/booking/button";
 import { RenderSaloon } from "../components/booking/RenderSaloon";
 
 import BookingModal from "@/app/components/booking/bookingModal";
-// import Saloon from "../components/booking/saloon";
 
 const Modal = ({ isModalOpen, isLogin, isVerified, specialNeeds }) => {
   return (
@@ -30,8 +29,11 @@ export default function Page() {
   const [seats, setSeats] = useState(4);
   const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
   const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
+  const [seatsToBook, setSeatsToBook] = useState([]);
 
-  console.log("Page render");
+  useEffect(() => {
+    console.log("seats to book: ", seatsToBook);
+  }, [seatsToBook]);
 
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
@@ -66,7 +68,7 @@ export default function Page() {
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
         <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
           <div id="movieScreen" className="h-2 w-full bg-black col-start-1 rounded-md border"></div>
-          <RenderSaloon saloonNumber={2} seats={seats} />
+          <RenderSaloon saloonNumber={2} seats={seats} setSeatsToBook={setSeatsToBook} />
         </div>
 
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">
@@ -83,6 +85,7 @@ export default function Page() {
           isLogin={isLogin}
           isVerified={isVerified}
           specialNeeds={specialNeeds}
+          seatsToBook={seatsToBook}
         />
       )}
     </div>

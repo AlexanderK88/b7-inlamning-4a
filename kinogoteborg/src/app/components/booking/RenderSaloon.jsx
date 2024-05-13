@@ -1,12 +1,12 @@
 "use client";
 
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { bookingHover, hoverSeats } from "@/app/components/booking/multiHover";
+import { hoverSeats, handleSeatsToBook } from "@/app/components/booking/multiHover";
 import { Loading } from "./loading";
 import { fetchSaloon } from "@/scripts/fetchSaloonLayout";
 
-export function RenderSaloon({ seats, saloonNumber }) {
+export function RenderSaloon({ seats, saloonNumber, setSeatsToBook }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -33,8 +33,9 @@ export function RenderSaloon({ seats, saloonNumber }) {
       <div
         key={`seat_${i}`}
         data-key={`seat_${i.toString()}`}
-        onMouseOver={(event) => hoverSeats(event, seats)}
-        onMouseOut={(event) => hoverSeats(event, seats)}
+        onMouseOver={(event) => hoverSeats(event, seats, true)}
+        onMouseOut={(event) => hoverSeats(event, seats, false)}
+        onClick={(event) => handleSeatsToBook(event, setSeatsToBook)}
         className={`m-1 w-6 h-6 border rounded-sm justify-center text-center align-middle
 
           ${isSpecial ? "bg-blue-400" : "bg-red-400"}
@@ -66,7 +67,7 @@ export function RenderSaloon({ seats, saloonNumber }) {
       collectedSaloonSeats.push(
         <div
           key={`layer_${collectedSaloonSeats.length}`}
-          layer-key={`layer_${collectedSaloonSeats.length}`}
+          layer-key={`layer_${collectedSaloonSeats.length}:${counter - 1}`}
           className="flex flex-row w-full col-span-6 bg-gray-900 justify-center content-center items-center align-middle"
         >
           {currentRowSeats}
@@ -75,23 +76,6 @@ export function RenderSaloon({ seats, saloonNumber }) {
       currentRowSeats = [];
     }
   }
-
-  // useEffect(() => {
-  //   async function fetchSaloonLayout() {
-  //       const layout = await fetchSaloon(saloonNumber);
-  //       setSaloonLayout(layout || []);
-  // }, []); // Run once on component mount
-
-  //   return (
-  //     <div className=" grid border max-w-full justify-items-start grid-flow-row justify-evenly overflow-auto mt-12">
-  //     <div className="grid w-full h-full justify-items-start grid-flow-row justify-evenly overflow-auto m-0">
-  //       {saloonLayout.length === 0 ? <div>Loading...</div> : saloonLayout}
-  //       {/* <Suspense fallback={<p>Loading...</p>}>
-  //         <RenderProcess saloonNumber={1}/>
-  //       </Suspense> */}
-  //     </div>
-  //   );
-  // }
 
   if (currentRowSeats.length > 0) console.log("success build");
   return (
