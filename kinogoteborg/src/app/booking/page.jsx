@@ -12,7 +12,7 @@ const Modal = ({ isModalOpen, isLogin, isVerified, specialNeeds }) => {
       <div className="flex flex-col items-center justify-center w-full max-w-screen-lg mx-auto px-4 py-8">
         <div className="bg-[#7E6969] text-white rounded-lg shadow-lg p-6 w-[96vw] md:w-[50vw]">
           <BookingModal
-            isModalOpen={setBookNow}
+            isModalOpen={isModalOpen}
             isLogin={isLogin}
             isVerified={isVerified}
             specialNeeds={specialNeeds}
