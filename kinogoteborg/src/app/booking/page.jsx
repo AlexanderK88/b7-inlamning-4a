@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
-import { Loading } from "../components/booking/loading";
+import React, { useState } from "react";
 import { Button } from "@/app/components/booking/button";
+import { RenderSaloon } from "../components/booking/RenderSaloon";
 
 import BookingModal from "@/app/components/booking/bookingModal";
-import Saloon from "../components/booking/saloon";
+// import Saloon from "../components/booking/saloon";
 
 const Modal = ({ isModalOpen, isLogin, isVerified, specialNeeds }) => {
   return (
@@ -66,9 +66,7 @@ export default function Page() {
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
         <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
           <div id="movieScreen" className="h-2 w-full bg-black col-start-1 rounded-md border"></div>
-          <Suspense fallback={<Loading />}>
-            <Saloon saloonNumber={2} seats={seats} />
-          </Suspense>
+          <RenderSaloon saloonNumber={2} seats={seats} />
         </div>
 
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">

@@ -1,20 +1,29 @@
 "use client";
 
 import React, { Suspense, useEffect, useState } from "react";
-import { bookingHover, hoverSeats } from "@/app/components/booking/multiHover";
 
-export function RenderSaloon({ seats, data }) {
-  console.log("rendersaloon render");
-  // try {
+import { bookingHover, hoverSeats } from "@/app/components/booking/multiHover";
+import { Loading } from "./loading";
+import { fetchSaloon } from "@/scripts/fetchSaloonLayout";
+
+export function RenderSaloon({ seats, saloonNumber }) {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchDataForSallon = async () => {
+      const fetchData = await fetchSaloon(saloonNumber);
+      setData(fetchData);
+    };
+
+    fetchDataForSallon();
+  }, []);
+
+  if (!data) {
+    return <Loading />;
+  }
 
   // Fetch saloon data
   const cinemaData = data.data;
-
-  // Check if saloon data is empty
-  if (!cinemaData || cinemaData.length === 0) {
-    console.error("Saloon not found.");
-    return null;
-  }
 
   let collectedSaloonSeats = [];
   let currentRowSeats = [];
@@ -69,12 +78,9 @@ export function RenderSaloon({ seats, data }) {
 
   // useEffect(() => {
   //   async function fetchSaloonLayout() {
-  //     try {
   //       const layout = await fetchSaloon(saloonNumber);
   //       setSaloonLayout(layout || []);
-  //     } catch (error) {
-  //       console.error("Error fetching saloon layout:", error);
-  // }}}, []); // Run once on component mount
+  // }, []); // Run once on component mount
 
   //   return (
   //     <div className=" grid border max-w-full justify-items-start grid-flow-row justify-evenly overflow-auto mt-12">
@@ -90,12 +96,7 @@ export function RenderSaloon({ seats, data }) {
   if (currentRowSeats.length > 0) console.log("success build");
   return (
     <div className="grid w-full h-full justify-items-start grid-flow-row justify- overflow-auto m-0">
-      {/* {collectedSaloonSeats.length === 0 ? <div>Loading...</div> : {collectedSaloonSeats}} */}
       {collectedSaloonSeats}
     </div>
   );
-  // } catch (error) {
-  //   console.error("Error:", error);
-  //   return null;
-  // }
 }
