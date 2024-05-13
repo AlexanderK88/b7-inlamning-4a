@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -9,17 +10,18 @@ export default function Header() {
         height={150}
         alt="Cinema logo in header"
         className="ml-3"
+        href="/movies"
       />
       <div className="flex gap-15 text-right p-5 mt-10 mr-20 justify-end gap-20">
-        <a className="text-white text-2xl font-bold" href="/movies">
+        <Link href="/movies" className="text-white text-2xl font-bold">
           Filmer
-        </a>
-        <a className="text-white text-2xl font-bold" href="">
+        </Link>
+        <Link href="" className="text-white text-2xl font-bold">
           Om oss
-        </a>
-        <a className="text-white text-2xl font-bold" href="">
+        </Link>
+        <Link href="" className="text-white text-2xl font-bold">
           Nyheter
-        </a>
+        </Link>
       </div>
     </div>
   );

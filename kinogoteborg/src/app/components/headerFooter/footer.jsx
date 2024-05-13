@@ -1,8 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className="absolute bottom-0 bg-[#800020] w-full pt-10 flex justify-center">
+    <div className="fixed bottom-0 bg-[#800020] w-full pt-10 flex justify-center">
       <div className="flex gap-20 flex-row pb-5">
         <Image
           src="/footerLogo.png"
@@ -20,15 +21,15 @@ export default function Footer() {
         </div>
         <div className="flex flex-col mt-6">
           <p className="text-xs font-bold text-white">Navigation</p>
-          <a href="/movies" className="text-xs text-white">
+          <Link href="/movies" className="text-xs text-white">
             Filmer
-          </a>
-          <a href="" className="text-xs text-white">
+          </Link>
+          <Link href="" className="text-xs text-white">
             Om oss
-          </a>
-          <a href="" className="text-xs text-white">
+          </Link>
+          <Link href="" className="text-xs text-white">
             Nyheter
-          </a>
+          </Link>
         </div>
         <div className="flex flex-col mt-6">
           <p className="text-xs font-bold text-white">Sociala Medier</p>
