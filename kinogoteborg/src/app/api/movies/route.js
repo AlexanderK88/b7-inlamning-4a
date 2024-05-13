@@ -20,12 +20,10 @@ export async function POST(req) {
 
     await connectToDb();
 
-    const movies = await Movie.find({});
-
-    const length = movies.length;
+    const movieCount = await Movie.countDocuments();
 
     await Movie.create({
-      id: length + 1,
+      id: movieCount + 1,
       attributes: {
         title,
         description,

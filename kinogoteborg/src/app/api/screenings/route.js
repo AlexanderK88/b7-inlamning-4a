@@ -4,20 +4,21 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const { movieID, date, startTime } = await req.json();
+    const { movieID, date } = await req.json();
+
+    const newDate = new Date(date);
+    const newStartTime = new Date(date);
 
     await connectToDb();
 
-    const screenings = await Screening.find({});
-
-    const length = screenings.length;
+    const screeningCount = await Screening.countDocuments();
 
     await Screening.create({
-      id: length + 1,
+      id: screeningCount + 1,
       attributes: {
         movieID,
-        date,
-        startTime,
+        date: newDate,
+        startTime: newStartTime,
       },
     });
 
@@ -25,6 +26,7 @@ export async function POST(req) {
   } catch (error) {
     return NextResponse.json({
       message: "Error while registering screening",
+      error: error,
       status: 400,
     });
   }
