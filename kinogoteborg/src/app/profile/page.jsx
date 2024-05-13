@@ -6,6 +6,7 @@ import General from "../components/profile/General";
 import Bookings from "../components/profile/Bookings";
 import Settings from "../components/profile/Settings";
 import Reviews from "../components/profile/Reviews";
+import Admin from "../components/profile/Admin";
 
 export default function page() {
   const [page, setPage] = useState("General");
@@ -17,6 +18,7 @@ export default function page() {
       {page === "Bookings" ? <Bookings /> : null}
       {page === "Reviews" ? <Reviews /> : null}
       {page === "Settings" ? <Settings /> : null}
+      {page === "Admin" ? <Admin /> : null}
     </main>
   );
 }
