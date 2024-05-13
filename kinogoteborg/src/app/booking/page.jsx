@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, Suspense } from "react";
+import { Loading } from "../components/booking/loading";
 import { Button } from "@/app/components/booking/button";
 
 import BookingModal from "@/app/components/booking/bookingModal";
@@ -26,7 +27,7 @@ const Modal = ({ isModalOpen, isLogin, isVerified, specialNeeds }) => {
 export default function Page() {
   const [bookNow, setBookNow] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [amountOfSeats, setAmountOfSeats] = useState(4);
+  const [seats, setSeats] = useState(4);
   const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
   const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
 
@@ -65,7 +66,9 @@ export default function Page() {
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
         <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
           <div id="movieScreen" className="h-2 w-full bg-black col-start-1 rounded-md border"></div>
-          <Saloon saloonNumber={2} seats={amountOfSeats} />
+          <Suspense fallback={<Loading />}>
+            <Saloon saloonNumber={2} seats={seats} />
+          </Suspense>
         </div>
 
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">
