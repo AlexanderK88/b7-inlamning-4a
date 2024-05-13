@@ -6,7 +6,7 @@ import { Button } from "@/app/components/booking/button";
 import BookingModal from "@/app/components/booking/bookingModal";
 import Saloon from "../components/booking/saloon";
 
-const Modal = ({ isModalOpen }) => {
+const Modal = ({ isModalOpen, isLogin, isVerified, specialNeeds }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
       <div className="flex flex-col items-center justify-center w-full max-w-screen-lg mx-auto px-4 py-8">
