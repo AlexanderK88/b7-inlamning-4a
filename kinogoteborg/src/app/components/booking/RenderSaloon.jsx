@@ -32,10 +32,10 @@ export function RenderSaloon({ seats, saloonNumber, setSeatsToBook }) {
     return (
       <div
         key={`seat_${i}`}
-        data-key={`seat_${i.toString()}`}
+        data-key={`seat_${i.toString()}${isSpecial ? "_S" : ""}`}
         onMouseOver={(event) => hoverSeats(event, seats, true)}
         onMouseOut={(event) => hoverSeats(event, seats, false)}
-        onClick={(event) => handleSeatsToBook(event, setSeatsToBook)}
+        onClick={(event) => handleSeatsToBook(event, setSeatsToBook, seats)}
         className={`m-1 w-6 h-6 border rounded-sm justify-center text-center align-middle
 
           ${isSpecial ? "bg-blue-400" : "bg-red-400"}
