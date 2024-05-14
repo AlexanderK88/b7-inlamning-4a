@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Button } from "@/app/components/booking/button";
-import { RenderSaloon } from "../components/booking/RenderSaloon";
+import { RenderSaloon } from "../../components/booking/RenderSaloon";
 
 import BookingModal from "@/app/components/booking/bookingModal";
 
