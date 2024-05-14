@@ -15,8 +15,6 @@ export default function Movies({ id }) {
     fetch(`http://localhost:3000/api/movies/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(id);
-        console.log(data);
         setMovie(data.data);
       });
   }, [id]);
@@ -27,7 +25,7 @@ export default function Movies({ id }) {
 
   return (
     <div className="flex flex-col-reverse lg:flex-row justify-center items-center gap-8 my-12 pb-8">
-      <div className=" w-5/6 sm:w-4/6 lg:w-1/4  rounded-md ">
+      <div className=" w-5/6 sm:w-4/6 lg:w-1/4 xl:w-1/4 2xl:w-1/6 rounded-md ">
         <img
           className="rounded-md"
           src={movie?.attributes?.image?.url}
@@ -62,8 +60,9 @@ export default function Movies({ id }) {
         setShowReviewForm={setShowReviewForm}
         isVisible={showReviewModal}
         onClose={() => setShowReviewModal(false)}
+        id={id}
       />
-      <ReviewForm isVisible={showReviewForm} onClose={() => setShowReviewForm(false)} />
+      <ReviewForm id={id} isVisible={showReviewForm} onClose={() => setShowReviewForm(false)} />
     </div>
   );
 }
