@@ -9,7 +9,7 @@ export default function ScreeningTimes({ id, date, onClick }) {
 
   useEffect(() => {
     if (date) {
-      fetch(`http://localhost:3000/api/booking/${id}`)
+      fetch(`http://localhost:3000/api/booking/${id}/times`)
         .then((res) => res.json())
         .then((data) => {
           console.log(id);
@@ -19,7 +19,7 @@ export default function ScreeningTimes({ id, date, onClick }) {
           setSelectedTime(data.data[0]);
         });
     }
-  }, [date]);
+  }, [id, date]);
 
   const handleTimeClick = (time) => {
     setSelectedTime(time);

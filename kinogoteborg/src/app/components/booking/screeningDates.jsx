@@ -8,7 +8,7 @@ export default function ScreeningDates({ id, onClick }) {
   const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/booking/${id}`)
+    fetch(`http://localhost:3000/api/booking/${id}/dates`)
       .then((res) => res.json())
       .then((data) => {
         console.log(id);

@@ -12,7 +12,7 @@ import { Button, RedButton } from "@/app/components/booking/button";
 import { set } from "mongoose";
 
 import BookingModal from "@/app/components/booking/bookingModal";
-import ScreeningDates from "@/app/components/booking/screenings";
+import ScreeningDates from "@/app/components/booking/screeningDates";
 import ScreeningTimes from "@/app/components/booking/screeningTimes";
 
 const Modal = ({ isModalOpen }) => {
@@ -37,7 +37,7 @@ export default function Page({ params }) {
   const [bookNow, setBookNow] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
-  const movieID = params.id;
+  const movieID = params.movieID;
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState([]);
 
