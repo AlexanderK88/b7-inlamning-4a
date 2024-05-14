@@ -7,7 +7,7 @@ import Bookings from "../components/profile/Bookings";
 import Settings from "../components/profile/Settings";
 import Reviews from "../components/profile/Reviews";
 
-export default function page() {
+export default function Page() {
   const [page, setPage] = useState("General");
 
   return (
