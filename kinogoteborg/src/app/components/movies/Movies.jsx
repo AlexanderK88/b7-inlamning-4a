@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
@@ -33,9 +34,12 @@ export default function Movies() {
             >
               {movie.attributes.title}
             </h2>
-            <button className="w-full p-2 m-2 bg-red-800 text-stone-300 rounded-full hover:bg-red-700 mb-5 hover:font-bold">
+            <Link
+              href={`http://localhost:3000/movies/${movie.id}`}
+              className="w-full p-2 m-2 bg-red-800 text-stone-300 text-center rounded-full hover:bg-red-700 mb-5 hover:font-bold"
+            >
               Book Now
-            </button>
+            </Link>
           </div>
         );
       })}
