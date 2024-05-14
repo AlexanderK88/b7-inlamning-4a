@@ -1,6 +1,6 @@
 export default function Bookings() {
   return (
-    <div className="col-span-5 w-full bg-stone-700 flex flex-col items-center gap-8">
+    <div className="col-span-5 w-full bg-stone-800 flex flex-col items-center gap-8">
       <h1 className="text-2xl text-stone-200 text-center mt-8">Bookings</h1>
       <div className="text-stone-200 border-2 border-solid border-stone-300 bg-stone-700 w-3/4 min-h-32 shadow-md rounded-md p-4">
         <ul className="pl-2">

@@ -13,12 +13,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-stone-700`}>
-        <Header />
-        <AuthProvider>{children}</AuthProvider>
-        <Footer />
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body className={`${inter.className} bg-stone-800 `}>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </AuthProvider>
   );
 }

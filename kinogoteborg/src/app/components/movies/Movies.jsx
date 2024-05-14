@@ -20,7 +20,7 @@ export default function Movies() {
         return (
           <div
             key={movie.id}
-            className="rounded-md bg-stone-700 w-5/5 max-w-64 m-4 flex flex-col justify-between items-center"
+            className="rounded-md bg-stone-800 w-5/5 max-w-64 m-4 flex flex-col justify-between items-center"
           >
             <img
               className="w-64 h-96 rounded-md shadow-md"
