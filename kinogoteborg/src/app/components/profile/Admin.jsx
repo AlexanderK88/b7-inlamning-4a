@@ -1,10 +1,12 @@
+"use client";
+
 import { useState } from "react";
 
 export default function Admin() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [genre, setGenre] = useState("");
-  const [rating, setRating] = useState("");
+  const [imdbRating, setImdbRating] = useState(5);
   const [url, setUrl] = useState("");
   const [alt, setAlt] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
@@ -16,17 +18,28 @@ export default function Admin() {
   async function onSubmitMovie(e) {
     e.preventDefault();
 
-    if (!title || !description || !genre || !rating || !url || !alt || !releaseDate) {
+    if (!title || !description || !genre || !imdbRating || !url || !alt || !releaseDate) {
       setError1("Please fill all the fields");
       return;
     }
+
+    const genreArray = genre.split(" ");
+
     try {
       const res = await fetch("/api/movies", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, description, genre, rating, url, alt, releaseDate }),
+        body: JSON.stringify({
+          title,
+          description,
+          genre: genreArray,
+          imdbRating,
+          url,
+          alt,
+          releaseDate,
+        }),
       });
       if (res.ok) {
         const form = e.target;
@@ -79,7 +92,7 @@ export default function Admin() {
             type="text"
             name="title"
             placeholder="title"
-            onChange={(e) => setTitle(e)}
+            onChange={(e) => setTitle(e.target.value)}
           />
           <label htmlFor="description">Movie Description</label>
           <input
@@ -87,23 +100,25 @@ export default function Admin() {
             type="text"
             name="description"
             placeholder="description"
-            onChange={(e) => setDescription(e)}
+            onChange={(e) => setDescription(e.target.value)}
           />
           <label htmlFor="genre">Genre</label>
           <input
             className="placeholder-white mb-2"
             type="text"
             name="genre"
-            placeholder="genres"
-            onChange={(e) => setGenre(e)}
+            placeholder="Action Comedy Romance"
+            onChange={(e) => setGenre(e.target.value)}
           />
           <label htmlFor="rating">IMDB Rating</label>
           <input
             className="placeholder-white mb-2"
-            type="text"
+            type="number"
+            min={0}
+            max={10}
             name="rating"
             placeholder="rating from IMDB"
-            onChange={(e) => setRating(e)}
+            onChange={(e) => setImdbRating(Number(e.target.value))}
           />
           <label htmlFor="url">Poster URL</label>
           <input
@@ -111,7 +126,7 @@ export default function Admin() {
             type="text"
             name="url"
             placeholder="url"
-            onChange={(e) => setUrl(e)}
+            onChange={(e) => setUrl(e.target.value)}
           />
           <label htmlFor="alt">Alterantive text</label>
           <input
@@ -119,7 +134,7 @@ export default function Admin() {
             type="text"
             name="alt"
             placeholder="alt"
-            onChange={(e) => setAlt(e)}
+            onChange={(e) => setAlt(e.target.value)}
           />
           <label htmlFor="date">Release Date</label>
           <input
@@ -127,7 +142,7 @@ export default function Admin() {
             type="text"
             name="date"
             placeholder="Release date"
-            onChange={(e) => setReleaseDate(e)}
+            onChange={(e) => setReleaseDate(e.target.value)}
           />
           <button className=" mt-4 bg-rose-800 hover:bg-rose-700 text-stone-300 font-bold cursor-pointer px-6 py-2 rounded-md">
             Submit
@@ -149,7 +164,7 @@ export default function Admin() {
             type="text"
             name="movieID"
             placeholder="Movie ID"
-            onChange={(e) => setMovieId(e)}
+            onChange={(e) => setMovieId(e.target.value)}
           />
           <label htmlFor="date">Date</label>
           <input
@@ -157,7 +172,7 @@ export default function Admin() {
             type="text"
             name="date"
             placeholder="2024-05-05T16:00"
-            onChange={(e) => setDate(e)}
+            onChange={(e) => setDate(e.target.value)}
           />
           <button className=" mt-4 bg-rose-800 hover:bg-rose-700 text-stone-300 font-bold cursor-pointer px-6 py-2 rounded-md">
             Submit

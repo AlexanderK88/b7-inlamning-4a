@@ -22,7 +22,7 @@ export async function POST(req) {
 
     const movieCount = await Movie.countDocuments();
 
-    await Movie.create({
+    const newMovie = new Movie({
       id: movieCount + 1,
       attributes: {
         title,
@@ -36,6 +36,9 @@ export async function POST(req) {
         genre,
       },
     });
+
+    // Save the new movie to the database
+    await newMovie.save();
 
     return NextResponse.json({ message: "Movie registered successfully", status: 200 });
   } catch (error) {
