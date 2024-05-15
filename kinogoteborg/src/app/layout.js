@@ -18,7 +18,6 @@ export default function RootLayout({ children }) {
         <body className={`${inter.className} bg-stone-700`}>
           <Header />
           <main className="min-h-screen">{children}</main>
-
           <Footer />
         </body>
       </AuthProvider>
