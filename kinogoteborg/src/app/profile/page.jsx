@@ -8,7 +8,7 @@ import Settings from "../components/profile/Settings";
 import Reviews from "../components/profile/Reviews";
 import Admin from "../components/profile/Admin";
 
-export default function page() {
+export default function Page() {
   const [page, setPage] = useState("General");
 
   return (

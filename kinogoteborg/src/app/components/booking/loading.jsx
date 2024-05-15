@@ -18,6 +18,8 @@ export const Loading = () => {
   }, []);
 
   return (
-    <div className="text-3xl text-white font-semibold justify-start text-start">{animation}</div>
+    <div className="text-3xl text-white font-semibold justify-center text-start my-10 mx-auto flex">
+      {animation}
+    </div>
   );
 };

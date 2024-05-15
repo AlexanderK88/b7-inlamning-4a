@@ -1,13 +1,24 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+// import { getServerSession } from "next-auth";
+// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { useSession } from "next-auth/react";
+
 import { Button } from "@/app/components/booking/button";
 import { RenderSaloon } from "../../components/booking/RenderSaloon";
-
+import { Loading } from "@/app/components/booking/loading";
 import BookingModal from "@/app/components/booking/bookingModal";
 import MovieDetails from "@/app/components/booking/movieDetails";
 
-const Modal = ({ isModalOpen, isLogin, isVerified, specialNeeds }) => {
+const Modal = ({
+  isModalOpen,
+  isLogin,
+  isVerified,
+  setSpecialNeeds,
+  specialNeeds,
+  seatsToBook,
+}) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
       <div className="flex flex-col items-center justify-center w-full max-w-screen-lg mx-auto px-4 py-8">
@@ -16,7 +27,9 @@ const Modal = ({ isModalOpen, isLogin, isVerified, specialNeeds }) => {
             isModalOpen={isModalOpen}
             isLogin={isLogin}
             isVerified={isVerified}
+            setSpecialNeeds={setSpecialNeeds}
             specialNeeds={specialNeeds}
+            seatsToBook={seatsToBook}
           />
         </div>
       </div>
@@ -26,11 +39,28 @@ const Modal = ({ isModalOpen, isLogin, isVerified, specialNeeds }) => {
 
 export default function Page() {
   const [bookNow, setBookNow] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
-  const [seats, setSeats] = useState(4);
+  const [seats, setSeats] = useState(2);
   const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
   const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
   const [seatsToBook, setSeatsToBook] = useState([]);
+  const [isLogin, setIsLogin] = useState(null);
+
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      console.log("Welcome unknown user");
+    },
+  });
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      console.log("logged in with session", status);
+      setIsLogin(true);
+    } else {
+      console.log("not logged in");
+      setIsLogin(false);
+    }
+  }, [status]);
 
   useEffect(() => {
     console.log("seats to book: ", seatsToBook);
@@ -69,13 +99,14 @@ export default function Page() {
           </Button>
         </div>
       </div>
-
+      {/* <bookingSession setIsLogin={setIsLogin} /> */}
       {/* Opens the booking modal when isModalOpen = true. */}
       {bookNow && (
         <Modal
           isModalOpen={setBookNow}
           isLogin={isLogin}
           isVerified={isVerified}
+          setSpecialNeeds={setSpecialNeeds}
           specialNeeds={specialNeeds}
           seatsToBook={seatsToBook}
         />
