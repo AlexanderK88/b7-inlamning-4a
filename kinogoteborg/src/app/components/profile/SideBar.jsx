@@ -14,7 +14,6 @@ export default function SideBar({ setPage }) {
     return <div>Please log in</div>;
   }
   const handleMenuClick = (e) => {
-    console.log(e.target.innerText);
     setPage(e.target.innerText);
   };
   return (
