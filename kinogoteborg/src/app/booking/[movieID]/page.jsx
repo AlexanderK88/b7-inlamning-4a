@@ -48,9 +48,7 @@ export default function Page() {
 
   const { status } = useSession({
     required: true,
-    onUnauthenticated() {
-      console.log("Welcome unknown user");
-    },
+    onUnauthenticated() {},
   });
 
   useEffect(() => {
@@ -63,17 +61,13 @@ export default function Page() {
 
   useEffect(() => {
     if (status === "authenticated") {
-      console.log("logged in with session", status);
       setIsLogin(true);
     } else {
-      console.log("not logged in");
       setIsLogin(false);
     }
   }, [status]);
 
-  useEffect(() => {
-    console.log("seats to book: ", seatsToBook);
-  }, [seatsToBook]);
+  useEffect(() => {}, [seatsToBook]);
 
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
