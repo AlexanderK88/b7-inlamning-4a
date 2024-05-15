@@ -67,8 +67,8 @@ export default function Page({ params }) {
           </div>
         </div>
 
-        <div className="md:col-span-3 flex flex-row align-center justify-evenly border p-2 ">
-          <p>screening date</p>
+        <div className="md:col-span-3 flex flex-col align-center justify-evenly border p-2 ">
+          <p className="mb-2">screening date</p>
           {/*<div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
