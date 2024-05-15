@@ -40,7 +40,6 @@ export default function BookingModal({
     seatsToBook[0].forEach((seat) => {
       if (seat.includes("_S")) {
         setSpecialNeeds(true);
-        console.log("change specialNeeds");
       } else {
         setSpecialNeeds(false);
       }
