@@ -10,7 +10,7 @@ export default function Admin() {
   const [url, setUrl] = useState("");
   const [alt, setAlt] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
-  const [movieId, setMovieId] = useState("");
+  const [movieID, setMovieID] = useState("");
   const [date, setDate] = useState("");
   const [error1, setError1] = useState("");
   const [error2, setError2] = useState("");
@@ -56,7 +56,7 @@ export default function Admin() {
   async function onSubmitScreening(e) {
     e.preventDefault();
 
-    if (!movieId || !date) {
+    if (!movieID || !date) {
       setError2("Please fill all the fields");
       return;
     }
@@ -66,7 +66,7 @@ export default function Admin() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ movieId, date }),
+        body: JSON.stringify({ movieID, date }),
       });
       if (res.ok) {
         const form = e.target;
@@ -164,7 +164,7 @@ export default function Admin() {
             type="text"
             name="movieID"
             placeholder="Movie ID"
-            onChange={(e) => setMovieId(e.target.value)}
+            onChange={(e) => setMovieID(e.target.value)}
           />
           <label htmlFor="date">Date</label>
           <input
