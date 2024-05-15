@@ -12,13 +12,13 @@ export default function page() {
   const [page, setPage] = useState("General");
 
   return (
-    <main className="h-screen bg-stone-100 flex flex-col sm:grid sm:grid-cols-8">
+    <div className="bg-stone-100 flex flex-col sm:grid sm:grid-cols-8">
       <SideBar setPage={setPage} />
       {page === "General" ? <General /> : null}
       {page === "Bookings" ? <Bookings /> : null}
       {page === "Reviews" ? <Reviews /> : null}
       {page === "Settings" ? <Settings /> : null}
       {page === "Admin" ? <Admin /> : null}
-    </main>
+    </div>
   );
 }
