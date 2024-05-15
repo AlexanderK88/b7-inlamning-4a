@@ -51,6 +51,8 @@ export default function Page({ params }) {
 
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
+      {/* <h1> to test if page.test.jsx pass */}
+      <h1>Home</h1>
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
         <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-[70vh]">
           movie data
@@ -74,7 +76,6 @@ export default function Page({ params }) {
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>*/}
           <ScreeningDates id={movieID} onClick={handleDateSelect} />
         </div>
-
         <div className="md:col-span-2 md:col-start-1 md:row-start-2 flex flex-row align-center justify-evenly p-2 border">
           <p>screening times</p>
           {/*<div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>

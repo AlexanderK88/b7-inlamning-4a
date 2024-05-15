@@ -2,34 +2,32 @@ import connectToDb from "@/lib/connectToDb";
 import Screening from "@/models/screeningsModel";
 import { NextResponse } from "next/server";
 
-export async function GET(req, { params }) {
-  const id = params.id; // or const { id } = params;
+export async function GET(req, { params, query }) {
+  const id = params.id;
 
   //only first five days of interest to render page
   const today = new Date();
   const start = new Date(today);
   const end = new Date(today);
-  end.setDate(end.getDate() + 4);
+  end.setDate(end.getDate() + 5);
 
-  const startDate = start.toISOString(); //.slice(0, 10);
-  const endDate = end.toISOString(); //.slice(0, 10);
+  const startDate = start.toISOString().slice(0, 10);
+  const endDate = end.toISOString().slice(0, 10);
+  console.log(startDate);
+  console.log(endDate);
+
+  const queryStartDate = query ? query.startDate : null;
+  const queryEndDate = query ? query.endDate : null;
 
   await connectToDb();
   try {
-    const screenings = await Screening.aggregate([
-      {
-        $match: {
-          "attributes.movieID": id,
-          "attributes.date": { $gte: new Date(startDate), $lte: new Date(endDate) },
-        },
+    const screenings = await Screening.find({
+      "attributes.movieID": id,
+      "attributes.date": {
+        $gte: new Date(queryStartDate || startDate),
+        $lte: new Date(queryEndDate || endDate),
       },
-      {
-        $group: {
-          _id: { $dateToString: { format: "%Y-%m-%d", date: "$attributes.date" } },
-          count: { $sum: 1 }, //if necessary to know for future code to render page?
-        },
-      },
-    ]);
+    });
 
     return NextResponse.json({ success: "true", data: screenings });
   } catch (error) {
