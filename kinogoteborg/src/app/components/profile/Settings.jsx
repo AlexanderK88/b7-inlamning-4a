@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { set } from "mongoose";
 
 export default function Settings() {
   const { data: session } = useSession();
@@ -31,6 +32,7 @@ export default function Settings() {
       if (res.ok) {
         const form = e.target;
         form.reset();
+        setName("");
         setError1("");
       } else {
         console.log("Changing users name failed");
@@ -64,6 +66,8 @@ export default function Settings() {
       if (res.ok) {
         const form = e.target;
         form.reset();
+        setPassword("");
+        setConfirmPasssword("");
         setError2("");
       } else {
         console.log("Changing users password failed");
