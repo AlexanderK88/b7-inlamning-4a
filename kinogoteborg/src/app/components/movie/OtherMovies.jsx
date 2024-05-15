@@ -9,12 +9,13 @@ export default function Movies({ id }) {
   const [movie2, setMovie2] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/movies")
+    fetch("/api/movies")
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.data);
-
-        let validIds = data.data.map((movie) => movie.id).filter((movieId) => movieId !== id);
+        let validIds = data.data
+          .map((movie) => movie.id)
+          .filter((movieId) => movieId !== Number(id));
 
         const randomIndex1 = Math.floor(Math.random() * validIds.length);
         const randomId1 = validIds[randomIndex1];
@@ -26,7 +27,7 @@ export default function Movies({ id }) {
         setMovie1(data.data.find((movie) => movie.id === randomId1));
         setMovie2(data.data.find((movie) => movie.id === randomId2));
       });
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -34,7 +35,7 @@ export default function Movies({ id }) {
       <div className="flex flex-col sm:flex-row justify-center my-12">
         <div className="flex flex-col w-6/6 sm:w-1/5 mx-5 items-center sm:justify-center">
           <Link
-            href={`http://localhost:3000/movies/${movie1?.id}`}
+            href={`/movies/${movie1?.id}`}
             className="flex flex-col text-center text-xl text-stone-200 hover:text-stone-100 justify-center mb-5"
           >
             <img
@@ -46,10 +47,9 @@ export default function Movies({ id }) {
             <p className="mt-4 mb-8 sm:my-4 h-4">{movie1?.attributes?.title}</p>
           </Link>
         </div>
-
         <div className="flex flex-col w-6/6 sm:w-1/5 mx-5 items-center sm:justify-center">
           <Link
-            href={`http://localhost:3000/movies/${movie2?.id}`}
+            href={`/movies/${movie2?.id}`}
             className="text-center text-xl text-stone-200 hover:text-stone-100 flex flex-col justify-center mb-5"
           >
             <img
@@ -57,7 +57,6 @@ export default function Movies({ id }) {
               alt={movie1?.attributes?.image?.alt}
               className="rounded-md max-h-[360px] w-[240px] sm:w-[255px]"
             />
-
             <p className="mt-4 mb-8 sm:my-4 h-4">{movie2?.attributes?.title}</p>
           </Link>
         </div>

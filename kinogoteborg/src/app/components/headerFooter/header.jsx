@@ -8,8 +8,8 @@ export default function Header() {
   const { data: session } = useSession();
 
   return (
-    <div className="bg-[#333333] grid grid-cols-2">
-      <Link href="/">
+    <div className="bg-[#333333] grid grid-cols-3">
+      <Link href="/" className="col-span-1">
         {" "}
         <Image
           src="/headerLogo.png"
@@ -20,22 +20,22 @@ export default function Header() {
         />
       </Link>
 
-      <div className="flex gap-15 text-right p-5 mt-10 mr-20 justify-end gap-20">
-        <Link href="/movies" className="text-white text-2xl font-bold">
+      <div className="col-span-2 flex gap-5 sm:gap-16 text-right p-5 mt-10 mr-0 sm:mr-20 justify-end">
+        <Link href="/movies" className="text-white text-lg md:text-xl font-bold">
           Filmer
         </Link>
-        <Link href="" className="text-white text-2xl font-bold">
+        <Link href="" className="text-white text-lg md:text-xl font-bold">
           Om oss
         </Link>
-        <Link href="" className="text-white text-2xl font-bold">
+        <Link href="" className="text-white text-lg md:text-xl font-bold">
           Nyheter
         </Link>
         {session?.user ? (
-          <Link href="/profile" className="text-white text-2xl font-bold">
+          <Link href="/profile" className="text-white text-lg md:text-xl font-bold">
             Profile
           </Link>
         ) : (
-          <Link href="/login" className="text-white text-2xl font-bold">
+          <Link href="/login" className="text-white text-lg md:text-xl font-bold">
             Login
           </Link>
         )}

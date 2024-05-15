@@ -12,7 +12,7 @@ export default function page() {
   const [page, setPage] = useState("General");
 
   return (
-    <div className="bg-stone-100 flex flex-col sm:grid sm:grid-cols-8">
+    <div className="bg-stone-800 flex flex-col sm:grid sm:grid-cols-8">
       <SideBar setPage={setPage} />
       {page === "General" ? <General /> : null}
       {page === "Bookings" ? <Bookings /> : null}
