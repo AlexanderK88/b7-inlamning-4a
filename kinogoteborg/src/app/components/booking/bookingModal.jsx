@@ -41,6 +41,8 @@ export default function BookingModal({
       if (seat.includes("_S")) {
         setSpecialNeeds(true);
         console.log("change specialNeeds");
+      } else {
+        setSpecialNeeds(false);
       }
     });
 
