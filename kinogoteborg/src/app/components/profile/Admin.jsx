@@ -45,6 +45,13 @@ export default function Admin() {
         const form = e.target;
         form.reset();
         setError1("");
+        setTitle("");
+        setDescription("");
+        setGenre("");
+        setImdbRating(5);
+        setUrl("");
+        setAlt("");
+        setReleaseDate("");
       } else {
         console.log("movie creation failed");
       }
@@ -71,6 +78,8 @@ export default function Admin() {
       if (res.ok) {
         const form = e.target;
         form.reset();
+        setDate("");
+        setMovieID("");
         setError2("");
       } else {
         console.log("Screening creation failed");
@@ -83,10 +92,10 @@ export default function Admin() {
   return (
     <div className="col-span-6 flex-grow h-full w-full bg-stone-800 flex flex-col items-center gap-8">
       <h1 className="text-2xl text-stone-200 text-center mt-8">Admin Settings</h1>
-      <div className="flex w-full h-full items-center md:items-baseline justify-center md:h-3/5 flex-col md:flex-row gap-5 lg:gap-20">
-        <div className="border-2 border-solid border-stone-500 bg-zinc-800 w-3/4 md:w-3/5 xl:w-1/2 2xl:w-1/3 min-h-32 shadow-md rounded-md text-stone-200 p-8 my-5">
+      <div className="flex w-full h-full items-center lg:items-baseline justify-center lg:h-3/5 flex-col lg:flex-row gap-5 lg:gap-10 m-5">
+        <div className="h-full md:mx-6 sm:h-auto border-2 border-solid border-stone-500 bg-zinc-800 w-3/4 md:w-3/5 lg:w-2/5 xl:w-1/3 2xl:w-1/3 min-h-32 shadow-md rounded-md text-stone-200 p-8 my-5">
           <h2 className="mb-5 text-xl font-bold">Create new movie</h2>
-          <form className="flex flex-col gap-4" onSubmit={onSubmitMovie}>
+          <form className="flex flex-col gap-4 " onSubmit={onSubmitMovie}>
             <label htmlFor="title">Title</label>
             <input
               className="placeholder-white mb-2"
@@ -156,7 +165,7 @@ export default function Admin() {
           </form>
         </div>
 
-        <div className="border-2 border-solid border-stone-500 bg-zinc-800 w-3/4 md:w-3/5 xl:w-1/2 2xl:w-1/3 min-h-32 shadow-md rounded-md text-stone-200 p-8 mb-[100px]">
+        <div className="h-full md:mx-6 sm:h-auto border-2 border-solid border-stone-500 bg-zinc-800 w-3/4 md:w-3/5 lg:w-2/5 xl:w-1/3 2xl:w-1/3 min-h-32 shadow-md rounded-md text-stone-200 p-8 mb-[100px]">
           <h2 className="mb-5 text-xl font-bold">Create new screening</h2>
           <form className="flex flex-col gap-4" onSubmit={onSubmitScreening}>
             <label htmlFor="movieID">Movie ID</label>
