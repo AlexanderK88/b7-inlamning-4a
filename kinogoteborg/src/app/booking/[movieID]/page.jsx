@@ -1,27 +1,21 @@
 "use client";
 
-//import rendersaloon to render page.
-//build modal to use booking.js
-//add state for booking to use, might be better placed in booking.js
-// renderSaloon(2)
-//   .then(cinema => console.log(cinema))
-//   .catch(error => console.error(error));
+import React, { useEffect, useState } from "react";
+import { Button } from "@/app/components/booking/button";
+import { RenderSaloon } from "../../components/booking/RenderSaloon";
+
 import BookingModal from "@/app/components/booking/bookingModal";
 
-import React, { useState } from "react";
-import { Button, RedButton } from "@/app/components/booking/button";
-import { set } from "mongoose";
-
-const Modal = ({ isModalOpen }) => {
+const Modal = ({ isModalOpen, isLogin, isVerified, specialNeeds }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
       <div className="flex flex-col items-center justify-center w-full max-w-screen-lg mx-auto px-4 py-8">
         <div className="bg-[#7E6969] text-white rounded-lg shadow-lg p-6 w-[96vw] md:w-[50vw]">
           <BookingModal
             isModalOpen={isModalOpen}
-            isVerified={false}
-            isLogin={false}
-            specialNeeds={false}
+            isLogin={isLogin}
+            isVerified={isVerified}
+            specialNeeds={specialNeeds}
           />
         </div>
       </div>
@@ -32,6 +26,14 @@ const Modal = ({ isModalOpen }) => {
 export default function Page() {
   const [bookNow, setBookNow] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [seats, setSeats] = useState(4);
+  const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
+  const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
+  const [seatsToBook, setSeatsToBook] = useState([]);
+
+  useEffect(() => {
+    console.log("seats to book: ", seatsToBook);
+  }, [seatsToBook]);
 
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
@@ -64,10 +66,11 @@ export default function Page() {
           <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
         </div>
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
-        <div className="grid md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border min-h-[30vh] ">
-          saloon render
-          <div className="h-2 w-[80%] bg-black m-auto rounded-md">content</div>
+        <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
+          <div id="movieScreen" className="h-2 w-full bg-black col-start-1 rounded-md border"></div>
+          <RenderSaloon saloonNumber={2} seats={seats} setSeatsToBook={setSeatsToBook} />
         </div>
+
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">
           <Button onClick={() => setBookNow(true)} className={"w-[10em]"}>
             Book Now
@@ -76,7 +79,15 @@ export default function Page() {
       </div>
 
       {/* Opens the booking modal when isModalOpen = true. */}
-      {bookNow && <Modal isModalOpen={setBookNow} knownUser={isLogin} />}
+      {bookNow && (
+        <Modal
+          isModalOpen={setBookNow}
+          isLogin={isLogin}
+          isVerified={isVerified}
+          specialNeeds={specialNeeds}
+          seatsToBook={seatsToBook}
+        />
+      )}
     </div>
   );
 }
