@@ -39,18 +39,17 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, user, session }) {
       if (user) {
-        //pass user id and number to token
         return {
           ...token,
           phoneNumber: user.phoneNumber,
           bookings: user.bookings,
           reviews: user.reviews,
+          admin: user.admin,
         };
       }
       return token;
     },
     async session({ token, user, session }) {
-      //Pass user id and number to session
       return {
         ...session,
         user: {
@@ -58,6 +57,7 @@ export const authOptions = {
           phoneNumber: token.phoneNumber,
           bookings: token.bookings,
           reviews: token.reviews,
+          admin: token.admin,
         },
       };
     },

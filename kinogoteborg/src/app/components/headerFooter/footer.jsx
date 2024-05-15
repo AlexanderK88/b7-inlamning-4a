@@ -8,7 +8,6 @@ export default function Footer() {
         <Link href="/">
           <Image src="/footerLogo.png" width={150} height={150} alt="Cinema logo in footer" />
         </Link>
-
         <div className="flex flex-col w-60 mt-6">
           <p className="text-xs font-bold text-white">Kino Göteborg</p>
           <p className="text-xs text-white">

@@ -7,7 +7,7 @@ export default function Movies() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/movies")
+    fetch("/api/movies")
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.data);
