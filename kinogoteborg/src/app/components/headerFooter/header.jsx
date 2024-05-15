@@ -22,13 +22,13 @@ export default function Header() {
 
       <div className="col-span-2 flex gap-5 sm:gap-16 text-right p-5 mt-10 mr-0 sm:mr-20 justify-end">
         <Link href="/movies" className="text-white text-lg md:text-xl font-bold">
-          Filmer
+          Movies
         </Link>
         <Link href="" className="text-white text-lg md:text-xl font-bold">
-          Om oss
+          About us
         </Link>
         <Link href="" className="text-white text-lg md:text-xl font-bold">
-          Nyheter
+          News
         </Link>
         {session?.user ? (
           <Link href="/profile" className="text-white text-lg md:text-xl font-bold">

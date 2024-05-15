@@ -24,13 +24,13 @@ export default function Footer() {
         <div className="flex flex-col mt-6">
           <p className="text-xs font-bold text-white">Navigation</p>
           <Link href="/movies" className="text-xs text-white">
-            Filmer
+            Movies
           </Link>
           <Link href="" className="text-xs text-white">
-            Om oss
+            About us
           </Link>
           <Link href="" className="text-xs text-white">
-            Nyheter
+            News
           </Link>
         </div>
         <div className="flex flex-col mt-6">
