@@ -13,8 +13,8 @@ export default function ScreeningDates({ id, onClick }) {
       .then((data) => {
         console.log(id);
         console.log(data);
-        setScreeningDates(data.data);
-        setSelectedDate(data.data[0]);
+        setScreeningDates(data.data.map(screening => screening.attributes.date));
+        setSelectedDate(data.data[0].attributes.date);
       });
   }, [id]);
 
