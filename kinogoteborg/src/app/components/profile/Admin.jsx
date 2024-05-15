@@ -81,108 +81,110 @@ export default function Admin() {
   }
 
   return (
-    <div className="col-span-6 w-full bg-stone-700 flex flex-col items-center gap-8">
+    <div className="col-span-6 flex-grow h-full w-full bg-stone-800 flex flex-col items-center gap-8">
       <h1 className="text-2xl text-stone-200 text-center mt-8">Admin Settings</h1>
-      <div className="border-2 border-solid border-stone-500 bg-zinc-800 w-3/4 md:w-3/5 xl:w-1/2 2xl:w-1/3 min-h-32 shadow-md rounded-md text-stone-200 p-8 my-5">
-        <h2 className="mb-5 text-xl font-bold">Create new movie</h2>
-        <form className="flex flex-col gap-4" onSubmit={onSubmitMovie}>
-          <label htmlFor="title">Title</label>
-          <input
-            className="placeholder-white mb-2"
-            type="text"
-            name="title"
-            placeholder="title"
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <label htmlFor="description">Movie Description</label>
-          <input
-            className="placeholder-white mb-2"
-            type="text"
-            name="description"
-            placeholder="description"
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <label htmlFor="genre">Genre</label>
-          <input
-            className="placeholder-white mb-2"
-            type="text"
-            name="genre"
-            placeholder="Action Comedy Romance"
-            onChange={(e) => setGenre(e.target.value)}
-          />
-          <label htmlFor="rating">IMDB Rating</label>
-          <input
-            className="placeholder-white mb-2"
-            type="number"
-            min={0}
-            max={10}
-            name="rating"
-            placeholder="rating from IMDB"
-            onChange={(e) => setImdbRating(Number(e.target.value))}
-          />
-          <label htmlFor="url">Poster URL</label>
-          <input
-            className="placeholder-white mb-2"
-            type="text"
-            name="url"
-            placeholder="url"
-            onChange={(e) => setUrl(e.target.value)}
-          />
-          <label htmlFor="alt">Alterantive text</label>
-          <input
-            className="placeholder-white mb-2"
-            type="text"
-            name="alt"
-            placeholder="alt"
-            onChange={(e) => setAlt(e.target.value)}
-          />
-          <label htmlFor="date">Release Date</label>
-          <input
-            className="placeholder-white mb-2"
-            type="text"
-            name="date"
-            placeholder="Release date"
-            onChange={(e) => setReleaseDate(e.target.value)}
-          />
-          <button className=" mt-4 bg-rose-800 hover:bg-rose-700 text-stone-300 font-bold cursor-pointer px-6 py-2 rounded-md">
-            Submit
-          </button>
-          {error1 && (
-            <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-              {error1}
-            </div>
-          )}
-        </form>
-      </div>
+      <div className="flex w-full h-full items-center md:items-baseline justify-center md:h-3/5 flex-col md:flex-row gap-5 lg:gap-20">
+        <div className="border-2 border-solid border-stone-500 bg-zinc-800 w-3/4 md:w-3/5 xl:w-1/2 2xl:w-1/3 min-h-32 shadow-md rounded-md text-stone-200 p-8 my-5">
+          <h2 className="mb-5 text-xl font-bold">Create new movie</h2>
+          <form className="flex flex-col gap-4" onSubmit={onSubmitMovie}>
+            <label htmlFor="title">Title</label>
+            <input
+              className="placeholder-white mb-2"
+              type="text"
+              name="title"
+              placeholder="title"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <label htmlFor="description">Movie Description</label>
+            <input
+              className="placeholder-white mb-2"
+              type="text"
+              name="description"
+              placeholder="description"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <label htmlFor="genre">Genre</label>
+            <input
+              className="placeholder-white mb-2"
+              type="text"
+              name="genre"
+              placeholder="Action Comedy Romance"
+              onChange={(e) => setGenre(e.target.value)}
+            />
+            <label htmlFor="rating">IMDB Rating</label>
+            <input
+              className="placeholder-white mb-2"
+              type="number"
+              min={0}
+              max={10}
+              name="rating"
+              placeholder="rating from IMDB"
+              onChange={(e) => setImdbRating(Number(e.target.value))}
+            />
+            <label htmlFor="url">Poster URL</label>
+            <input
+              className="placeholder-white mb-2"
+              type="text"
+              name="url"
+              placeholder="url"
+              onChange={(e) => setUrl(e.target.value)}
+            />
+            <label htmlFor="alt">Alterantive text</label>
+            <input
+              className="placeholder-white mb-2"
+              type="text"
+              name="alt"
+              placeholder="alt"
+              onChange={(e) => setAlt(e.target.value)}
+            />
+            <label htmlFor="date">Release Date</label>
+            <input
+              className="placeholder-white mb-2"
+              type="text"
+              name="date"
+              placeholder="Release date"
+              onChange={(e) => setReleaseDate(e.target.value)}
+            />
+            <button className=" mt-4 bg-rose-800 hover:bg-rose-700 text-stone-300 font-bold cursor-pointer px-6 py-2 rounded-md">
+              Submit
+            </button>
+            {error1 && (
+              <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                {error1}
+              </div>
+            )}
+          </form>
+        </div>
 
-      <div className="border-2 border-solid border-stone-500 bg-zinc-800 w-3/4 md:w-3/5 xl:w-1/2 2xl:w-1/3 min-h-32 shadow-md rounded-md text-stone-200 p-8 mb-[100px]">
-        <h2 className="mb-5 text-xl font-bold">Create new screening</h2>
-        <form className="flex flex-col gap-4" onSubmit={onSubmitScreening}>
-          <label htmlFor="movieID">Movie ID</label>
-          <input
-            className="placeholder-white mb-2"
-            type="text"
-            name="movieID"
-            placeholder="Movie ID"
-            onChange={(e) => setMovieID(e.target.value)}
-          />
-          <label htmlFor="date">Date</label>
-          <input
-            className="placeholder-white mb-2"
-            type="text"
-            name="date"
-            placeholder="2024-05-05T16:00"
-            onChange={(e) => setDate(e.target.value)}
-          />
-          <button className=" mt-4 bg-rose-800 hover:bg-rose-700 text-stone-300 font-bold cursor-pointer px-6 py-2 rounded-md">
-            Submit
-          </button>
-          {error2 && (
-            <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-              {error2}
-            </div>
-          )}
-        </form>
+        <div className="border-2 border-solid border-stone-500 bg-zinc-800 w-3/4 md:w-3/5 xl:w-1/2 2xl:w-1/3 min-h-32 shadow-md rounded-md text-stone-200 p-8 mb-[100px]">
+          <h2 className="mb-5 text-xl font-bold">Create new screening</h2>
+          <form className="flex flex-col gap-4" onSubmit={onSubmitScreening}>
+            <label htmlFor="movieID">Movie ID</label>
+            <input
+              className="placeholder-white mb-2"
+              type="text"
+              name="movieID"
+              placeholder="Movie ID"
+              onChange={(e) => setMovieID(e.target.value)}
+            />
+            <label htmlFor="date">Date</label>
+            <input
+              className="placeholder-white mb-2"
+              type="text"
+              name="date"
+              placeholder="2024-05-05T16:00"
+              onChange={(e) => setDate(e.target.value)}
+            />
+            <button className=" mt-4 bg-rose-800 hover:bg-rose-700 text-stone-300 font-bold cursor-pointer px-6 py-2 rounded-md">
+              Submit
+            </button>
+            {error2 && (
+              <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                {error2}
+              </div>
+            )}
+          </form>
+        </div>
       </div>
     </div>
   );
