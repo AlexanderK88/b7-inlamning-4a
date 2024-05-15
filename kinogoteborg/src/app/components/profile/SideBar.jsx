@@ -6,7 +6,6 @@ export default function SideBar({ setPage }) {
   const { data: session, status } = useSession();
 
   const handleMenuClick = (e) => {
-    console.log(e.target.innerText);
     setPage(e.target.innerText);
   };
   return (
