@@ -8,7 +8,7 @@ export default function page({ params }) {
   const [id, setId] = useState(params.movieID);
 
   return (
-    <div>
+    <div className="my-[100px]">
       <Movie id={id} />
       <OtherMovies id={id} />
     </div>

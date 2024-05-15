@@ -24,7 +24,7 @@ export default function Movies({ id }) {
   };
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row justify-center items-center gap-8 my-12 pb-8">
+    <div className="flex flex-col-reverse lg:flex-row justify-center items-center gap-8 pb-8 mb-12">
       <div className=" w-5/6 sm:w-4/6 lg:w-1/4 xl:w-1/4 2xl:w-1/6 rounded-md ">
         <img
           className="rounded-md"
@@ -49,7 +49,7 @@ export default function Movies({ id }) {
           </button>
         </Link>
         <p
-          className="text-lg text-stone-300 underline hover:cursor-pointer w-1/3 hover:text-stone-200"
+          className="text-lg text-stone-300 underline hover:cursor-pointer w-2/3 hover:text-stone-200"
           onClick={reviewHandler}
         >
           See all reviews
