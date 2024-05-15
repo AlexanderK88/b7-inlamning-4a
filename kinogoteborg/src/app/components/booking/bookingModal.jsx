@@ -36,12 +36,13 @@ export default function BookingModal({
 }) {
   const [bookingState, setBookingState] = useState("Login");
 
-  seatsToBook[0].forEach((seat) => {
-    if (seat.includes("_S")) {
-      setSpecialNeeds(true);
-      console.log("change specialNeeds");
-    }
-  });
+  if (seatsToBook.length != 0)
+    seatsToBook[0].forEach((seat) => {
+      if (seat.includes("_S")) {
+        setSpecialNeeds(true);
+        console.log("change specialNeeds");
+      }
+    });
 
   useEffect(() => {
     if (specialNeeds) {
@@ -58,7 +59,7 @@ export default function BookingModal({
       if (isLogin) {
         setBookingState("PaymentAsUser");
       } else {
-        setBookingState("PaymentAsGuest");
+        setBookingState("Login");
       }
     }
   }, [isLogin, specialNeeds, isVerified]);
