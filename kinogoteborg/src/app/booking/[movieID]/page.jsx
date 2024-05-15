@@ -38,7 +38,7 @@ const Modal = ({
   );
 };
 
-export default function Page() {
+export default function Page({ params }) {
   const [bookNow, setBookNow] = useState(false);
   const [seats, setSeats] = useState(2);
   const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
@@ -47,6 +47,7 @@ export default function Page() {
   const [isLogin, setIsLogin] = useState(null);
   const [isAllowToBook, setIsAllowToBook] = useState(false);
   const [noSeatsBooked, setNoSeatsBooked] = useState(false);
+  const id = params.movieID;
 
   const { status } = useSession({
     required: true,
@@ -75,7 +76,7 @@ export default function Page() {
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
         <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-[70vh]">
-          <MovieDetails />
+          <MovieDetails id={id} />
         </div>
 
         <div className="md:col-span-3 flex flex-row align-center justify-evenly border p-2 ">

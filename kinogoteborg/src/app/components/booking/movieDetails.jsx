@@ -14,14 +14,19 @@ export default function MovieDetails({ id }) {
   }, [id]);
 
   return (
-    <>
+    <div className="flex flex-col text-white justify-left content-center text-left ">
       <img
         className="rounded-md"
         src={movie?.attributes?.image?.url}
         alt={movie?.attributes?.image?.alt}
       />
-      <p>details</p>
-      <p>imdb?</p>
-    </>
+      <div>
+        <h1 className="text-xl text-white">{movie?.attributes?.title}</h1>
+      </div>
+      <ul className="flex flex-col gap-4 mt-4">
+        <li className="my-2">Imdb rating: {movie?.attributes?.imdbRating}</li>
+      </ul>
+      <p>{movie?.attributes?.description}</p>{" "}
+    </div>
   );
 }
