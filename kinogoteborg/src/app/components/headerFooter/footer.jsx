@@ -3,9 +3,12 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className="relative mt-4 bottom-0 bg-[#800020] w-full pt-10 flex justify-center">
+    <div className="bottom-0 bg-[#800020] w-full pt-10 flex justify-center">
       <div className="flex gap-20 flex-row pb-5">
-        <Image src="/footerLogo.png" width={150} height={150} alt="Cinema logo in footer" />
+        <Link href="/">
+          <Image src="/footerLogo.png" width={150} height={150} alt="Cinema logo in footer" />
+        </Link>
+
         <div className="flex flex-col w-60 mt-6">
           <p className="text-xs font-bold text-white">Kino Göteborg</p>
           <p className="text-xs text-white">
