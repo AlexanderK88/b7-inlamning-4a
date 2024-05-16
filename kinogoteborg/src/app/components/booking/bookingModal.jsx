@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+
+import React, { useState, useEffect } from "react";
 import { Button } from "@/app/components/booking/button";
 
 // first step: login
@@ -25,39 +26,8 @@ export const ModalHeader = ({ input }) => {
   );
 };
 
-export default function BookingModal({ isModalOpen, isVerified, isLogin, specialNeeds }) {
+export default function BookingModal({ isModalOpen, isLogin, isVerified, specialNeeds }) {
   const [bookingState, setBookingState] = useState("Login");
-
-  // function useOnClickOutside(ref, handler) {
-  //   useEffect(
-  //     () => {
-  //       const listener = (event) => {
-  //         // Do nothing if clicking ref's element or descendent elements
-  //         if (!ref.current || ref.current.contains(event.target)) {
-  //           return;
-  //         }
-  //         handler(event);
-  //       };
-  //       document.addEventListener("mousedown", listener);
-  //       document.addEventListener("touchstart", listener);
-  //       return () => {
-  //         document.removeEventListener("mousedown", listener);
-  //         document.removeEventListener("touchstart", listener);
-  //       };
-  //     },
-  //     // Add ref and handler to effect dependencies
-  //     // It's worth noting that because the passed-in handler is a new ...
-  //     // ... function on every render that will cause this effect ...
-  //     // ... callback/cleanup to run every render. It's not a big deal ...
-  //     // ... but to optimize you can wrap handler in useCallback before ...
-  //     // ... passing it into this hook.
-  //     [ref, handler]
-  //   );
-  // }
-
-  // Exit modal if click outside
-  // const ref = useRef();
-  // useOnClickOutside(() => console.log("test"));
 
   useEffect(() => {
     if (isLogin) {
@@ -65,7 +35,7 @@ export default function BookingModal({ isModalOpen, isVerified, isLogin, special
     } else if (!isVerified && specialNeeds) {
       setBookingState("ValidateSpecialNeeds");
     }
-  }, [isLogin, isVerified, specialNeeds]);
+  }, [isLogin, specialNeeds, isVerified]);
 
   return (
     <>
