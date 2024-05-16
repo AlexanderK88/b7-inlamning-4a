@@ -38,7 +38,7 @@ export default function Page({ params }) {
   const [isLogin, setIsLogin] = useState(false);
 
   const movieID = params.movieID;
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null); //Put first date here in some way!!!
   const [selectedTime, setSelectedTime] = useState([]);
 
   const handleDateSelect = (date) => {

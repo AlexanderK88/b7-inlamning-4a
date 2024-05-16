@@ -13,8 +13,6 @@ export async function GET(req, { params, query }) {
 
   const startDate = start.toISOString().slice(0, 10);
   const endDate = end.toISOString().slice(0, 10);
-  console.log(startDate);
-  console.log(endDate);
 
   const queryStartDate = query ? query.startDate : null;
   const queryEndDate = query ? query.endDate : null;

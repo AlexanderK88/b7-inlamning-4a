@@ -6,6 +6,7 @@ export default function ScreeningDates({ id, onClick }) {
   const [screeningDates, setScreeningDates] = useState([]);
   //for indicator of chosen date
   const [selectedDate, setSelectedDate] = useState(null);
+  /////const [selectedDate, setSelectedDate] = useState(getTodaysDate());
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/booking/${id}/dates`)
@@ -14,6 +15,7 @@ export default function ScreeningDates({ id, onClick }) {
         //to create Month name to later render
         //one screening date per day, for example "19 June"
         const todaysDate = new Date();
+        /////const todaysDate = getTodaysDate();/////
         const todaysMonth = todaysDate.getMonth() + 1;
         const todaysYear = todaysDate.getFullYear();
 
@@ -24,6 +26,7 @@ export default function ScreeningDates({ id, onClick }) {
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
           if (year === todaysYear && month === todaysMonth) {
+          /////if (year === todaysDate.year && month === todaysDate.month) {
             screeningDays.add(`${day} ${createMonthName(month)}`);
           }
         });
@@ -61,20 +64,28 @@ export default function ScreeningDates({ id, onClick }) {
   );
 }
 
+{/*function getTodaysDate() {
+  const today = new Date();
+  const year = today.getFullYear(); 
+  const month = today.getMonth() +1;
+  const day = today.getDate();
+  return { year, month, day };
+}*/}
+
 function createMonthName(monthIndex) {
   const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
     "June",
     "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
   return monthNames[monthIndex - 1];
 }
