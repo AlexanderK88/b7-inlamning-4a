@@ -58,7 +58,7 @@ export default function BookingModal({
       if (isLogin) {
         setBookingState("PaymentAsUser");
       } else {
-        setBookingState("PaymentAsGuest");
+        setBookingState("Login");
       }
     }
   }, [isLogin, specialNeeds, isVerified]);
