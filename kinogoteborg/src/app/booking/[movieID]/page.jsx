@@ -9,6 +9,8 @@ import { Button } from "@/app/components/booking/button";
 import { RenderSaloon } from "../../components/booking/RenderSaloon";
 import { Loading } from "@/app/components/booking/loading";
 import BookingModal from "@/app/components/booking/bookingModal";
+import { NoSeats } from "@/app/components/booking/NoSeats";
+import MovieDetails from "@/app/components/booking/movieDetails";
 
 const Modal = ({
   isModalOpen,
@@ -36,49 +38,45 @@ const Modal = ({
   );
 };
 
-export default function Page() {
+export default function Page({ params }) {
   const [bookNow, setBookNow] = useState(false);
   const [seats, setSeats] = useState(2);
   const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
   const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
   const [seatsToBook, setSeatsToBook] = useState([]);
   const [isLogin, setIsLogin] = useState(null);
+  const [isAllowToBook, setIsAllowToBook] = useState(false);
+  const [noSeatsBooked, setNoSeatsBooked] = useState(false);
+  const id = params.movieID;
 
   const { status } = useSession({
     required: true,
-    onUnauthenticated() {
-      console.log("Welcome unknown user");
-    },
+    onUnauthenticated() {},
   });
 
   useEffect(() => {
+    if (seatsToBook != 0) {
+      setIsAllowToBook(true);
+    } else {
+      setBookNow(false);
+    }
+  }, [seatsToBook]);
+
+  useEffect(() => {
     if (status === "authenticated") {
-      console.log("logged in with session", status);
       setIsLogin(true);
     } else {
-      console.log("not logged in");
       setIsLogin(false);
     }
   }, [status]);
 
-  useEffect(() => {
-    console.log("seats to book: ", seatsToBook);
-  }, [seatsToBook]);
+  useEffect(() => {}, [seatsToBook]);
 
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
-        <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-[70vh]">
-          movie data
-          <div className="bg-gray-600 w-[90%] h-[50%] flex justify-center m-auto my-2">
-            movie poster
-          </div>
-          <div className="bg-gray-600 w-[90%] h-[10%] flex justify-center m-auto my-2">
-            movie details
-          </div>
-          <div className="bg-gray-600 w-[90%] h-[10%] flex justify-center m-auto my-2">
-            some more details
-          </div>
+        <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-fit">
+          <MovieDetails id={id} />
         </div>
 
         <div className="md:col-span-3 flex flex-row align-center justify-evenly border p-2 ">
@@ -102,12 +100,27 @@ export default function Page() {
         </div>
 
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">
-          <Button onClick={() => setBookNow(true)} className={"w-[10em]"}>
-            Book Now
-          </Button>
+          {!noSeatsBooked && (
+            <Button
+              onClick={() => {
+                if (isAllowToBook) {
+                  setBookNow(true);
+                } else {
+                  setNoSeatsBooked(true);
+                  setTimeout(() => {
+                    setNoSeatsBooked(false);
+                  }, 2000);
+                }
+              }}
+              className={"w-[10em]"}
+            >
+              Book Now
+            </Button>
+          )}
+          {noSeatsBooked && <NoSeats />}
         </div>
       </div>
-      {/* <bookingSession setIsLogin={setIsLogin} /> */}
+
       {/* Opens the booking modal when isModalOpen = true. */}
       {bookNow && (
         <Modal
