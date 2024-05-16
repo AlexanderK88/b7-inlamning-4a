@@ -12,7 +12,7 @@ export default function Movies({ id }) {
   const [showReviewForm, setShowReviewForm] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/movies/${id}`)
+    fetch(`/api/movies/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setMovie(data.data);
@@ -43,7 +43,7 @@ export default function Movies({ id }) {
           <li>Imdb rating: {movie?.attributes?.imdbRating}</li>
         </ul>
         <p>{movie?.attributes?.description}</p>
-        <Link href={`http://localhost:3000/booking/${movie?.id}`}>
+        <Link href={`/booking/${movie?.id}`}>
           <button className="p-2 bg-red-900 w-3/4 rounded-md shadow-sm hover:bg-red-800 hover:shadow-md ">
             Book Now
           </button>
