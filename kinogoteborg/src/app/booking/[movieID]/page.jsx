@@ -75,7 +75,7 @@ export default function Page({ params }) {
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
-        <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-[70vh]">
+        <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-fit">
           <MovieDetails id={id} />
         </div>
 

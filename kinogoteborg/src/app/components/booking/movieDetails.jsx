@@ -14,7 +14,7 @@ export default function MovieDetails({ id }) {
   }, [id]);
 
   return (
-    <div className="flex flex-col text-white justify-left content-center text-left ">
+    <div className="flex flex-col text-white justify-left content-center text-left mb-4">
       <img
         className="rounded-md"
         src={movie?.attributes?.image?.url}
