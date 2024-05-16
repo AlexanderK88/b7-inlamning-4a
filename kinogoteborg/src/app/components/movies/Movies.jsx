@@ -20,7 +20,7 @@ export default function Movies() {
         return (
           <div
             key={movie.id}
-            className="rounded-md bg-stone-700 w-5/5 max-w-64 m-4 flex flex-col justify-between items-center"
+            className="rounded-md bg-stone-800 w-5/5 max-w-64 m-4 flex flex-col justify-between items-center"
           >
             <img
               className="w-64 h-96 rounded-md shadow-md"
@@ -35,7 +35,7 @@ export default function Movies() {
               {movie.attributes.title}
             </h2>
             <Link
-              href={`http://localhost:3000/movies/${movie.id}`}
+              href={`/movies/${movie.id}`}
               className="w-full p-2 m-2 bg-red-800 text-stone-300 text-center rounded-full hover:bg-red-700 mb-5 hover:font-bold"
             >
               Book Now

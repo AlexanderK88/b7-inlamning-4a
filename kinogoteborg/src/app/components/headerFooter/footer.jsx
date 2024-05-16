@@ -4,9 +4,15 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <div className="bottom-0 bg-[#800020] w-full pt-10 flex justify-center">
-      <div className="flex gap-20 flex-row pb-5">
+      <div className="flex flex-col justify-center text-center md:text-left gap-5 md:gap-20 md:flex-row md:justify-baseline pb-5">
         <Link href="/">
-          <Image src="/footerLogo.png" width={150} height={150} alt="Cinema logo in footer" />
+          <Image
+            src="/footerLogo.png"
+            width={150}
+            height={150}
+            alt="Cinema logo in footer"
+            className="mx-auto"
+          />
         </Link>
         <div className="flex flex-col w-60 mt-6">
           <p className="text-xs font-bold text-white">Kino Göteborg</p>
@@ -18,13 +24,13 @@ export default function Footer() {
         <div className="flex flex-col mt-6">
           <p className="text-xs font-bold text-white">Navigation</p>
           <Link href="/movies" className="text-xs text-white">
-            Filmer
+            Movies
           </Link>
           <Link href="" className="text-xs text-white">
-            Om oss
+            About us
           </Link>
           <Link href="" className="text-xs text-white">
-            Nyheter
+            News
           </Link>
         </div>
         <div className="flex flex-col mt-6">
