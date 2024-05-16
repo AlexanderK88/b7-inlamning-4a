@@ -23,7 +23,7 @@ export default function ScreeningTimes({ id, date, onClick }) {
         setSelectedTime(data.data[0]);
       });
     }
-  }, [id, date]);
+  }, [date]);
 
   const handleTimeClick = (time) => {
     setSelectedTime(time);
