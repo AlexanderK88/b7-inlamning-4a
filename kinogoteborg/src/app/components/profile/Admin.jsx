@@ -90,7 +90,7 @@ export default function Admin() {
   }
 
   return (
-    <div className="col-span-6 flex-grow h-full w-full bg-stone-800 flex flex-col items-center gap-8">
+    <div className="col-span-6 flex-grow h-full w-full bg-stone-800 flex flex-col items-center gap-8 mb-10">
       <h1 className="text-2xl text-stone-200 text-center mt-8">Admin Settings</h1>
       <div className="flex w-full h-full items-center lg:items-baseline justify-center lg:h-3/5 flex-col lg:flex-row gap-5 lg:gap-10 m-5">
         <div className="h-full md:mx-6 sm:h-auto border-2 border-solid border-stone-500 bg-zinc-800 w-3/4 md:w-3/5 lg:w-2/5 xl:w-1/3 2xl:w-1/3 min-h-32 shadow-md rounded-md text-stone-200 p-8 my-5">

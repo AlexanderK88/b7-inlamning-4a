@@ -5,7 +5,7 @@ export default function Reviews({ isVisible, onClose, setShowReviewForm, setShow
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/reviews/${id}`)
+    fetch(`/api/reviews/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setReviews(data.data);
