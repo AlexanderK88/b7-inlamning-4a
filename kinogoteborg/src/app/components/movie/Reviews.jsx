@@ -25,7 +25,7 @@ export default function Reviews({ isVisible, onClose, setShowReviewForm, setShow
         <button className="text-white text-xl place-self-end hover:scale-105" onClick={onClose}>
           X
         </button>
-        <div className="bg-stone-800 text-stone-200  p-2 rounded-md">
+        <div className="bg-stone-800 text-stone-200  p-10 rounded-lg">
           <h2 className="text-xl text-center">Reviews</h2>
           <div className="border-solid border-y-2 border-gray-600 max-h-[450px] overflow-scroll">
             {reviews.map((review) => {

@@ -54,7 +54,7 @@ export default function Reviews({ isVisible, onClose, id, movieTitle }) {
         <button className="text-white text-xl place-self-end hover:scale-105" onClick={onClose}>
           X
         </button>
-        <div className=" bg-stone-800 p-2 rounded-md text-stone-200">
+        <div className=" bg-stone-800 rounded-lg text-stone-200 p-10">
           <h2 className="text-2xl text-center">Write a review of your own</h2>
           <form className="flex flex-col gap-2" onSubmit={submitReview}>
             <label htmlFor="Author">Author</label>
