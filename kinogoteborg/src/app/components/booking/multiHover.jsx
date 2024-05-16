@@ -3,6 +3,8 @@
 const fetchKeyData = (Event) => Event.target.getAttribute("data-key").split("_")[1];
 let bookSeats = [];
 let clickedSeats = [];
+let oldSeats = [];
+let uuid = "";
 
 const fetchLayerKeyData = (event) => {
   let parentElement = event.target;
@@ -13,19 +15,8 @@ const fetchLayerKeyData = (event) => {
     }
     parentElement = parentElement.parentNode;
   }
-  // Desired parent element not found, return null or handle appropriately
   return null;
 };
-
-// const bookingHover = (Event) => {
-//   // const value = event.target.getAttribute('data-key').split('_')[1];
-//   const halfValue = Number(fetchKeyData(Event)) / 2;
-
-//   const lowValue = Math.floor(halfValue);
-//   const highValue = Math.ceil(halfValue);
-
-//   return console.log("low: ", lowValue, "high: ", highValue, "sum: ", lowValue + highValue);
-// };
 
 const hoverSeats = (Event, amountOfSeats, inOreOut) => {
   bookSeats = [];

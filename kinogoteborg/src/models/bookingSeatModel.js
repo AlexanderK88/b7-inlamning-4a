@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const seatSchema = new mongoose.Schema({
+  movieID: { type: Number, required: true },
   uuid: { type: String, required: true },
   userID: { type: String },
   details: {

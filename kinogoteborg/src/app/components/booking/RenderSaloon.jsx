@@ -6,7 +6,7 @@ import { hoverSeats, handleSeatsToBook } from "@/app/components/booking/multiHov
 import { Loading } from "./loading";
 import { fetchSaloon } from "@/scripts/fetchSaloonLayout";
 
-export function RenderSaloon({ seats, saloonNumber, setSeatsToBook }) {
+export function RenderSaloon({ seats, saloonNumber, setSeatsToBook, setUuid, uuid }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -35,7 +35,9 @@ export function RenderSaloon({ seats, saloonNumber, setSeatsToBook }) {
         data-key={`seat_${i.toString()}${isSpecial ? "_S" : ""}`}
         onMouseOver={(event) => hoverSeats(event, seats, true)}
         onMouseOut={(event) => hoverSeats(event, seats, false)}
-        onClick={(event) => handleSeatsToBook(event, setSeatsToBook, seats)}
+        onClick={(event) => {
+          handleSeatsToBook(event, setSeatsToBook, seats);
+        }}
         className={`m-1 w-6 h-6 border rounded-sm justify-center text-center align-middle
 
           ${isSpecial ? "bg-blue-400" : "bg-red-400"}

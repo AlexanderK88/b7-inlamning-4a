@@ -15,11 +15,12 @@ export async function POST(req) {
   const uuid = uuidv4();
 
   try {
-    const { userID, date, time, seats, isBooked } = await req.json();
+    const { movieID, userID, date, time, seats, isBooked } = await req.json();
 
     await connectToDb();
 
     await Booking.create({
+      movieID,
       uuid: uuid,
       userID: userID || "",
       details: {
