@@ -72,7 +72,7 @@ export default function Reviews({ isVisible, onClose, id, movieTitle }) {
               className="w-24"
               type="number"
               min={0}
-              max={5}
+              max={10}
               name="rating"
               id="rating"
               onChange={(e) => {
