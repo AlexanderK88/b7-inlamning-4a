@@ -62,7 +62,12 @@ export default function Movies({ id }) {
         onClose={() => setShowReviewModal(false)}
         id={id}
       />
-      <ReviewForm id={id} isVisible={showReviewForm} onClose={() => setShowReviewForm(false)} />
+      <ReviewForm
+        movieTitle={movie?.attributes?.title}
+        id={id}
+        isVisible={showReviewForm}
+        onClose={() => setShowReviewForm(false)}
+      />
     </div>
   );
 }

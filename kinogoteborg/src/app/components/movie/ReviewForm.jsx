@@ -1,7 +1,10 @@
 "use client";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
-export default function Reviews({ isVisible, onClose, id }) {
+export default function Reviews({ isVisible, onClose, id, movieTitle }) {
+  const { data: session } = useSession();
+
   const [movieID, setMovieID] = useState(id);
   const [author, setAuthor] = useState("");
   const [rating, setRating] = useState(0);
@@ -21,7 +24,14 @@ export default function Reviews({ isVisible, onClose, id }) {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ movieID, author, rating, comment }),
+        body: JSON.stringify({
+          movieID,
+          author,
+          rating,
+          comment,
+          userID: session?.user?.id,
+          movieTitle,
+        }),
       });
       if (res.ok) {
         const form = e.target;

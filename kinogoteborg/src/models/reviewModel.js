@@ -7,6 +7,8 @@ const reviewSchema = new mongoose.Schema({
     rating: { type: Number, required: true },
     author: { type: String, required: true },
     comment: { type: String, required: true },
+    userID: { type: String, required: false },
+    movieTitle: { type: String, required: true },
   },
 });
 
