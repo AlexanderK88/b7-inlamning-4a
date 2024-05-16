@@ -11,6 +11,8 @@ export default function Settings() {
   const [confirmPassword, setConfirmPasssword] = useState("");
   const [error1, setError1] = useState("");
   const [error2, setError2] = useState("");
+  const [confirmation1, setConfirmation1] = useState("");
+  const [confirmation2, setConfirmation2] = useState("");
 
   async function onSubmitNameChange(e) {
     e.preventDefault();
@@ -34,6 +36,7 @@ export default function Settings() {
         form.reset();
         setName("");
         setError1("");
+        setConfirmation1("Your name has been changed");
       } else {
         console.log("Changing users name failed");
       }
@@ -69,6 +72,7 @@ export default function Settings() {
         setPassword("");
         setConfirmPasssword("");
         setError2("");
+        setConfirmation2("Your password has been changed");
       } else {
         console.log("Changing users password failed");
       }
@@ -101,6 +105,9 @@ export default function Settings() {
               </div>
             )}
           </form>
+          {confirmation1 ? (
+            <h2 className="text-xl text-green-700 mt-2 font-bold">{confirmation1}</h2>
+          ) : null}
         </div>
         <div className="border-2 border-solid border-stone-500 bg-zinc-800 w-3/4 md:w-3/5 xl:w-1/3 min-h-32 shadow-md rounded-md text-stone-200 p-8 m-5">
           <h2 className="mb-5 text-xl font-bold">Change Password</h2>
@@ -130,6 +137,9 @@ export default function Settings() {
               </div>
             )}
           </form>
+          {confirmation2 ? (
+            <h2 className="text-xl text-green-700 font-bold mt-2">{confirmation2}</h2>
+          ) : null}
         </div>
       </div>
     </div>
