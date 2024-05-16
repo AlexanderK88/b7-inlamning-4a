@@ -36,12 +36,14 @@ export default function BookingModal({
 }) {
   const [bookingState, setBookingState] = useState("Login");
 
-  seatsToBook[0].forEach((seat) => {
-    if (seat.includes("_S")) {
-      setSpecialNeeds(true);
-      console.log("change specialNeeds");
-    }
-  });
+  if (seatsToBook.length != 0)
+    seatsToBook[0].forEach((seat) => {
+      if (seat.includes("_S")) {
+        setSpecialNeeds(true);
+      } else {
+        setSpecialNeeds(false);
+      }
+    });
 
   useEffect(() => {
     if (specialNeeds) {

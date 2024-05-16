@@ -9,7 +9,7 @@ import { Button } from "@/app/components/booking/button";
 import { RenderSaloon } from "../../components/booking/RenderSaloon";
 import { Loading } from "@/app/components/booking/loading";
 import BookingModal from "@/app/components/booking/bookingModal";
-
+import { NoSeats } from "@/app/components/booking/NoSeats";
 const Modal = ({
   isModalOpen,
   isLogin,
@@ -43,27 +43,31 @@ export default function Page() {
   const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
   const [seatsToBook, setSeatsToBook] = useState([]);
   const [isLogin, setIsLogin] = useState(null);
+  const [isAllowToBook, setIsAllowToBook] = useState(false);
+  const [noSeatsBooked, setNoSeatsBooked] = useState(false);
 
   const { status } = useSession({
     required: true,
-    onUnauthenticated() {
-      console.log("Welcome unknown user");
-    },
+    onUnauthenticated() {},
   });
 
   useEffect(() => {
+    if (seatsToBook != 0) {
+      setIsAllowToBook(true);
+    } else {
+      setBookNow(false);
+    }
+  }, [seatsToBook]);
+
+  useEffect(() => {
     if (status === "authenticated") {
-      console.log("logged in with session", status);
       setIsLogin(true);
     } else {
-      console.log("not logged in");
       setIsLogin(false);
     }
   }, [status]);
 
-  useEffect(() => {
-    console.log("seats to book: ", seatsToBook);
-  }, [seatsToBook]);
+  useEffect(() => {}, [seatsToBook]);
 
   return (
     <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
@@ -102,12 +106,27 @@ export default function Page() {
         </div>
 
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">
-          <Button onClick={() => setBookNow(true)} className={"w-[10em]"}>
-            Book Now
-          </Button>
+          {!noSeatsBooked && (
+            <Button
+              onClick={() => {
+                if (isAllowToBook) {
+                  setBookNow(true);
+                } else {
+                  setNoSeatsBooked(true);
+                  setTimeout(() => {
+                    setNoSeatsBooked(false);
+                  }, 2000);
+                }
+              }}
+              className={"w-[10em]"}
+            >
+              Book Now
+            </Button>
+          )}
+          {noSeatsBooked && <NoSeats />}
         </div>
       </div>
-      {/* <bookingSession setIsLogin={setIsLogin} /> */}
+
       {/* Opens the booking modal when isModalOpen = true. */}
       {bookNow && (
         <Modal
