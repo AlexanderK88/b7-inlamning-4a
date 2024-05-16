@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { set } from "mongoose";
 
 export default function Settings() {
   const { data: session } = useSession();
