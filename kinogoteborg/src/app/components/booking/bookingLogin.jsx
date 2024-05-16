@@ -4,7 +4,7 @@ export default function BookingLogin({ setBookingState, nextState, isModalOpen }
   return (
     <>
       <h2 className="relative top-0 left-[30%]">loginpage</h2>
-      <form className="mt-14 mb-6">
+      <form className="mt-14 mb-6 text-black">
         <div>
           <label>Email Adress</label>
           <input placeholder="exempel@mail.com" className="bg-white m-3"></input>
