@@ -6,7 +6,7 @@ export async function GET(req, { params, query }) {
   const id = params.id;
   console.log(id);
   console.log(query.date);
-  const date = query.date;
+  const date = query.date; //or searchParams i stället för query, searchParams.get('date');
   console.log(id);
   console.log(date);
 
@@ -18,7 +18,7 @@ export async function GET(req, { params, query }) {
   try {
     const screenings = await Screening.find({
       "attributes.movieID": id,
-      "attributes.date": date
+      "attributes.date": date //new Date(date)
     });
 
     {/*const screenings = await Screening.aggregate([

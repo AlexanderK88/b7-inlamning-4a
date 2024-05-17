@@ -54,7 +54,7 @@ export default function ScreeningDates({ id, onClick }) {
         <div
           key={index}
           onClick={() => handleDateClick(date)}
-          className={`flex items-center justify-center w-[8vw] h-[4vw] p-2 rounded text-center hover: bg-red-700 text-stone-300 font-bold cursor-pointer 
+          className={`flex items-center justify-center w-[8vw] h-[4vw] p-2 rounded text-center hover:bg-red-700 text-stone-300 font-bold cursor-pointer 
                     ${date === selectedDate ? "bg-red-900 text-white font-bold" : "bg-gray-200 text-white"} mb-2 md:mb-0`}
         >
           {date}

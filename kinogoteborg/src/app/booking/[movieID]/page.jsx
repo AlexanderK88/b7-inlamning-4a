@@ -28,7 +28,7 @@ const Modal = ({ isModalOpen, isLogin, isVerified, specialNeeds }) => {
 export default function Page({ params }) {
   const movieID = params.movieID;
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState([]);
+  const [selectedTime, setSelectedTime] = useState([]); //const [selectedTime, setSelectedTime] = useState(null);
   const [bookNow, setBookNow] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [seats, setSeats] = useState(4);

@@ -15,25 +15,24 @@ export default function ScreeningTimes({ id, date, onClick }) {
     const fetchDataForTimes = async () => {
       const fetchedData = await fetchScreeningTimes(id, date);
       setScreeningTimes(fetchedData.data);
-      setSelectedTime(fetchedData.data[0]);
+      setSelectedTime(fetchedData.data[0]); //setSelectedTime(fetchedData.data[0] || null);
     };
 
     fetchDataForTimes();
-  }, [date]); //or empty or with id & date?
+  }, [id, date]); //or empty or with date
 
   const handleTimeClick = (time) => {
     setSelectedTime(time);
     onClick(time);
   };
 
-  // if (screeningTimes) {
-  return (
-    <div className="flex flew-wrap justify-center">
+    return (
+    <div className="flex flex-wrap justify-center">
       {screeningTimes.map((time, index) => (
         <div
           key={index}
           onClick={() => handleTimeClick(time)}
-          className={`flex items-center justify-center w-[8vw] h-[4vw] p-2 rounded text-center hover: bg-red-700 text-stone-300 font-bold cursor-pointer
+          className={`flex items-center justify-center w-[8vw] h-[4vw] p-2 rounded text-center hover:bg-red-700 text-stone-300 font-bold cursor-pointer
                     ${time === selectedTime ? "bg-red-900 text-white font-bold" : "bg-gray-200 text-white"} mb-2 md:mb-0`}
         >
           {time}
@@ -41,5 +40,4 @@ export default function ScreeningTimes({ id, date, onClick }) {
       ))}
     </div>
   );
-  //}
 }

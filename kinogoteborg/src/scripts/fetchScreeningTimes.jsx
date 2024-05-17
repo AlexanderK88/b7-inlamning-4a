@@ -7,8 +7,8 @@ export async function fetchScreeningTimes(id, date) {
       console.log(id);
       console.log(date);
       console.log(data);
-      setScreeningTimes(data.data);
-      setSelectedTime(data.data[0]);
+      //setScreeningTimes(data.data);
+      //setSelectedTime(data.data[0]);
     });
 }
 
@@ -21,6 +21,7 @@ function createDateIndex(dateMonthName) {
     Apr: "04",
     May: "05",
     Jun: "06",
+    Jul: "07",
     Aug: "08",
     Sep: "09",
     Oct: "10",
