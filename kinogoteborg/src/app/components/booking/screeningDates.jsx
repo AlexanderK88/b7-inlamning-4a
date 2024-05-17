@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 export default function ScreeningDates({ id, setSelectedDate, selectedDate }) {
   const [screeningDates, setScreeningDates] = useState([]);
-  //for indicator of chosen date
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/booking/${id}/dates`)
