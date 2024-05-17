@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-export default function ScreeningDates({ id, onClick }) {
+export default function ScreeningDates({ id, setSelectedDate, selectedDate }) {
   const [screeningDates, setScreeningDates] = useState([]);
   //for indicator of chosen date
-  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/booking/${id}/dates`)
@@ -42,17 +41,16 @@ export default function ScreeningDates({ id, onClick }) {
 
   const handleDateClick = (date) => {
     setSelectedDate(date);
-    onClick(date);
   };
 
   return (
-    <div className="flex flew-wrap justify-center">
+    <div className="flex flex-wrap justify-center my-auto">
       {screeningDates.map((date, index) => (
         <div
           key={index}
           onClick={() => handleDateClick(date)}
-          className={`flex items-center justify-center w-[8vw] h-[4vw] p-2 rounded text-center hover: bg-red-700 text-stone-300 font-bold cursor-pointer 
-                    ${date === selectedDate ? "bg-red-900 text-white font-bold" : "bg-gray-200 text-white"} mb-2 md:mb-0`}
+          className={`flex items-center justify-center w-[8vw] h-[4vw] p-2 rounded text-center hover:bg-red-700 text-stone-300 font-bold cursor-pointer 
+                    ${date === selectedDate ? "bg-red-900 text-white font-bold" : "bg-gray-500 text-white"} mb-2 md:mb-0 mx-1`}
         >
           {date}
         </div>

@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { useSession } from "next-auth/react";
 
 import { Button } from "@/app/components/booking/button";
@@ -58,14 +56,6 @@ export default function Page({ params }) {
     onUnauthenticated() {},
   });
 
-  const handleDateSelect = (date) => {
-    setSelectedDate(date);
-  };
-
-  const handleTimeSelect = (time) => {
-    setSelectedTime(time);
-  };
-
   useEffect(() => {
     if (seatsToBook != 0) {
       setIsAllowToBook(true);
@@ -91,14 +81,11 @@ export default function Page({ params }) {
           <MovieDetails id={id} />
         </div>
 
-        <div className="md:col-span-3 flex flex-row align-center justify-evenly border p-2 ">
-          <p className="text-xl text-white mt-4">screening date</p>
-          <ScreeningDates id={id} onClick={handleDateSelect} />
+        <div className="md:col-span-3 flex flex-row align-center justify-center border p-2 ">
+          <ScreeningDates id={id} setSelectedDate={setSelectedDate} selectedDate={selectedDate} />
         </div>
 
-        <div className="md:col-span-2 md:col-start-1 md:row-start-2 flex flex-row align-center justify-evenly p-2 border">
-          <p className="text-xl text-white mt-4">screening times</p>
-        </div>
+        <div className="md:col-span-2 md:col-start-1 md:row-start-2 flex flex-row align-center justify-evenly p-2 border"></div>
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
         <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
           <div id="movieScreen" className="h-2 w-full bg-black col-start-1 rounded-md border"></div>
