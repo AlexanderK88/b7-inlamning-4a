@@ -1,14 +1,26 @@
-export default async function Movies() {
-  const res = await fetch("http://localhost:3000/api/movies");
-  const data = await res.json();
-  const movies = data.data;
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
+export default function Movies() {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/movies")
+      .then((res) => res.json())
+      .then((data) => {
+        setMovies(data.data);
+      });
+  }, []);
+
   return (
     <>
       {movies.map((movie) => {
         return (
           <div
             key={movie.id}
-            className="rounded-md bg-stone-700 w-5/5 max-w-64 m-4 flex flex-col justify-between items-center"
+            className="rounded-md bg-stone-800 w-5/5 max-w-64 m-4 flex flex-col justify-between items-center"
           >
             <img
               className="w-64 h-96 rounded-md shadow-md"
@@ -22,9 +34,12 @@ export default async function Movies() {
             >
               {movie.attributes.title}
             </h2>
-            <button className="w-full p-2 m-2 bg-red-800 text-stone-300 rounded-full hover:bg-red-700 mb-5 hover:font-bold">
+            <Link
+              href={`/movies/${movie.id}`}
+              className="w-full p-2 m-2 bg-red-800 text-stone-300 text-center rounded-full hover:bg-red-700 mb-5 hover:font-bold"
+            >
               Book Now
-            </button>
+            </Link>
           </div>
         );
       })}
