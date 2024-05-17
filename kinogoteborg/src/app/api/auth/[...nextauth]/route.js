@@ -26,7 +26,7 @@ export const authOptions = {
           if (!passWordmatch) {
             return null;
           }
-          return user.attributes;
+          return { ...user.attributes, id: user.id };
         } catch (error) {
           console.log(error);
         }
@@ -45,6 +45,7 @@ export const authOptions = {
           bookings: user.bookings,
           reviews: user.reviews,
           admin: user.admin,
+          id: user.id,
         };
       }
       return token;
@@ -58,6 +59,7 @@ export const authOptions = {
           bookings: token.bookings,
           reviews: token.reviews,
           admin: token.admin,
+          id: token.id,
         },
       };
     },

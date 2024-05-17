@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const { movieID, rating, author, comment } = await req.json();
+    const { movieID, rating, author, comment, userID, movieTitle } = await req.json();
 
     await connectToDb();
 
@@ -19,6 +19,8 @@ export async function POST(req) {
         rating,
         author,
         comment,
+        userID,
+        movieTitle,
       },
     });
 
