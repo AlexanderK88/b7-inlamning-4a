@@ -11,6 +11,7 @@ import { Loading } from "@/app/components/booking/loading";
 import BookingModal from "@/app/components/booking/bookingModal";
 import { NoSeats } from "@/app/components/booking/NoSeats";
 import MovieDetails from "@/app/components/booking/movieDetails";
+import ScreeningDates from "@/app/components/booking/screeningDates";
 
 const Modal = ({
   isModalOpen,
@@ -47,12 +48,23 @@ export default function Page({ params }) {
   const [isLogin, setIsLogin] = useState(null);
   const [isAllowToBook, setIsAllowToBook] = useState(false);
   const [noSeatsBooked, setNoSeatsBooked] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState([]);
+
   const id = params.movieID;
 
   const { status } = useSession({
     required: true,
     onUnauthenticated() {},
   });
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleTimeSelect = (time) => {
+    setSelectedTime(time);
+  };
 
   useEffect(() => {
     if (seatsToBook != 0) {
@@ -80,18 +92,12 @@ export default function Page({ params }) {
         </div>
 
         <div className="md:col-span-3 flex flex-row align-center justify-evenly border p-2 ">
-          <p>screening date</p>
-          <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
-          <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
-          <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
-          <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
-          <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
+          <p className="text-xl text-white mt-4">screening date</p>
+          <ScreeningDates id={id} onClick={handleDateSelect} />
         </div>
 
         <div className="md:col-span-2 md:col-start-1 md:row-start-2 flex flex-row align-center justify-evenly p-2 border">
-          <p>screening times</p>
-          <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
-          <div className="bg-gray-200 w-[8vw] h-[4vw]">content</div>
+          <p className="text-xl text-white mt-4">screening times</p>
         </div>
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
         <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
