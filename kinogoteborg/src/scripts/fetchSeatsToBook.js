@@ -1,5 +1,3 @@
-import { resolve } from "styled-jsx/css";
-
 const postSeats = async (movieID, seatsToBook, date, time, userID) => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -19,16 +17,6 @@ const postSeats = async (movieID, seatsToBook, date, time, userID) => {
     body: raw,
     redirect: "follow",
   };
-
-  // fetch("http://localhost:3000/api/booking/seats", requestOptions)
-  //   .then((response) => {
-  //     if (response.ok) {
-  //       const data = response.json()
-  //       return data;
-  //     }
-  //   })
-  //   .then((result) => console.log('fetch: ', result))
-  //   .catch((error) => console.error(error));
 
   try {
     const response = await fetch("http://localhost:3000/api/booking/seats", requestOptions);
@@ -63,18 +51,6 @@ const putSeats = async (seatsToBook, uuid) => {
     .then((response) => response.text())
     .then((result) => console.log(result))
     .catch((error) => console.error(error));
-
-  // try {
-  //   const response = await fetch(`http://localhost:3000/api/booking/seats/`, requestOptions);
-  //   if (!response.ok) {
-  //     throw new Error(`HTTP error! Status: ${response.status}`);
-  //   }
-  //   const data = await response.json();
-  //   return data; // Return the parsed JSON data
-  // } catch (error) {
-  //   console.error('Error updating seats:', error);
-  //   throw error; // Optionally re-throw the error for further handling
-  // }
 };
 
 export { postSeats, putSeats };

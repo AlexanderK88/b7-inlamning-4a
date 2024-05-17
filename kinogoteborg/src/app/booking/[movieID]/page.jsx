@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 
 import { Button } from "@/app/components/booking/button";
 import { RenderSaloon } from "../../components/booking/RenderSaloon";
-import { Loading } from "@/app/components/booking/loading";
 import BookingModal from "@/app/components/booking/bookingModal";
 import { postSeats, putSeats } from "@/scripts/fetchSeatsToBook";
 import { NoSeats } from "@/app/components/booking/NoSeats";
@@ -115,14 +114,7 @@ export default function Page({ params }) {
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
         <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
           <div id="movieScreen" className="h-2 w-full bg-black col-start-1 rounded-md border"></div>
-          <RenderSaloon
-            saloonNumber={2}
-            seats={seats}
-            setSeatsToBook={setSeatsToBook}
-            setUuid={setUuid}
-            time={time}
-            date={date}
-          />
+          <RenderSaloon saloonNumber={2} seats={seats} setSeatsToBook={setSeatsToBook} />
         </div>
 
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">

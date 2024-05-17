@@ -6,16 +6,7 @@ import { hoverSeats, handleSeatsToBook } from "@/app/components/booking/multiHov
 import { Loading } from "./loading";
 import { fetchSaloon } from "@/scripts/fetchSaloonLayout";
 
-export function RenderSaloon({
-  seats,
-  saloonNumber,
-  setSeatsToBook,
-  setUuid,
-  movieID,
-  user,
-  date,
-  time,
-}) {
+export function RenderSaloon({ seats, saloonNumber, setSeatsToBook }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
