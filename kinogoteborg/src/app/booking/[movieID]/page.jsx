@@ -40,7 +40,7 @@ const Modal = ({
   );
 };
 
-export default function Page({ params }{ params }) {
+export default function Page({ params }) {
   const movieID = params.movieID;
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState([]); //const [selectedTime, setSelectedTime] = useState(null);
