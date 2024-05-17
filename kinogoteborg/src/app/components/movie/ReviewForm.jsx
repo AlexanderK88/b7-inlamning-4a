@@ -1,7 +1,10 @@
 "use client";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
-export default function Reviews({ isVisible, onClose, id }) {
+export default function Reviews({ isVisible, onClose, id, movieTitle }) {
+  const { data: session } = useSession();
+
   const [movieID, setMovieID] = useState(id);
   const [author, setAuthor] = useState("");
   const [rating, setRating] = useState(0);
@@ -21,7 +24,14 @@ export default function Reviews({ isVisible, onClose, id }) {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ movieID, author, rating, comment }),
+        body: JSON.stringify({
+          movieID,
+          author,
+          rating,
+          comment,
+          userID: session?.user?.id,
+          movieTitle,
+        }),
       });
       if (res.ok) {
         const form = e.target;
@@ -44,7 +54,7 @@ export default function Reviews({ isVisible, onClose, id }) {
         <button className="text-white text-xl place-self-end hover:scale-105" onClick={onClose}>
           X
         </button>
-        <div className=" bg-stone-800 p-2 rounded-md text-stone-200">
+        <div className=" bg-stone-800 rounded-lg text-stone-200 p-10">
           <h2 className="text-2xl text-center">Write a review of your own</h2>
           <form className="flex flex-col gap-2" onSubmit={submitReview}>
             <label htmlFor="Author">Author</label>
@@ -62,7 +72,7 @@ export default function Reviews({ isVisible, onClose, id }) {
               className="w-24"
               type="number"
               min={0}
-              max={5}
+              max={10}
               name="rating"
               id="rating"
               onChange={(e) => {

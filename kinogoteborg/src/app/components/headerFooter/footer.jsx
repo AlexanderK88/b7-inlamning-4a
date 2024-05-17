@@ -26,10 +26,10 @@ export default function Footer() {
           <Link href="/movies" className="text-xs text-white">
             Movies
           </Link>
-          <Link href="" className="text-xs text-white">
+          <Link href="/aboutus" className="text-xs text-white">
             About us
           </Link>
-          <Link href="" className="text-xs text-white">
+          <Link href="/news" className="text-xs text-white">
             News
           </Link>
         </div>

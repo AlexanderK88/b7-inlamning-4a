@@ -13,6 +13,12 @@ export default function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      setError("Fill out all the fields");
+      return;
+    }
+
     try {
       const res = await signIn("credentials", {
         email,

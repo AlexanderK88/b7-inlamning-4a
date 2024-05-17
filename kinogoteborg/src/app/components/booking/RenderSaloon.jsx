@@ -35,7 +35,9 @@ export function RenderSaloon({ seats, saloonNumber, setSeatsToBook }) {
         data-key={`seat_${i.toString()}${isSpecial ? "_S" : ""}`}
         onMouseOver={(event) => hoverSeats(event, seats, true)}
         onMouseOut={(event) => hoverSeats(event, seats, false)}
-        onClick={(event) => handleSeatsToBook(event, setSeatsToBook, seats)}
+        onClick={(event) => {
+          handleSeatsToBook(event, setSeatsToBook, seats);
+        }}
         className={`m-1 w-6 h-6 border rounded-sm justify-center text-center align-middle
 
           ${isSpecial ? "bg-blue-400" : "bg-red-400"}
@@ -77,7 +79,6 @@ export function RenderSaloon({ seats, saloonNumber, setSeatsToBook }) {
     }
   }
 
-  if (currentRowSeats.length > 0) console.log("success build");
   return (
     <div className="grid w-full h-full justify-items-start grid-flow-row justify- overflow-auto m-0">
       {collectedSaloonSeats}

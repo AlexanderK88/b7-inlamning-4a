@@ -24,10 +24,10 @@ export default function Header() {
         <Link href="/movies" className="text-white text-lg md:text-xl font-bold">
           Movies
         </Link>
-        <Link href="" className="text-white text-lg md:text-xl font-bold">
+        <Link href="/aboutus" className="text-white text-lg md:text-xl font-bold">
           About us
         </Link>
-        <Link href="" className="text-white text-lg md:text-xl font-bold">
+        <Link href="/news" className="text-white text-lg md:text-xl font-bold">
           News
         </Link>
         {session?.user ? (
