@@ -35,10 +35,15 @@ export async function POST(req) {
       message: "Request for seats successfully executed",
       status: 200,
       uuid: uuid,
+      seats: seats,
     });
   } catch (error) {
     console.error("Error", error);
-    return NextResponse.json({ message: "Error while requesting seats to hold", status: 400 });
+    return NextResponse.json({
+      message: "Error while requesting seats to hold",
+      error,
+      status: 400,
+    });
   }
 }
 
@@ -59,6 +64,7 @@ export async function PUT(req) {
   } catch (error) {
     return NextResponse.json({
       message: "Could not update the chosens seats, please try again",
+      error,
       status: 400,
     });
   }

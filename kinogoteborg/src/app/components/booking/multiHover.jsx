@@ -4,7 +4,6 @@ const fetchKeyData = (Event) => Event.target.getAttribute("data-key").split("_")
 let bookSeats = [];
 let clickedSeats = [];
 let oldSeats = [];
-let uuid = "";
 
 const fetchLayerKeyData = (event) => {
   let parentElement = event.target;

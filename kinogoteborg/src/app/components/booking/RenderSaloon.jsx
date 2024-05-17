@@ -6,7 +6,16 @@ import { hoverSeats, handleSeatsToBook } from "@/app/components/booking/multiHov
 import { Loading } from "./loading";
 import { fetchSaloon } from "@/scripts/fetchSaloonLayout";
 
-export function RenderSaloon({ seats, saloonNumber, setSeatsToBook, setUuid, uuid }) {
+export function RenderSaloon({
+  seats,
+  saloonNumber,
+  setSeatsToBook,
+  setUuid,
+  movieID,
+  user,
+  date,
+  time,
+}) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -79,7 +88,6 @@ export function RenderSaloon({ seats, saloonNumber, setSeatsToBook, setUuid, uui
     }
   }
 
-  if (currentRowSeats.length > 0) console.log("success build");
   return (
     <div className="grid w-full h-full justify-items-start grid-flow-row justify- overflow-auto m-0">
       {collectedSaloonSeats}

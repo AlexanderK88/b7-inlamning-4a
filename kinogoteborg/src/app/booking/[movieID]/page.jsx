@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { useSession } from "next-auth/react";
 
 import { Button } from "@/app/components/booking/button";
@@ -47,18 +45,16 @@ export default function Page({ params }) {
   const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
   const [seatsToBook, setSeatsToBook] = useState([]);
   const [isLogin, setIsLogin] = useState(null);
-  const [uuid, setUuid] = useState(null);
-  let oldSeats = false;
-  const movieID = 1;
   const [isAllowToBook, setIsAllowToBook] = useState(false);
   const [noSeatsBooked, setNoSeatsBooked] = useState(false);
+  const [uuid, setUuid] = useState(null);
+  const [oldSeats, setOldSeats] = useState(null);
   const id = params.movieID;
+  const movieID = 1;
 
   const { data: session, status } = useSession({
     required: false,
-    onUnauthenticated() {
-      console.log("Welcome unknown user");
-    },
+    onUnauthenticated() {},
   });
 
   //PLACEHOLDER VARIABLES
@@ -73,50 +69,30 @@ export default function Page({ params }) {
     }
   }, [status]);
 
-  const [response, setResponse] = useState(null);
-
-  // useEffect(() => {
-  // if (seatsToBook && seatsToBook.length > 0) { // Check if seatsToBook is not empty
-  // async function handleSeats() {
-  // if (!oldSeats) {
-  try {
-    postSeats(movieID, seatsToBook[0], date, time, session?.user?.email)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Failed to post seats: ${res.status} - ${res.statusText}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setUuid(data.uuid);
-        setOldSeats(true);
-      });
-    // if (!res.ok) {
-    //   throw new Error(`Failed to post seats: ${res.status} - ${res.statusText}`);
-    // }
-    // const data = await res.json(); // Corrected variable name from `response` to `res`
-    // setUuid(data.uuid);
-    // setOldSeats(true);
-  } catch (error) {
-    // Handle fetch error
-    console.error("Error while fetching:", error);
-  }
-  // } else {
-  putSeats(seatsToBook, uuid, false);
-  // }
-  // }
-  // handleSeats();
-  // }
-  // }, [seatsToBook]);
+  const [response, setResponse] = useState([]);
 
   useEffect(() => {
-    if (response) {
-      console.log("response: ", response);
+    if (seatsToBook && seatsToBook.length > 0) {
+      const handleSeats = async () => {
+        try {
+          if (!oldSeats) {
+            const data = await postSeats(movieID, seatsToBook[0], date, time, session?.user?.email);
+            setResponse(data);
+            setUuid(data.uuid);
+            setOldSeats(true);
+          } else if (uuid) {
+            putSeats(seatsToBook[0], uuid);
+          }
+        } catch (error) {
+          console.error("Error while handling seats:", error);
+        }
+      };
+      handleSeats();
     }
-  }, [uuid, response]);
+  }, [seatsToBook]);
 
   return (
-    <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
+    <div className="flex flex-col h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
         <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-fit">
           <MovieDetails id={id} />
@@ -144,7 +120,8 @@ export default function Page({ params }) {
             seats={seats}
             setSeatsToBook={setSeatsToBook}
             setUuid={setUuid}
-            uuid={uuid}
+            time={time}
+            date={date}
           />
         </div>
 
