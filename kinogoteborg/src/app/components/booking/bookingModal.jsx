@@ -20,20 +20,48 @@ import SpecialNeedsLogin from "@/app/components/booking/specialNeedsLogin";
 
 export const ModalHeader = ({ input }) => {
   return (
-    <div class="flex justify-center">
-      <h2 class="relative text-2xl text-white underline underline-offset-2">{input}</h2>
+    <div className="flex justify-center">
+      <h2 className="relative text-2xl text-white underline underline-offset-2">{input}</h2>
     </div>
   );
 };
 
-export default function BookingModal({ isModalOpen, isLogin, isVerified, specialNeeds }) {
+export default function BookingModal({
+  isModalOpen,
+  isLogin,
+  isVerified,
+  setSpecialNeeds,
+  specialNeeds,
+  seatsToBook,
+}) {
   const [bookingState, setBookingState] = useState("Login");
 
+  if (seatsToBook.length != 0)
+    seatsToBook[0].forEach((seat) => {
+      if (seat.includes("_S")) {
+        setSpecialNeeds(true);
+      } else {
+        setSpecialNeeds(false);
+      }
+    });
+
   useEffect(() => {
-    if (isLogin) {
-      setBookingState("PaymentAsUser");
-    } else if (!isVerified && specialNeeds) {
-      setBookingState("ValidateSpecialNeeds");
+    if (specialNeeds) {
+      if (isLogin) {
+        if (isVerified) {
+          setBookingState("PaymentAsUser");
+        } else {
+          setBookingState("ValidateSpecialNeeds");
+        }
+      } else {
+        setBookingState("ValidateSpecialNeeds");
+      }
+    } else {
+      if (isLogin) {
+        setBookingState("PaymentAsUser");
+      } else {
+        setBookingState("Login");
+      }
     }
   }, [isLogin, specialNeeds, isVerified]);
 

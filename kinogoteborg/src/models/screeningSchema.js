@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const screeningSchema = new mongoose.Schema({
   id: { type: Number, required: true },
   attributes: {
@@ -12,3 +14,5 @@ const screeningSchema = new mongoose.Schema({
     ],
   },
 });
+
+export default mongoose.models.Screening || mongoose.model("Screening", screeningSchema);

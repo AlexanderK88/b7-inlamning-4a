@@ -78,7 +78,7 @@ export default function PaymentAsUser({ setBookingState, isModalOpen }) {
           }}
         >
           <label className="mr-5">Ny betalningsmetod</label>
-          <input type="radio" className="w-[1em] h-[1em] rounded-lg" checked={newPayment} />
+          <input type="radio" className="w-[1em] h-[1em] rounded-lg" defaultChecked={newPayment} />
         </div>
         <div
           className="flex flex-row w-full justify-between my-1 m-auto border-b-2"
@@ -90,7 +90,7 @@ export default function PaymentAsUser({ setBookingState, isModalOpen }) {
           <input
             type="radio"
             className="w-[1em] h-[1em] rounded-lg active:bg-white"
-            checked={savedPayment}
+            defaultChecked={savedPayment}
           />
         </div>
         <div className="flex flex-row w-full justify-between my-1 m-auto ">

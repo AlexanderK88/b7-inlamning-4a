@@ -9,7 +9,7 @@ export default function SideBar({ setPage }) {
     setPage(e.target.innerText);
   };
   return (
-    <aside className="h-{400px} w-full bg-zinc-900 text-stone-200 sm:h-full flex flex-col py-4 col-span-2">
+    <aside className="h-{400px}w-full bg-zinc-900 text-stone-200 sm:min-h-screen flex flex-col py-4 col-span-2">
       <h1 className="text-center mt-8 text-2xl font-bold">Profile</h1>
       <h2 className="text-center mt-3 text-xl font-bold">{session?.user?.name}</h2>
       <nav
