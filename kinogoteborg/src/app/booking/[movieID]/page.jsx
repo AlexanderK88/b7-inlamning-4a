@@ -1,14 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { useSession } from "next-auth/react";
 
 import { Button } from "@/app/components/booking/button";
 import { RenderSaloon } from "../../components/booking/RenderSaloon";
-import { Loading } from "@/app/components/booking/loading";
 import BookingModal from "@/app/components/booking/bookingModal";
+import { postSeats, putSeats } from "@/scripts/fetchSeatsToBook";
 import { NoSeats } from "@/app/components/booking/NoSeats";
 import MovieDetails from "@/app/components/booking/movieDetails";
 
@@ -31,6 +29,7 @@ const Modal = ({
             setSpecialNeeds={setSpecialNeeds}
             specialNeeds={specialNeeds}
             seatsToBook={seatsToBook}
+            uuid={uuid}
           />
         </div>
       </div>
@@ -47,20 +46,19 @@ export default function Page({ params }) {
   const [isLogin, setIsLogin] = useState(null);
   const [isAllowToBook, setIsAllowToBook] = useState(false);
   const [noSeatsBooked, setNoSeatsBooked] = useState(false);
+  const [uuid, setUuid] = useState(null);
+  const [oldSeats, setOldSeats] = useState(null);
   const id = params.movieID;
+  const movieID = 1;
 
-  const { status } = useSession({
-    required: true,
+  const { data: session, status } = useSession({
+    required: false,
     onUnauthenticated() {},
   });
 
-  useEffect(() => {
-    if (seatsToBook != 0) {
-      setIsAllowToBook(true);
-    } else {
-      setBookNow(false);
-    }
-  }, [seatsToBook]);
+  //PLACEHOLDER VARIABLES
+  const date = new Date();
+  const time = "13.00";
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -70,10 +68,30 @@ export default function Page({ params }) {
     }
   }, [status]);
 
-  useEffect(() => {}, [seatsToBook]);
+  const [response, setResponse] = useState([]);
+
+  useEffect(() => {
+    if (seatsToBook && seatsToBook.length > 0) {
+      const handleSeats = async () => {
+        try {
+          if (!oldSeats) {
+            const data = await postSeats(movieID, seatsToBook[0], date, time, session?.user?.email);
+            setResponse(data);
+            setUuid(data.uuid);
+            setOldSeats(true);
+          } else if (uuid) {
+            putSeats(seatsToBook[0], uuid);
+          }
+        } catch (error) {
+          console.error("Error while handling seats:", error);
+        }
+      };
+      handleSeats();
+    }
+  }, [seatsToBook]);
 
   return (
-    <div className="flex flex-col border h-screen m-0 w-[80vw] m-auto">
+    <div className="flex flex-col h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
         <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-fit">
           <MovieDetails id={id} />
@@ -130,6 +148,7 @@ export default function Page({ params }) {
           setSpecialNeeds={setSpecialNeeds}
           specialNeeds={specialNeeds}
           seatsToBook={seatsToBook}
+          uuid={uuid}
         />
       )}
     </div>
