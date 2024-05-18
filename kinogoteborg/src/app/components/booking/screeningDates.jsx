@@ -8,7 +8,7 @@ export default function ScreeningDates({ movieID, setSelectedDate, selectedDate 
 
   useEffect(() => {
     const fetchedDataForDates = async () => {
-      const fetchedData = await fetchScreeningDates(movieId);
+      const fetchedData = await fetchScreeningDates(movieID);
 
       if (fetchedData.length === 0) {
         const noScreeningDates = ["No available dates"];
@@ -46,7 +46,7 @@ export default function ScreeningDates({ movieID, setSelectedDate, selectedDate 
     };
 
     fetchedDataForDates();
-  }, [movieId]);
+  }, [movieID]);
 
   const handleDateClick = (date) => {
     setSelectedDate(date);

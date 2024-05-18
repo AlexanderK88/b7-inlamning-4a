@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { fetchScreeningTimes } from "@/scripts/fetchScreeningTimes";
 
-export default function ScreeningTimes({ id, setSelectedTime, selectedTime, selectedDate }) {
+export default function ScreeningTimes({ movieID, setSelectedTime, selectedTime, selectedDate }) {
   const [screeningTimes, setScreeningTimes] = useState([]);
 
   useEffect(() => {
     const fetchedDataForTimes = async () => {
-      const fetchedData = await fetchScreeningTimes(id, selectedDate);
+      const fetchedData = await fetchScreeningTimes(movieID, selectedDate);
 
       if (fetchedData.length === 0) {
         const noScreeningTimes = ["No available times"];
