@@ -1,22 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { fetchScreeningDates } from "@/scripts/fetchScreeningDates";
 
 export default function ScreeningDates({ movieID, setSelectedDate, selectedDate }) {
   const [screeningDates, setScreeningDates] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/booking/${movieID}/dates`)
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchedDataForDates = async () => {
+      const fetchedData = await fetchScreeningDates(movieId);
+
+      if (fetchedData.length === 0) {
+        const noScreeningDates = ["No available dates"];
+
+        setScreeningDates(noScreeningDates);
+        setSelectedDate(noScreeningDates[0]);
+      } else {
         //to create Month name to later render
         //one screening date per day, for example "19 June"
         const todaysDate = new Date();
         const todaysMonth = todaysDate.getMonth() + 1;
         const todaysYear = todaysDate.getFullYear();
-
         const screeningDays = new Set();
-        data.data.forEach((screening) => {
+
+        fetchedData.forEach((screening) => {
           const date = new Date(screening.attributes.date);
           const day = date.getDate();
           const month = date.getMonth() + 1;
@@ -26,7 +33,7 @@ export default function ScreeningDates({ movieID, setSelectedDate, selectedDate 
           }
         });
 
-        //to sort screening dates in decending order
+        //to sort screening dates in ascending order
         const sortedScreeningDates = Array.from(screeningDays).sort((a, b) => {
           const [dayA] = a.split(" ");
           const [dayB] = b.split(" ");
@@ -35,8 +42,11 @@ export default function ScreeningDates({ movieID, setSelectedDate, selectedDate 
 
         setScreeningDates(sortedScreeningDates);
         setSelectedDate(sortedScreeningDates[0]);
-      });
-  }, [movieID]);
+      }
+    };
+
+    fetchedDataForDates();
+  }, [movieId]);
 
   const handleDateClick = (date) => {
     setSelectedDate(date);
@@ -48,7 +58,7 @@ export default function ScreeningDates({ movieID, setSelectedDate, selectedDate 
         <div
           key={index}
           onClick={() => handleDateClick(date)}
-          className={`flex items-center justify-center w-[8vw] h-[4vw] p-2 rounded text-center hover:bg-red-700 text-stone-300 font-bold cursor-pointer 
+          className={`flex items-center justify-center min-w-[8vw] min-h-[4vw] p-2 rounded text-center hover:bg-red-700 text-stone-300 font-bold cursor-pointer 
                     ${date === selectedDate ? "bg-red-900 text-white font-bold" : "bg-gray-500 text-white"} mb-2 md:mb-0 mx-1`}
         >
           {date}
