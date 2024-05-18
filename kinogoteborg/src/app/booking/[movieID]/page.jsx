@@ -84,7 +84,7 @@ export default function Page({ params }) {
               seatsToBook[0],
               selectedDate,
               selectedTime,
-              session?.user?.email
+              session?.user?.id,
             );
             setResponse(data);
             setUuid(data.uuid);
