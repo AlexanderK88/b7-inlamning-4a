@@ -5,18 +5,56 @@ import React, { useEffect, useState } from "react";
 import { hoverSeats, handleSeatsToBook } from "@/app/components/booking/multiHover";
 import { Loading } from "./loading";
 import { fetchSaloon } from "@/scripts/fetchSaloonLayout";
+import { fetchBookedSeats } from "@/scripts/fetchSeatsFromDB";
 
-export function RenderSaloon({ seats, saloonNumber, setSeatsToBook }) {
+export function RenderSaloon({
+  seats,
+  saloonNumber,
+  setSeatsToBook,
+  movieID,
+  selectedDate,
+  selectedTime,
+  seatsToBook,
+  userID,
+}) {
   const [data, setData] = useState(null);
+  const [bookings, setBooking] = useState(null);
+  let sortedBooking;
 
   useEffect(() => {
-    const fetchDataForSallon = async () => {
+    const fetchDataForSaloon = async () => {
       const fetchData = await fetchSaloon(saloonNumber);
       setData(fetchData);
+      const fetchBookings = await fetchBookedSeats(movieID, "17 May", selectedTime);
+      setBooking(fetchBookings.data);
     };
 
-    fetchDataForSallon();
-  }, []);
+    fetchDataForSaloon();
+  }, [seatsToBook, selectedDate, selectedTime]);
+
+  useEffect(() => {
+    if (!Array.isArray(bookings)) {
+    } else {
+      const payload = bookings.map((booking) => booking.details.seats);
+      const flat = payload.flat();
+      const set = [...new Set(flat)];
+      // const split = set.map(seat => seat.split('_')[1])
+      sortedBooking = set;
+
+      const changeColor = async () => {
+        set.forEach((seatKey) => {
+          const element = document.querySelector(`[data-key="${seatKey}"]`);
+          if (element) {
+            element.classList.remove("bg-red-400");
+            element.classList.add("bg-black");
+            element.setAttribute("data-key", `${seatKey}_B`);
+          }
+        });
+      };
+      changeColor();
+      console.log(set);
+    }
+  }, [bookings]);
 
   if (!data) {
     return <Loading />;
@@ -48,14 +86,30 @@ export function RenderSaloon({ seats, saloonNumber, setSeatsToBook }) {
     );
   };
 
+  const bookedSeat = (i, seatNumber) => {
+    return (
+      <div
+        key={`seat_${i}`}
+        data-key={`seat_${i.toString()}_B`}
+        className={`m-1 w-6 h-6 border rounded-sm justify-center text-center align-middle bg-black`}
+      >
+        {seatNumber}
+      </div>
+    );
+  };
+
   let counter = 1;
   for (const seat of cinemaData[0].seats) {
     for (let i = 0; i < seat.count; i++) {
-      currentRowSeats.push(
-        seat.type === "regular"
-          ? renderSeat(counter, counter, false)
-          : renderSeat(counter, counter, true),
-      );
+      if (sortedBooking?.includes(counter)) {
+        currentRowSeats.push(bookedSeat(counter, counter));
+      } else {
+        currentRowSeats.push(
+          seat.type === "regular"
+            ? renderSeat(counter, counter, false)
+            : renderSeat(counter, counter, true),
+        );
+      }
       counter++;
     }
 

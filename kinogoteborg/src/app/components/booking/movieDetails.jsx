@@ -2,16 +2,16 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-export default function MovieDetails({ id }) {
+export default function MovieDetails({ movieID }) {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/movies/${id}`)
+    fetch(`http://localhost:3000/api/movies/${movieID}`)
       .then((res) => res.json())
       .then((data) => {
         setMovie(data.data);
       });
-  }, [id]);
+  }, [movieID]);
 
   return (
     <div className="flex flex-col text-white justify-left content-center text-left mb-4">

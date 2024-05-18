@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-export default function ScreeningDates({ id, setSelectedDate, selectedDate }) {
+export default function ScreeningDates({ movieID, setSelectedDate, selectedDate }) {
   const [screeningDates, setScreeningDates] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/booking/${id}/dates`)
+    fetch(`http://localhost:3000/api/booking/${movieID}/dates`)
       .then((res) => res.json())
       .then((data) => {
         //to create Month name to later render
@@ -36,7 +36,7 @@ export default function ScreeningDates({ id, setSelectedDate, selectedDate }) {
         setScreeningDates(sortedScreeningDates);
         setSelectedDate(sortedScreeningDates[0]);
       });
-  }, [id]);
+  }, [movieID]);
 
   const handleDateClick = (date) => {
     setSelectedDate(date);

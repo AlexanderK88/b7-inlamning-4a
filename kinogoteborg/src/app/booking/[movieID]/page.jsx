@@ -48,11 +48,10 @@ export default function Page({ params }) {
   const [isAllowToBook, setIsAllowToBook] = useState(false);
   const [noSeatsBooked, setNoSeatsBooked] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState([]);
+  const [selectedTime, setSelectedTime] = useState("13.00");
   const [uuid, setUuid] = useState(null);
   const [oldSeats, setOldSeats] = useState(null);
-  const id = params.movieID;
-  const movieID = 1;
+  const movieID = params.movieID;
 
   const { data: session, status } = useSession({
     required: false,
@@ -60,8 +59,8 @@ export default function Page({ params }) {
   });
 
   //PLACEHOLDER VARIABLES
-  const date = new Date();
-  const time = "13.00";
+  // const date = new Date();
+  // const time = "13.00";
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -78,7 +77,13 @@ export default function Page({ params }) {
       const handleSeats = async () => {
         try {
           if (!oldSeats) {
-            const data = await postSeats(movieID, seatsToBook[0], date, time, session?.user?.email);
+            const data = await postSeats(
+              movieID,
+              seatsToBook[0],
+              selectedDate,
+              selectedTime,
+              session?.user?.email,
+            );
             setResponse(data);
             setUuid(data.uuid);
             setOldSeats(true);
@@ -97,18 +102,31 @@ export default function Page({ params }) {
     <div className="flex flex-col h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
         <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-fit">
-          <MovieDetails id={id} />
+          <MovieDetails movieID={movieID} />
         </div>
 
         <div className="md:col-span-3 flex flex-row align-center justify-center border p-2 ">
-          <ScreeningDates id={id} setSelectedDate={setSelectedDate} selectedDate={selectedDate} />
+          <ScreeningDates
+            movieID={movieID}
+            setSelectedDate={setSelectedDate}
+            selectedDate={selectedDate}
+          />
         </div>
 
         <div className="md:col-span-2 md:col-start-1 md:row-start-2 flex flex-row align-center justify-evenly p-2 border"></div>
         <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
         <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
           <div id="movieScreen" className="h-2 w-full bg-black col-start-1 rounded-md border"></div>
-          <RenderSaloon saloonNumber={2} seats={seats} setSeatsToBook={setSeatsToBook} />
+          <RenderSaloon
+            saloonNumber={2}
+            seats={seats}
+            setSeatsToBook={setSeatsToBook}
+            seatsToBook={seatsToBook}
+            selectedDate={selectedDate}
+            selectedTime={selectedTime}
+            userID={session?.user?.id}
+            movieID={movieID}
+          />
         </div>
 
         <div className="md:col-start-4 md:row-start-8 border justify-center items-center grid">
