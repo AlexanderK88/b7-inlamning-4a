@@ -1,22 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { fetchScreeningDates } from "@/scripts/fetchScreeningDates";
 
 export default function ScreeningDates({ id, setSelectedDate, selectedDate }) {
   const [screeningDates, setScreeningDates] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/booking/${id}/dates`)
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchedDataForDates = async () => {
+      const fetchedData = await fetchScreeningDates(id);
+
+      if (fetchedData.length === 0) {
+        const noScreeningDates = ["No available dates"];
+
+        setScreeningDates(noScreeningDates);
+        setSelectedDate(noScreeningDates[0]);
+      } else {
         //to create Month name to later render
         //one screening date per day, for example "19 June"
         const todaysDate = new Date();
         const todaysMonth = todaysDate.getMonth() + 1;
         const todaysYear = todaysDate.getFullYear();
-
         const screeningDays = new Set();
-        data.data.forEach((screening) => {
+
+        fetchedData.forEach((screening) => {
           const date = new Date(screening.attributes.date);
           const day = date.getDate();
           const month = date.getMonth() + 1;
@@ -35,7 +42,10 @@ export default function ScreeningDates({ id, setSelectedDate, selectedDate }) {
 
         setScreeningDates(sortedScreeningDates);
         setSelectedDate(sortedScreeningDates[0]);
-      });
+      }
+    };
+
+    fetchedDataForDates();
   }, [id]);
 
   const handleDateClick = (date) => {

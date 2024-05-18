@@ -12,6 +12,7 @@ export default function ScreeningTimes({ id, setSelectedTime, selectedTime, sele
 
       if (fetchedData.length === 0) {
         const noScreeningTimes = ["No available times"];
+
         setScreeningTimes(noScreeningTimes);
         setSelectedTime(noScreeningTimes[0]);
       } else {

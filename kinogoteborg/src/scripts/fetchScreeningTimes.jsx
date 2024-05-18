@@ -17,7 +17,7 @@ export async function fetchScreeningTimes(id, date) {
     const data = await resp.json();
     return data.data;
   } catch (error) {
-    console.error("Error when fetch", error);
+    console.error("Error when fetch times", error);
     return [];
   }
 }
