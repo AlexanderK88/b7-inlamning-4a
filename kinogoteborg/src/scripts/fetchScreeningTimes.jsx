@@ -1,23 +1,24 @@
 export async function fetchScreeningTimes(id, date) {
+  if (!date) {
+    return [];
+  }
+
   const formattedDate = createDateIndex(date);
 
-  const resp = await fetch(`http://localhost:3000/api/booking/${id}/times/?date=${formattedDate}`);
-  const data = await resp.json();
+  try {
+    const resp = await fetch(
+      `http://localhost:3000/api/booking/${id}/times/?date=${formattedDate}`
+    );
 
-  return data.data;
+    if (!resp.ok) {
+      throw new Error("Network response was not ok");
+    }
 
-  {
-    /*return fetch(`http://localhost:3000/api/booking/${id}/times/?date=${formattedDate}`)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-      console.log(res.json());
-      return res.json();
-    })
-    .catch((error) => {
-      throw error;
-    });*/
+    const data = await resp.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error when fetch", error);
+    return [];
   }
 }
 

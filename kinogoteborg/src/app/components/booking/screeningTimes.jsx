@@ -9,19 +9,26 @@ export default function ScreeningTimes({ id, setSelectedTime, selectedTime, sele
   useEffect(() => {
     const fetchedDataForTimes = async () => {
       const fetchedData = await fetchScreeningTimes(id, selectedDate);
-      const screeningStartTimes = fetchedData.map((data) =>
-        data.attributes.startTime.slice(12, 16)
-      );
 
-      //to sort screening times in decending order
-      const sortedScreeningTimes = Array.from(screeningStartTimes).sort((a, b) => {
-        const [timeA] = a.split(" ");
-        const [timeB] = b.split(" ");
-        return Number(timeA) - Number(timeB);
-      });
+      if (fetchedData.length === 0) {
+        const noScreeningTimes = ["No available times"];
+        setScreeningTimes(noScreeningTimes);
+        setSelectedTime(noScreeningTimes[0]);
+      } else {
+        const screeningStartTimes = fetchedData.map((data) =>
+          data.attributes.startTime.slice(11, 16)
+        );
 
-      setScreeningTimes(sortedScreeningTimes);
-      setSelectedTime(sortedScreeningTimes[0]);
+        //to sort screening times in ascending order
+        const sortedScreeningTimes = Array.from(screeningStartTimes).sort((a, b) => {
+          const [timeA] = a.split(" ");
+          const [timeB] = b.split(" ");
+          return Number(timeA) - Number(timeB);
+        });
+
+        setScreeningTimes(sortedScreeningTimes);
+        setSelectedTime(sortedScreeningTimes[0]);
+      }
     };
 
     fetchedDataForTimes();

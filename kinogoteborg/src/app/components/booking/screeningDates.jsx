@@ -26,7 +26,7 @@ export default function ScreeningDates({ id, setSelectedDate, selectedDate }) {
           }
         });
 
-        //to sort screening dates in decending order
+        //to sort screening dates in ascending order
         const sortedScreeningDates = Array.from(screeningDays).sort((a, b) => {
           const [dayA] = a.split(" ");
           const [dayB] = b.split(" ");
