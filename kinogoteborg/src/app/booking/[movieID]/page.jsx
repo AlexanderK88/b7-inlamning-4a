@@ -48,7 +48,7 @@ export default function Page({ params }) {
   const [isAllowToBook, setIsAllowToBook] = useState(false);
   const [noSeatsBooked, setNoSeatsBooked] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState("13.00");
+  const [selectedTime, setSelectedTime] = useState(null);
   const [uuid, setUuid] = useState(null);
   const [oldSeats, setOldSeats] = useState(null);
   const movieID = params.movieID;
