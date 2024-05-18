@@ -20,6 +20,7 @@ const Modal = ({
   setSpecialNeeds,
   specialNeeds,
   seatsToBook,
+  uuid,
 }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
@@ -89,6 +90,7 @@ export default function Page({ params }) {
             setResponse(data);
             setUuid(data.uuid);
             setOldSeats(true);
+            setIsAllowToBook(true);
           } else if (uuid) {
             putSeats(seatsToBook[0], uuid);
           }
@@ -153,7 +155,7 @@ export default function Page({ params }) {
           {!noSeatsBooked && (
             <Button
               onClick={() => {
-                if (isAllowToBook) {
+                if (isAllowToBook && seatsToBook[0]) {
                   setBookNow(true);
                 } else {
                   setNoSeatsBooked(true);

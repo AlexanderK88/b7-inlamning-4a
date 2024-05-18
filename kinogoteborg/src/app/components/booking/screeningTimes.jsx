@@ -17,7 +17,7 @@ export default function ScreeningTimes({ movieID, setSelectedTime, selectedTime,
         setSelectedTime(noScreeningTimes[0]);
       } else {
         const screeningStartTimes = fetchedData.map((data) =>
-          data.attributes.startTime.slice(11, 16)
+          data.attributes.startTime.slice(11, 16),
         );
 
         //to sort screening times in ascending order
@@ -29,6 +29,7 @@ export default function ScreeningTimes({ movieID, setSelectedTime, selectedTime,
 
         setScreeningTimes(sortedScreeningTimes);
         setSelectedTime(sortedScreeningTimes[0]);
+        console.log("sorted time: ", sortedScreeningTimes);
       }
     };
 
