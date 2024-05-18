@@ -11,6 +11,7 @@ import MovieDetails from "@/app/components/booking/movieDetails";
 import ScreeningDates from "@/app/components/booking/screeningDates";
 import ScreeningTimes from "@/app/components/booking/screeningTimes";
 import { Loading } from "@/app/components/booking/loading";
+import AmountOfGuests from "@/app/components/booking/amountOfGuests";
 
 const Modal = ({
   isModalOpen,
@@ -122,7 +123,16 @@ export default function Page({ params }) {
             selectedDate={selectedDate}
           />
         </div>
-        <div className="md:col-start-3 md:row-start-2 border">amount of guests</div>
+
+        <div className="md:col-start-3 md:col-start-3 md:row-start-2 flex flex-row align-center justify-evenly p-2 border">
+          <AmountOfGuests
+            seats={seats}
+            setSeats={setSeats}
+            selectedTime={selectedTime}
+            selectedDate={selectedDate}
+          />
+        </div>
+
         <div className="flex flex-col md:col-span-3 md:row-span-6 md:col-start-1 md:row-start-3 border items-center m-0">
           <div id="movieScreen" className="h-2 w-full bg-black col-start-1 rounded-md border"></div>
           <Suspense fallback={<Loading />}>
