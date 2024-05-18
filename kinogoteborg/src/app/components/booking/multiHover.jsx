@@ -41,14 +41,17 @@ const hoverSeats = (Event, amountOfSeats, inOreOut) => {
   // Iterate over each seat key and apply hover effect
   bookSeats.forEach((seatKey) => {
     const element = document.querySelector(`[data-key="${seatKey}"]`);
+    const booked = !element.getAttribute("data-key").includes(`${seatKey}_B`);
     if (element) {
-      inOreOut
-        ? notToHigh
-          ? element.classList.add("opacity-50")
-          : element.classList.add("bg-red-900")
-        : notToHigh
-          ? element.classList.remove("opacity-50")
-          : element.classList.remove("bg-red-900");
+      booked
+        ? inOreOut
+          ? notToHigh
+            ? element.classList.add("opacity-50")
+            : element.classList.add("bg-red-900")
+          : notToHigh
+            ? element.classList.remove("opacity-50")
+            : element.classList.remove("bg-red-900")
+        : null;
     }
   });
 };

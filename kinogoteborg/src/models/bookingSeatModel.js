@@ -5,7 +5,7 @@ const seatSchema = new mongoose.Schema({
   uuid: { type: String, required: true },
   userID: { type: String },
   details: {
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     time: { type: String, required: true },
     seats: { type: [String], required: true },
     isBooked: { type: Boolean, required: true },
