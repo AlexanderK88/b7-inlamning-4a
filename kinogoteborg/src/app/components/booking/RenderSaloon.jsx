@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 import { hoverSeats, handleSeatsToBook } from "@/app/components/booking/multiHover";
 import { Loading } from "./loading";
@@ -135,7 +135,7 @@ export function RenderSaloon({
 
   return (
     <div className="grid w-full h-full justify-items-start grid-flow-row justify- overflow-auto m-0">
-      {collectedSaloonSeats}
+      <Suspense>{collectedSaloonSeats}</Suspense>
     </div>
   );
 }
