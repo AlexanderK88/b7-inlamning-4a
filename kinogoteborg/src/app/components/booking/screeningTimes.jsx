@@ -5,13 +5,23 @@ import { fetchScreeningTimes } from "@/scripts/fetchScreeningTimes";
 
 export default function ScreeningTimes({ id, setSelectedTime, selectedTime, selectedDate }) {
   const [screeningTimes, setScreeningTimes] = useState([]);
-  console.log(selectedDate);
 
   useEffect(() => {
     const fetchedDataForTimes = async () => {
       const fetchedData = await fetchScreeningTimes(id, selectedDate);
-      setScreeningTimes(fetchedData.data);
-      setSelectedTime(fetchedData.data[0]);
+      const screeningStartTimes = fetchedData.map((data) =>
+        data.attributes.startTime.slice(12, 16)
+      );
+
+      //to sort screening times in decending order
+      const sortedScreeningTimes = Array.from(screeningStartTimes).sort((a, b) => {
+        const [timeA] = a.split(" ");
+        const [timeB] = b.split(" ");
+        return Number(timeA) - Number(timeB);
+      });
+
+      setScreeningTimes(sortedScreeningTimes);
+      setSelectedTime(sortedScreeningTimes[0]);
     };
 
     fetchedDataForTimes();
