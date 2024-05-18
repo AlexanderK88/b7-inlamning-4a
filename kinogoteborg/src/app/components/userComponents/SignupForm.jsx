@@ -99,7 +99,7 @@ export default function SignupForm() {
         <input
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="Password"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
