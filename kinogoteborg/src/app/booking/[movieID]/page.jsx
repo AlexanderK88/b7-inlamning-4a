@@ -20,6 +20,7 @@ const Modal = ({
   setSpecialNeeds,
   specialNeeds,
   seatsToBook,
+  uuid,
 }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
@@ -55,6 +56,10 @@ export default function Page({ params }) {
   const [oldSeats, setOldSeats] = useState(null);
   const movieID = params.movieID;
 
+  // if(uuid){
+  //   setUuid(null)
+  // }
+
   const { data: session, status } = useSession({
     required: false,
     onUnauthenticated() {},
@@ -75,10 +80,14 @@ export default function Page({ params }) {
   const [response, setResponse] = useState([]);
 
   useEffect(() => {
+    console.log("data response: ", response);
+  });
+
+  useEffect(() => {
     if (seatsToBook && seatsToBook.length > 0) {
       const handleSeats = async () => {
         try {
-          if (!oldSeats) {
+          if (!uuid) {
             const data = await postSeats(
               movieID,
               seatsToBook[0],
@@ -89,6 +98,7 @@ export default function Page({ params }) {
             setResponse(data);
             setUuid(data.uuid);
             setOldSeats(true);
+            setIsAllowToBook(true);
           } else if (uuid) {
             putSeats(seatsToBook[0], uuid);
           }

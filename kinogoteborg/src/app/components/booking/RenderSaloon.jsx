@@ -17,8 +17,8 @@ export function RenderSaloon({
   seatsToBook,
   userID,
 }) {
-  const [data, setData] = useState(null);
-  const [bookings, setBooking] = useState(null);
+  const [data, setData] = useState();
+  const [bookings, setBooking] = useState();
   let sortedBooking;
 
   useEffect(() => {
@@ -33,28 +33,40 @@ export function RenderSaloon({
   }, [seatsToBook, selectedDate, selectedTime]);
 
   useEffect(() => {
-    if (!Array.isArray(bookings)) {
-    } else {
+    if (Array.isArray(bookings)) {
       const payload = bookings.map((booking) => booking.details.seats);
       const flat = payload.flat();
       const set = [...new Set(flat)];
       // const split = set.map(seat => seat.split('_')[1])
       sortedBooking = set;
-
-      const changeColor = async () => {
-        set.forEach((seatKey) => {
-          const element = document.querySelector(`[data-key="${seatKey}"]`);
-          if (element) {
-            element.classList.remove("bg-red-400");
-            element.classList.add("bg-black");
-            element.setAttribute("data-key", `${seatKey}_B`);
-          }
-        });
-      };
-      changeColor();
-      console.log(set);
     }
-  }, [bookings]);
+    // if (oldBookings !== sortedBooking && oldBookings?.length > 0) {
+    // console.log('back from black');
+    // const oldBookings = document.querySelectorAll("[data-key]")
+    // oldBookings?.forEach((seat) => {
+    //   if (seat?.classList?.contains("!bg-black")) {
+    //     seat.classList.remove("!bg-black");
+    //     const newSeatName = seat.getAttribute("[data-key]")
+    //     console.log('new seat: ', newSeatName)
+    //     // seat.setAttribute("data-key", `${seatKey}`);
+    //     }
+    // });
+
+    // } else {
+    // console.log('set black', sortedBooking);
+
+    sortedBooking?.forEach((seatKey) => {
+      const element = document.querySelector(`[data-key="${seatKey}"]`);
+      if (element) {
+        element.classList.add("!bg-black");
+        element.setAttribute("data-key", `${seatKey}_B`);
+      }
+    });
+
+    // }
+
+    // }
+  }, [bookings, selectedDate, selectedTime]);
 
   if (!data) {
     return <Loading />;
