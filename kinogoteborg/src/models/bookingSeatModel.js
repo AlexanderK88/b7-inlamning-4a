@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const seatSchema = new mongoose.Schema({
-  movieID: { type: Number, required: true },
+  movieID: { type: String, required: true },
   uuid: { type: String, required: true },
-  userID: { type: String },
+  userID: { type: String, required: false },
   details: {
     date: { type: String, required: true },
     time: { type: String, required: true },

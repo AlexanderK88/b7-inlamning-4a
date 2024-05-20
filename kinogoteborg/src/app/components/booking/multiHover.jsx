@@ -88,7 +88,7 @@ const handleSeatsToBook = (event, setSeatsToBook, seats) => {
   // Update the seats to book based on the clicked seat
   setSeatsToBook((prevSeatsToBook) => {
     // Toggle the clicked seat: if it's already in the array, remove it; otherwise, add it
-    if (prevSeatsToBook.includes(bookSeats)) {
+    if (prevSeatsToBook?.includes(bookSeats)) {
       return prevSeatsToBook.filter((seat) => seat !== bookSeats);
     } else {
       return [bookSeats];

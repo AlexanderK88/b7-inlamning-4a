@@ -46,7 +46,7 @@ export default function Page({ params }) {
   const [seats, setSeats] = useState(2);
   const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
   const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
-  const [seatsToBook, setSeatsToBook] = useState([]);
+  const [seatsToBook, setSeatsToBook] = useState();
   const [isLogin, setIsLogin] = useState(null);
   const [isAllowToBook, setIsAllowToBook] = useState(false);
   const [noSeatsBooked, setNoSeatsBooked] = useState(false);
@@ -72,6 +72,7 @@ export default function Page({ params }) {
   useEffect(() => {
     if (status === "authenticated") {
       setIsLogin(true);
+      console.log(session.user.email);
     } else {
       setIsLogin(false);
     }
@@ -93,7 +94,7 @@ export default function Page({ params }) {
               seatsToBook[0],
               selectedDate,
               selectedTime,
-              session?.user?.id,
+              session?.user?.email,
             );
             setResponse(data);
             setUuid(data.uuid);

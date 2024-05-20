@@ -1,16 +1,15 @@
-const postSeats = async (movieID, seatsToBook, date, time, userID) => {
+const postSeats = async (movieID, seats, date, time, userID) => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
   const raw = JSON.stringify({
-    movieID: movieID,
-    userID: userID || "",
-    date: date,
-    time: time,
-    seats: seatsToBook,
-    isBooked: false,
+    movieID,
+    userID,
+    date,
+    time,
+    seats,
   });
-
+  console.log("raw: ", raw);
   const requestOptions = {
     method: "POST",
     headers: myHeaders,

@@ -1,3 +1,5 @@
+"use server";
+
 import connectToDb from "@/lib/connectToDb";
 import { NextResponse } from "next/server";
 import Booking from "@/models/bookingSeatModel";
@@ -15,19 +17,19 @@ export async function POST(req) {
   const uuid = uuidv4();
 
   try {
-    const { movieID, userID, date, time, seats, isBooked } = await req.json();
-
+    const { movieID, userID, date, time, seats } = await req.json();
     await connectToDb();
+    // Log the data being passed to .create()
 
     await Booking.create({
       movieID,
-      uuid: uuid,
-      userID: userID || "",
+      uuid: "test time",
+      userID,
       details: {
         date,
         time,
         seats,
-        isBooked,
+        isBooked: false,
       },
     });
 
@@ -35,7 +37,6 @@ export async function POST(req) {
       message: "Request for seats successfully executed",
       status: 200,
       uuid: uuid,
-      seats: seats,
     });
   } catch (error) {
     console.error("Error", error);
@@ -60,7 +61,10 @@ export async function PUT(req) {
       returnOriginal: false,
     });
 
-    return NextResponse.json({ message: "Successfully changed seats", status: 200 });
+    return NextResponse.json({
+      message: `Successfully changed seats for uuid ${uuid}`,
+      status: 200,
+    });
   } catch (error) {
     return NextResponse.json({
       message: "Could not update the chosens seats, please try again",
