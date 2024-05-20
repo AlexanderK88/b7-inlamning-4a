@@ -71,7 +71,7 @@ const handleSeatsToBook = (event, setSeatsToBook, seats) => {
     clickedSeats.forEach((seatKey) => {
       const element = document.querySelector(`[data-key="${seatKey}"]`);
       if (element) {
-        element.classList?.remove("bg-white");
+        element.classList?.remove("!bg-white");
       }
     });
   }
@@ -81,7 +81,7 @@ const handleSeatsToBook = (event, setSeatsToBook, seats) => {
   clickedSeats.forEach((seatKey) => {
     const element = document.querySelector(`[data-key="${seatKey}"]`);
     if (element) {
-      element.classList.add("bg-white");
+      element.classList.add("!bg-white");
     }
   });
 

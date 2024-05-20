@@ -42,7 +42,7 @@ export function RenderSaloon({
 
     //RESETS FROM BLACK
     var elements = document.querySelectorAll('[data-key*="_B"]');
-    elements?.forEach(function (element) {
+    elements?.forEach((element) => {
       var dataKeyValue = element.getAttribute("data-key");
       element.classList.remove("!bg-black");
       var newDataKeyValue = dataKeyValue.replace("_B", "");
@@ -58,6 +58,15 @@ export function RenderSaloon({
       }
     });
   }, [bookings, selectedDate, selectedTime]);
+
+  useEffect(() => {
+    const elements = document.getElementsByClassName("!bg-white");
+    if (elements.length > 0) {
+      Array.from(elements).forEach((element) => {
+        element.classList.remove("!bg-white");
+      });
+    }
+  }, [selectedDate, selectedTime]);
 
   if (!data) {
     return <Loading />;
