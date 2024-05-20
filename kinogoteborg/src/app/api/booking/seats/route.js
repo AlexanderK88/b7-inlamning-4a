@@ -23,7 +23,7 @@ export async function POST(req) {
 
     await Booking.create({
       movieID,
-      uuid: "test time",
+      uuid: uuid,
       userID,
       details: {
         date,
