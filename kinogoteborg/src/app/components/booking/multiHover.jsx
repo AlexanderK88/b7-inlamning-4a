@@ -20,7 +20,7 @@ const fetchLayerKeyData = (event) => {
 const hoverSeats = (Event, amountOfSeats, inOreOut) => {
   bookSeats = [];
 
-  const layerElement = fetchLayerKeyData(Event); // event is assumed to be available
+  const layerElement = fetchLayerKeyData(Event);
   // LIMIT MAX_SEAT_VALUE TO RENDER A NO-GO APPERENCE
 
   const seat = fetchKeyData(Event);
@@ -31,10 +31,15 @@ const hoverSeats = (Event, amountOfSeats, inOreOut) => {
   }
   for (let i = seat; i < amountOfSeats + Number(seat); i++) {
     if (i <= Number(layerElement)) {
-      if (document.querySelector(`[data-key=seat_${i}]`)) {
-        bookSeats.push(`seat_${i}`);
-      } else if (document.querySelector(`[data-key=seat_${i}_S]`)) {
-        bookSeats.push(`seat_${i}_S`);
+      if (document.querySelector(`[data-key=seat_${i}_B]`)) {
+        bookSeats = [];
+        return;
+      } else {
+        if (document.querySelector(`[data-key=seat_${i}]`)) {
+          bookSeats.push(`seat_${i}`);
+        } else if (document.querySelector(`[data-key=seat_${i}_S]`)) {
+          bookSeats.push(`seat_${i}_S`);
+        }
       }
     }
   }
@@ -42,16 +47,17 @@ const hoverSeats = (Event, amountOfSeats, inOreOut) => {
   bookSeats.forEach((seatKey) => {
     const element = document.querySelector(`[data-key="${seatKey}"]`);
     const booked = !element.getAttribute("data-key").includes(`${seatKey}_B`);
-    if (element) {
-      booked
-        ? inOreOut
-          ? notToHigh
-            ? element.classList.add("opacity-50")
-            : element.classList.add("bg-red-900")
-          : notToHigh
-            ? element.classList.remove("opacity-50")
-            : element.classList.remove("bg-red-900")
-        : null;
+    if (element && booked) {
+      // booked
+      // ?
+      inOreOut
+        ? notToHigh
+          ? element.classList.add("opacity-50")
+          : element.classList.add("bg-red-900")
+        : notToHigh
+          ? element.classList.remove("opacity-50")
+          : element.classList.remove("bg-red-900");
+      // : null;
     }
   });
 };

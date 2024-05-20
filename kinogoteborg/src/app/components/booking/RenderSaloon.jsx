@@ -37,24 +37,19 @@ export function RenderSaloon({
       const payload = bookings.map((booking) => booking.details.seats);
       const flat = payload.flat();
       const set = [...new Set(flat)];
-      // const split = set.map(seat => seat.split('_')[1])
       sortedBooking = set;
     }
-    // if (oldBookings !== sortedBooking && oldBookings?.length > 0) {
-    // console.log('back from black');
-    // const oldBookings = document.querySelectorAll("[data-key]")
-    // oldBookings?.forEach((seat) => {
-    //   if (seat?.classList?.contains("!bg-black")) {
-    //     seat.classList.remove("!bg-black");
-    //     const newSeatName = seat.getAttribute("[data-key]")
-    //     console.log('new seat: ', newSeatName)
-    //     // seat.setAttribute("data-key", `${seatKey}`);
-    //     }
-    // });
 
-    // } else {
-    // console.log('set black', sortedBooking);
+    //RESETS FROM BLACK
+    var elements = document.querySelectorAll('[data-key*="_B"]');
+    elements?.forEach(function (element) {
+      var dataKeyValue = element.getAttribute("data-key");
+      element.classList.remove("!bg-black");
+      var newDataKeyValue = dataKeyValue.replace("_B", "");
+      element.setAttribute("data-key", newDataKeyValue);
+    });
 
+    //ADDS BLACK AFTER FETCH FROM DB
     sortedBooking?.forEach((seatKey) => {
       const element = document.querySelector(`[data-key="${seatKey}"]`);
       if (element) {
@@ -62,10 +57,6 @@ export function RenderSaloon({
         element.setAttribute("data-key", `${seatKey}_B`);
       }
     });
-
-    // }
-
-    // }
   }, [bookings, selectedDate, selectedTime]);
 
   if (!data) {
@@ -146,7 +137,7 @@ export function RenderSaloon({
   }
 
   return (
-    <div className="grid w-full h-full justify-items-start grid-flow-row justify- overflow-auto m-0">
+    <div className="grid w-full h-full justify-items-start grid-flow-row overflow-auto m-0">
       <Suspense>{collectedSaloonSeats}</Suspense>
     </div>
   );
