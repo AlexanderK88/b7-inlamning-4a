@@ -72,7 +72,7 @@ export default function Page({ params }) {
   useEffect(() => {
     if (status === "authenticated") {
       setIsLogin(true);
-      console.log(session.user.email);
+      console.log(session);
     } else {
       setIsLogin(false);
     }
