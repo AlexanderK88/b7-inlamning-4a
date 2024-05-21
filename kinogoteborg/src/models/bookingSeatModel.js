@@ -7,8 +7,9 @@ const seatSchema = new mongoose.Schema({
   details: {
     date: { type: String, required: true },
     time: { type: String, required: true },
-    seats: { type: Array, required: true },
+    seats: { type: [String], required: true },
     isBooked: { type: Boolean, required: true },
+    bookedAt: { type: Date, required: true },
   },
 });
 

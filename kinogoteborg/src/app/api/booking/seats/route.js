@@ -30,6 +30,7 @@ export async function POST(req) {
         time,
         seats,
         isBooked: false,
+        bookedAt: new Date(),
       },
     });
 
