@@ -53,7 +53,7 @@ export default function Page({ params }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [uuid, setUuid] = useState(null);
-  const [oldSeats, setOldSeats] = useState(null);
+  const [oldSeats, setOldSeats] = useState(false);
   const movieID = params.movieID;
 
   // if(uuid){
@@ -81,20 +81,17 @@ export default function Page({ params }) {
   const [response, setResponse] = useState([]);
 
   useEffect(() => {
-    console.log("data response: ", response);
-  });
-
-  useEffect(() => {
     if (seatsToBook && seatsToBook.length > 0) {
       const handleSeats = async () => {
         try {
+          //using if !oldSeats to avoid async problems.
           if (!uuid) {
             const data = await postSeats(
               movieID,
               seatsToBook[0],
               selectedDate,
               selectedTime,
-              session?.user?.email,
+              session?.user?.id,
             );
             setResponse(data);
             setUuid(data.uuid);

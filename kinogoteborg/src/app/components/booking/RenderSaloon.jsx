@@ -26,7 +26,7 @@ export function RenderSaloon({
       const fetchData = await fetchSaloon(saloonNumber);
       setData(fetchData);
       const fetchBookings = await fetchBookedSeats(movieID, selectedDate, selectedTime);
-      setBooking(fetchBookings.data);
+      setBooking(fetchBookings);
     };
 
     fetchDataForSaloon();

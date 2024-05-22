@@ -14,11 +14,10 @@ import { v4 as uuidv4 } from "uuid";
 */
 
 export async function POST(req) {
-  const uuid = uuidv4();
-
   try {
     const { movieID, userID, date, time, seats } = await req.json();
     await connectToDb();
+    const uuid = uuidv4();
     // Log the data being passed to .create()
 
     await Booking.create({
