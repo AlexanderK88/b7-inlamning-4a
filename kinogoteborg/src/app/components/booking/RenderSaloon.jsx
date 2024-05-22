@@ -17,8 +17,8 @@ export function RenderSaloon({
   seatsToBook,
   userID,
 }) {
-  const [data, setData] = useState(null);
-  const [bookings, setBooking] = useState(null);
+  const [data, setData] = useState();
+  const [bookings, setBooking] = useState();
   let sortedBooking;
 
   useEffect(() => {
@@ -33,28 +33,40 @@ export function RenderSaloon({
   }, [seatsToBook, selectedDate, selectedTime]);
 
   useEffect(() => {
-    if (!Array.isArray(bookings)) {
-    } else {
+    if (Array.isArray(bookings)) {
       const payload = bookings.map((booking) => booking.details.seats);
       const flat = payload.flat();
       const set = [...new Set(flat)];
-      // const split = set.map(seat => seat.split('_')[1])
       sortedBooking = set;
-
-      const changeColor = async () => {
-        set.forEach((seatKey) => {
-          const element = document.querySelector(`[data-key="${seatKey}"]`);
-          if (element) {
-            element.classList.remove("bg-red-400");
-            element.classList.add("bg-black");
-            element.setAttribute("data-key", `${seatKey}_B`);
-          }
-        });
-      };
-      changeColor();
-      console.log(set);
     }
-  }, [bookings]);
+
+    //RESETS FROM BLACK
+    var elements = document.querySelectorAll('[data-key*="_B"]');
+    elements?.forEach((element) => {
+      var dataKeyValue = element.getAttribute("data-key");
+      element.classList.remove("!bg-black");
+      var newDataKeyValue = dataKeyValue.replace("_B", "");
+      element.setAttribute("data-key", newDataKeyValue);
+    });
+
+    //ADDS BLACK AFTER FETCH FROM DB
+    sortedBooking?.forEach((seatKey) => {
+      const element = document.querySelector(`[data-key="${seatKey}"]`);
+      if (element) {
+        element.classList.add("!bg-black");
+        element.setAttribute("data-key", `${seatKey}_B`);
+      }
+    });
+  }, [bookings, selectedDate, selectedTime]);
+
+  useEffect(() => {
+    const elements = document.getElementsByClassName("!bg-white");
+    if (elements.length > 0) {
+      Array.from(elements).forEach((element) => {
+        element.classList.remove("!bg-white");
+      });
+    }
+  }, [selectedDate, selectedTime]);
 
   if (!data) {
     return <Loading />;
@@ -134,7 +146,7 @@ export function RenderSaloon({
   }
 
   return (
-    <div className="grid w-full h-full justify-items-start grid-flow-row justify- overflow-auto m-0">
+    <div className="grid w-full h-full justify-items-start grid-flow-row overflow-auto m-0">
       <Suspense>{collectedSaloonSeats}</Suspense>
     </div>
   );

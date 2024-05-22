@@ -10,7 +10,7 @@ export default function ScreeningDates({ movieID, setSelectedDate, selectedDate 
     const fetchedDataForDates = async () => {
       const fetchedData = await fetchScreeningDates(movieID);
 
-      if (fetchedData.length === 0) {
+      if (fetchedData?.length === 0) {
         const noScreeningDates = ["No available dates"];
 
         setScreeningDates(noScreeningDates);

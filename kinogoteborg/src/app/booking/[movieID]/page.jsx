@@ -20,6 +20,7 @@ const Modal = ({
   setSpecialNeeds,
   specialNeeds,
   seatsToBook,
+  uuid,
 }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
@@ -45,7 +46,7 @@ export default function Page({ params }) {
   const [seats, setSeats] = useState(2);
   const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
   const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
-  const [seatsToBook, setSeatsToBook] = useState([]);
+  const [seatsToBook, setSeatsToBook] = useState();
   const [isLogin, setIsLogin] = useState(null);
   const [isAllowToBook, setIsAllowToBook] = useState(false);
   const [noSeatsBooked, setNoSeatsBooked] = useState(false);
@@ -54,6 +55,10 @@ export default function Page({ params }) {
   const [uuid, setUuid] = useState(null);
   const [oldSeats, setOldSeats] = useState(null);
   const movieID = params.movieID;
+
+  // if(uuid){
+  //   setUuid(null)
+  // }
 
   const { data: session, status } = useSession({
     required: false,
@@ -67,6 +72,7 @@ export default function Page({ params }) {
   useEffect(() => {
     if (status === "authenticated") {
       setIsLogin(true);
+      console.log(session);
     } else {
       setIsLogin(false);
     }
@@ -75,20 +81,25 @@ export default function Page({ params }) {
   const [response, setResponse] = useState([]);
 
   useEffect(() => {
+    console.log("data response: ", response);
+  });
+
+  useEffect(() => {
     if (seatsToBook && seatsToBook.length > 0) {
       const handleSeats = async () => {
         try {
-          if (!oldSeats) {
+          if (!uuid) {
             const data = await postSeats(
               movieID,
               seatsToBook[0],
               selectedDate,
               selectedTime,
-              session?.user?.id,
+              session?.user?.email,
             );
             setResponse(data);
             setUuid(data.uuid);
             setOldSeats(true);
+            setIsAllowToBook(true);
           } else if (uuid) {
             putSeats(seatsToBook[0], uuid);
           }
