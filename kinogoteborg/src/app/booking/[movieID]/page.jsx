@@ -21,6 +21,7 @@ const Modal = ({
   specialNeeds,
   seatsToBook,
   uuid,
+  userID,
 }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
@@ -34,6 +35,7 @@ const Modal = ({
             specialNeeds={specialNeeds}
             seatsToBook={seatsToBook}
             uuid={uuid}
+            userID={userID}
           />
         </div>
       </div>
@@ -55,6 +57,7 @@ export default function Page({ params }) {
   const [uuid, setUuid] = useState(null);
   const [oldSeats, setOldSeats] = useState(null);
   const movieID = params.movieID;
+  let userID;
 
   const { data: session, status } = useSession({
     required: false,
@@ -64,7 +67,7 @@ export default function Page({ params }) {
   useEffect(() => {
     if (status === "authenticated") {
       setIsLogin(true);
-      console.log(session);
+      userID = session?.user?.id;
     } else {
       setIsLogin(false);
     }
@@ -82,7 +85,7 @@ export default function Page({ params }) {
               seatsToBook[0],
               selectedDate,
               selectedTime,
-              session?.user?.email,
+              session?.user?.id,
             );
             setResponse(data);
             setUuid(data.uuid);
@@ -180,6 +183,7 @@ export default function Page({ params }) {
           specialNeeds={specialNeeds}
           seatsToBook={seatsToBook}
           uuid={uuid}
+          userID={userID}
         />
       )}
     </div>

@@ -19,7 +19,7 @@ export async function fetchSaloon(saloonNumber) {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      console.log("result from fetschSaloon: ");
+      // console.log("result from fetschSaloon: ");
       return response.json();
     })
     .catch((error) => {
