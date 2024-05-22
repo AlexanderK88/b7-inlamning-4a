@@ -44,8 +44,8 @@ const Modal = ({
 export default function Page({ params }) {
   const [bookNow, setBookNow] = useState(false);
   const [seats, setSeats] = useState(2);
-  const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
-  const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
+  const [isVerified, setIsVerified] = useState(false);
+  const [specialNeeds, setSpecialNeeds] = useState(false);
   const [seatsToBook, setSeatsToBook] = useState();
   const [isLogin, setIsLogin] = useState(null);
   const [isAllowToBook, setIsAllowToBook] = useState(false);
@@ -56,18 +56,10 @@ export default function Page({ params }) {
   const [oldSeats, setOldSeats] = useState(null);
   const movieID = params.movieID;
 
-  // if(uuid){
-  //   setUuid(null)
-  // }
-
   const { data: session, status } = useSession({
     required: false,
     onUnauthenticated() {},
   });
-
-  //PLACEHOLDER VARIABLES
-  // const date = new Date();
-  // const time = "13.00";
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -79,10 +71,6 @@ export default function Page({ params }) {
   }, [status]);
 
   const [response, setResponse] = useState([]);
-
-  useEffect(() => {
-    console.log("data response: ", response);
-  });
 
   useEffect(() => {
     if (seatsToBook && seatsToBook.length > 0) {
