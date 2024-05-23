@@ -32,9 +32,9 @@ export async function POST(req) {
         isBooked: false,
         bookedAt: new Date(),
         guest: {
-          name: "test",
-          phone: "123",
-          email: "emails",
+          name: "",
+          phone: "",
+          email: "",
         },
       },
     });

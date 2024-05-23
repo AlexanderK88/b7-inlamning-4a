@@ -13,21 +13,28 @@ export default function BookingControl({
 }) {
   const totalPrice = seatsToBook[0].length * 130;
   const paymentMethod = "I Kassa";
-  const userName = guestUser.name;
+  const userName = guestUser?.name;
   const userID = session?.user?.id;
 
   async function confirmBookingDb() {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-      uuid: uuid,
-      userID: userID,
-      guestName: guestUser.name,
-      guestPhone: guestUser.phone,
-      guestEmail: guestUser.email,
-      isBooked: true,
-    });
+    let raw;
+    if (userID) {
+      raw = JSON.stringify({
+        uuid: uuid,
+        userID: userID,
+        isBooked: true,
+      });
+    } else {
+      raw = JSON.stringify({
+        uuid: uuid,
+        guestName: guestUser?.name,
+        guestPhone: guestUser?.phone,
+        guestEmail: guestUser?.email,
+        isBooked: true,
+      });
+    }
 
     const requestOptions = {
       method: "PUT",
