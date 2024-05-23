@@ -10,6 +10,11 @@ const seatSchema = new mongoose.Schema({
     seats: { type: [String], required: true },
     isBooked: { type: Boolean, required: true },
     bookedAt: { type: Date, required: true },
+    guest: {
+      name: { type: String, required: false },
+      phone: { type: String, required: false },
+      email: { type: String, required: false },
+    },
   },
 });
 

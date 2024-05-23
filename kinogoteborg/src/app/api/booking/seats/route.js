@@ -31,6 +31,11 @@ export async function POST(req) {
         seats,
         isBooked: false,
         bookedAt: new Date(),
+        guest: {
+          name: "test",
+          phone: "123",
+          email: "emails",
+        },
       },
     });
 
@@ -52,19 +57,25 @@ export async function POST(req) {
 
 export async function PUT(req) {
   try {
-    const { seats, uuid } = await req.json();
+    const { seats, uuid, guestName, guestPhone, guestEmail, isBooked } = await req.json();
 
     await connectToDb();
 
     const filter = { uuid: uuid };
-    const update = { "details.seats": seats };
+    const update = {
+      "details.seats": seats,
+      "details.isBooked": isBooked,
+      "details.guest.name": guestName,
+      "details.guest.phone": guestPhone,
+      "details.guest.email": guestEmail,
+    };
 
     let doc = await Booking.findOneAndUpdate(filter, update, {
       returnOriginal: false,
     });
 
     return NextResponse.json({
-      message: `Successfully changed seats for uuid ${uuid}`,
+      message: `Successfully changed data for ${uuid}`,
       status: 200,
     });
   } catch (error) {

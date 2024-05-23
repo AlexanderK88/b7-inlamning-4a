@@ -117,6 +117,8 @@ export default function BookingModal({
           date={date}
           movieName={movieName}
           session={session}
+          guestUser={guestUser}
+          uuid={uuid}
         />
       ) : null}
 
