@@ -10,6 +10,7 @@ export default function BookingControl({
   date,
   guestUser,
   uuid,
+  setSeatsToBook,
 }) {
   const totalPrice = seatsToBook[0].length * 130;
   const paymentMethod = "I Kassa";

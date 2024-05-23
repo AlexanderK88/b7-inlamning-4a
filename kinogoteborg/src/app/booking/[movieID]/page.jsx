@@ -26,6 +26,7 @@ const Modal = ({
   movieName,
   selectedDate,
   selectedTime,
+  setSeatsToBook,
 }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
@@ -44,6 +45,7 @@ const Modal = ({
             movieName={movieName}
             time={selectedTime}
             date={selectedDate}
+            setSeatsToBook={setSeatsToBook}
           />
         </div>
       </div>
@@ -197,6 +199,7 @@ export default function Page({ params }) {
           selectedTime={selectedTime}
           selectedDate={selectedDate}
           movieName={movieName}
+          setSeatsToBook={setSeatsToBook}
         />
       )}
     </div>

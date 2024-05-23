@@ -9,6 +9,7 @@ export default function BookingConfirmation({
   date,
   isModalOpen,
   isLogin,
+  setSeatsToBook,
 }) {
   // const movieName = movieName;
   // const seats = seatsToBook;
@@ -62,6 +63,7 @@ export default function BookingConfirmation({
       <Button
         onClick={() => {
           setBookingState("Login"), isModalOpen(false);
+          setSeatsToBook();
         }}
       >
         Enjoy your movie!

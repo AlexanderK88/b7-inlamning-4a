@@ -58,16 +58,16 @@ export default function PaymentAsGuest({ setBookingState, isModalOpen, setGuestU
         <div className="flex flex-row mt-10 justify-evenly">
           {/* <Button onClick={() => setBookingState("ControlOfBooking")}>Confirm Booking</Button> */}
           <button>Continue</button>
+          <RedButton
+            onClick={() => {
+              setBookingState("Login"), isModalOpen(false);
+            }}
+          >
+            Cancel
+          </RedButton>
         </div>
         {error && <div>{error}</div>}
       </form>
-      <RedButton
-        onClick={() => {
-          setBookingState("Login"), isModalOpen(false);
-        }}
-      >
-        Cancel
-      </RedButton>
     </>
   );
 }

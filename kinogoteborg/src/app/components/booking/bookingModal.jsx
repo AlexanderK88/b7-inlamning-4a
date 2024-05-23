@@ -39,6 +39,7 @@ export default function BookingModal({
   time,
   date,
   movieName,
+  setSeatsToBook,
 }) {
   const [bookingState, setBookingState] = useState("Login");
   const [guestUser, setGuestUser] = useState();
@@ -119,6 +120,7 @@ export default function BookingModal({
           session={session}
           guestUser={guestUser}
           uuid={uuid}
+          setSeatsToBook={setSeatsToBook}
         />
       ) : null}
 
@@ -132,6 +134,7 @@ export default function BookingModal({
           date={date}
           movieName={movieName}
           session={session}
+          setSeatsToBook={setSeatsToBook}
         />
       ) : null}
 
