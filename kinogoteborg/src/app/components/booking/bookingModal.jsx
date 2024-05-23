@@ -33,8 +33,15 @@ export default function BookingModal({
   setSpecialNeeds,
   specialNeeds,
   seatsToBook,
+  uuid,
+  userID,
+  session,
+  time,
+  date,
+  movieName,
 }) {
   const [bookingState, setBookingState] = useState("Login");
+  const [guestUser, setGuestUser] = useState();
 
   if (seatsToBook.length != 0)
     seatsToBook[0].forEach((seat) => {
@@ -49,7 +56,7 @@ export default function BookingModal({
     if (specialNeeds) {
       if (isLogin) {
         if (isVerified) {
-          setBookingState("PaymentAsUser");
+          setBookingState("ControlOfBooking");
         } else {
           setBookingState("ValidateSpecialNeeds");
         }
@@ -58,7 +65,7 @@ export default function BookingModal({
       }
     } else {
       if (isLogin) {
-        setBookingState("PaymentAsUser");
+        setBookingState("ControlOfBooking");
       } else {
         setBookingState("Login");
       }
@@ -80,25 +87,37 @@ export default function BookingModal({
       {bookingState === "Login" ? (
         <BookingLogin setBookingState={setBookingState} isModalOpen={isModalOpen} />
       ) : null}
-
-      {/* OPTIONS FOR USERS */}
+      {/* 
+      OPTIONS FOR USERS
       {bookingState === "PaymentAsUser" ? (
         <PaymentAsUser setBookingState={setBookingState} isModalOpen={isModalOpen} />
       ) : null}
 
       {bookingState === "EditPaymentAsUser" ? (
         <EditPaymentAsUser setBookingState={setBookingState} isModalOpen={isModalOpen} />
-      ) : null}
+      ) : null} */}
 
       {/* OPTIONS FOR GUESTS */}
 
       {bookingState === "PaymentAsGuest" ? (
-        <PaymentAsGuest setBookingState={setBookingState} isModalOpen={isModalOpen} />
+        <PaymentAsGuest
+          setBookingState={setBookingState}
+          isModalOpen={isModalOpen}
+          setGuestUser={setGuestUser}
+        />
       ) : null}
 
       {/* ENDSTEP OF BOOKING  */}
       {bookingState === "ControlOfBooking" ? (
-        <BookingControl setBookingState={setBookingState} isModalOpen={isModalOpen} />
+        <BookingControl
+          setBookingState={setBookingState}
+          isModalOpen={isModalOpen}
+          seatsToBook={seatsToBook}
+          time={time}
+          date={date}
+          movieName={movieName}
+          session={session}
+        />
       ) : null}
 
       {bookingState === "ConfirmationOfBooking" ? (
@@ -106,6 +125,11 @@ export default function BookingModal({
           setBookingState={setBookingState}
           isModalOpen={isModalOpen}
           isLogin={isLogin}
+          seatsToBook={seatsToBook}
+          time={time}
+          date={date}
+          movieName={movieName}
+          session={session}
         />
       ) : null}
 

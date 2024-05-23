@@ -38,6 +38,7 @@ export async function POST(req) {
       message: "Request for seats successfully executed",
       status: 200,
       uuid: uuid,
+      seats: seats,
     });
   } catch (error) {
     console.error("Error", error);
