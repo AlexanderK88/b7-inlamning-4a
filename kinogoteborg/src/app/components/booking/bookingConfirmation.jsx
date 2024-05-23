@@ -16,15 +16,11 @@ export default function BookingConfirmation({
   // const date = date;
   const totalPrice = seatsToBook[0].length * 130;
   const paymentMethod = "I Kassa";
-  const userName = "_USERNAME_";
 
   const ConfirmUser = () => {
     return (
       <>
-        <h2>
-          Tack {userName} för din bokning, vänligen hämta dina biljetter senast 30min innan
-          filmstart
-        </h2>
+        <h2>Tack för din bokning, vänligen hämta dina biljetter senast 30min innan filmstart</h2>
         <div className="mx-3 my-5 flex flex-col justify-start gap-2">
           <p>Film: {movieName}</p>
           <p>Antal Platser: {seatsToBook[0].length}</p>

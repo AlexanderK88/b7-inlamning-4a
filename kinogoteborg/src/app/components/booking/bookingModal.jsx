@@ -44,7 +44,11 @@ export default function BookingModal({
   const [bookingState, setBookingState] = useState("Login");
   const [guestUser, setGuestUser] = useState();
 
-  if (seatsToBook.length != 0)
+  if (!seatsToBook) {
+    isModalOpen(false);
+  }
+
+  if (seatsToBook && seatsToBook.length != 0)
     seatsToBook[0].forEach((seat) => {
       if (seat.includes("_S")) {
         setSpecialNeeds(true);
