@@ -53,7 +53,7 @@ const Modal = ({
   );
 };
 
-export default function Page({ params }) {
+export default function RenderFullBooking({ params }) {
   const [bookNow, setBookNow] = useState(false);
   const [seats, setSeats] = useState(2);
   const [isVerified, setIsVerified] = useState(false);
