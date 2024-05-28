@@ -22,10 +22,10 @@ export default function Reviews({ isVisible, onClose, setShowReviewForm, setShow
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
       <div className="w-[600px] flex flex-col ">
-        <button className="text-white text-xl place-self-end hover:scale-105" onClick={onClose}>
+        <button className="text-white text-3xl place-self-end hover:scale-105" onClick={onClose}>
           X
         </button>
-        <div className="bg-stone-800 text-stone-200  p-10 rounded-lg">
+        <div className="bg-stone-800 text-stone-200 min-h-[500px] p-10 rounded-lg">
           <h2 className="text-xl text-center">Reviews</h2>
           <div className="border-solid border-y-2 border-gray-600 max-h-[450px] overflow-scroll">
             {reviews.map((review) => {
