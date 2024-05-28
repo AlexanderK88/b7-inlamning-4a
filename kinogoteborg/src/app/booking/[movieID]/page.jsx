@@ -21,6 +21,7 @@ const Modal = ({
   specialNeeds,
   seatsToBook,
   uuid,
+  userID,
 }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
@@ -34,6 +35,7 @@ const Modal = ({
             specialNeeds={specialNeeds}
             seatsToBook={seatsToBook}
             uuid={uuid}
+            userID={userID}
           />
         </div>
       </div>
@@ -44,8 +46,8 @@ const Modal = ({
 export default function Page({ params }) {
   const [bookNow, setBookNow] = useState(false);
   const [seats, setSeats] = useState(2);
-  const [isVerified, setIsVerified] = useState(false); //Fetch from userProfile
-  const [specialNeeds, setSpecialNeeds] = useState(false); //Set if SpecialNeeds sets are chosen
+  const [isVerified, setIsVerified] = useState(false);
+  const [specialNeeds, setSpecialNeeds] = useState(false);
   const [seatsToBook, setSeatsToBook] = useState();
   const [isLogin, setIsLogin] = useState(null);
   const [isAllowToBook, setIsAllowToBook] = useState(false);
@@ -55,34 +57,23 @@ export default function Page({ params }) {
   const [uuid, setUuid] = useState(null);
   const [oldSeats, setOldSeats] = useState(null);
   const movieID = params.movieID;
-
-  // if(uuid){
-  //   setUuid(null)
-  // }
+  let userID;
 
   const { data: session, status } = useSession({
     required: false,
     onUnauthenticated() {},
   });
 
-  //PLACEHOLDER VARIABLES
-  // const date = new Date();
-  // const time = "13.00";
-
   useEffect(() => {
     if (status === "authenticated") {
       setIsLogin(true);
-      console.log(session);
+      userID = session?.user?.id;
     } else {
       setIsLogin(false);
     }
   }, [status]);
 
   const [response, setResponse] = useState([]);
-
-  useEffect(() => {
-    console.log("data response: ", response);
-  });
 
   useEffect(() => {
     if (seatsToBook && seatsToBook.length > 0) {
@@ -94,7 +85,7 @@ export default function Page({ params }) {
               seatsToBook[0],
               selectedDate,
               selectedTime,
-              session?.user?.email,
+              session?.user?.id,
             );
             setResponse(data);
             setUuid(data.uuid);
@@ -192,6 +183,7 @@ export default function Page({ params }) {
           specialNeeds={specialNeeds}
           seatsToBook={seatsToBook}
           uuid={uuid}
+          userID={userID}
         />
       )}
     </div>

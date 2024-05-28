@@ -33,6 +33,7 @@ export function RenderSaloon({
   }, [seatsToBook, selectedDate, selectedTime]);
 
   useEffect(() => {
+    //SORTS THE SEATS FROM DATABASE
     if (Array.isArray(bookings)) {
       const payload = bookings.map((booking) => booking.details.seats);
       const flat = payload.flat();
@@ -40,7 +41,7 @@ export function RenderSaloon({
       sortedBooking = set;
     }
 
-    //RESETS FROM BLACK
+    //RESETS ALL SEATS FROM BLACK
     var elements = document.querySelectorAll('[data-key*="_B"]');
     elements?.forEach((element) => {
       var dataKeyValue = element.getAttribute("data-key");
@@ -50,9 +51,16 @@ export function RenderSaloon({
     });
 
     //ADDS BLACK AFTER FETCH FROM DB
+    const seatsToBookFlattened =
+      Array.isArray(seatsToBook) && Array.isArray(seatsToBook[0])
+        ? seatsToBook.flat()
+        : Array.isArray(seatsToBook)
+          ? seatsToBook
+          : [];
+
     sortedBooking?.forEach((seatKey) => {
       const element = document.querySelector(`[data-key="${seatKey}"]`);
-      if (element) {
+      if (element && !seatsToBookFlattened.includes(seatKey)) {
         element.classList.add("!bg-black");
         element.setAttribute("data-key", `${seatKey}_B`);
       }
@@ -60,10 +68,11 @@ export function RenderSaloon({
   }, [bookings, selectedDate, selectedTime]);
 
   useEffect(() => {
-    const elements = document.getElementsByClassName("!bg-white");
+    const elements = document.getElementsByClassName("bg-white");
     if (elements.length > 0) {
       Array.from(elements).forEach((element) => {
-        element.classList.remove("!bg-white");
+        element.classList.remove("bg-white");
+        element.classList.remove("opacity-50");
       });
     }
   }, [selectedDate, selectedTime]);

@@ -47,17 +47,16 @@ const hoverSeats = (Event, amountOfSeats, inOreOut) => {
   bookSeats.forEach((seatKey) => {
     const element = document.querySelector(`[data-key="${seatKey}"]`);
     const booked = !element.getAttribute("data-key").includes(`${seatKey}_B`);
-    if (element && booked) {
-      // booked
-      // ?
-      inOreOut
-        ? notToHigh
-          ? element.classList.add("opacity-50")
-          : element.classList.add("bg-red-900")
-        : notToHigh
-          ? element.classList.remove("opacity-50")
-          : element.classList.remove("bg-red-900");
-      // : null;
+    if (element) {
+      booked
+        ? inOreOut
+          ? notToHigh
+            ? element.classList.add("opacity-50")
+            : element.classList.add("bg-red-900")
+          : notToHigh
+            ? element.classList.remove("opacity-50")
+            : element.classList.remove("bg-red-900")
+        : null;
     }
   });
 };
@@ -71,7 +70,7 @@ const handleSeatsToBook = (event, setSeatsToBook, seats) => {
     clickedSeats.forEach((seatKey) => {
       const element = document.querySelector(`[data-key="${seatKey}"]`);
       if (element) {
-        element.classList?.remove("!bg-white");
+        element.classList?.remove("bg-white");
       }
     });
   }
@@ -81,7 +80,7 @@ const handleSeatsToBook = (event, setSeatsToBook, seats) => {
   clickedSeats.forEach((seatKey) => {
     const element = document.querySelector(`[data-key="${seatKey}"]`);
     if (element) {
-      element.classList.add("!bg-white");
+      element.classList.add("bg-white");
     }
   });
 
