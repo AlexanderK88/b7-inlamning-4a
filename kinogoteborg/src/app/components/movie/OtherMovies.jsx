@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Movies({ id }) {
   const [movies, setMovies] = useState([]);
@@ -36,13 +37,17 @@ export default function Movies({ id }) {
         <div className="flex flex-col w-6/6 sm:w-1/5 mx-5 items-center sm:justify-center">
           <Link
             href={`/movies/${movie1?.id}`}
-            className="flex flex-col text-center text-xl text-stone-200 hover:text-stone-100 justify-center mb-5"
+            className="flex flex-col items-center text-center text-xl text-stone-200 hover:text-stone-100 justify-center mb-5"
           >
-            <img
-              src={movie1?.attributes?.image?.url}
-              alt={movie1?.attributes?.image?.alt}
-              className="rounded-md sm:h-[360px] w-[240px] sm:w-[255px]"
-            />
+            <div className="relative w-[180px] h-[270px]">
+              <Image
+                src={movie1?.attributes?.image?.url}
+                alt={movie1?.attributes?.image?.alt}
+                className="rounded-md"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
 
             <p className="mt-4 mb-8 sm:my-4 h-4">{movie1?.attributes?.title}</p>
           </Link>
@@ -50,13 +55,18 @@ export default function Movies({ id }) {
         <div className="flex flex-col w-6/6 sm:w-1/5 mx-5 items-center sm:justify-center">
           <Link
             href={`/movies/${movie2?.id}`}
-            className="text-center text-xl text-stone-200 hover:text-stone-100 flex flex-col justify-center mb-5"
+            className="flex flex-col items-center text-center text-xl text-stone-200 hover:text-stone-100 justify-center mb-5"
           >
-            <img
-              src={movie2?.attributes?.image?.url}
-              alt={movie1?.attributes?.image?.alt}
-              className="rounded-md max-h-[360px] w-[240px] sm:w-[255px]"
-            />
+            <div className="relative w-[180px] h-[270px]">
+              <Image
+                src={movie2?.attributes?.image?.url}
+                alt={movie2?.attributes?.image?.alt}
+                className="rounded-md"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+
             <p className="mt-4 mb-8 sm:my-4 h-4">{movie2?.attributes?.title}</p>
           </Link>
         </div>
