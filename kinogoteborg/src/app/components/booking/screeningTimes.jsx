@@ -10,14 +10,14 @@ export default function ScreeningTimes({ movieID, setSelectedTime, selectedTime,
     const fetchedDataForTimes = async () => {
       const fetchedData = await fetchScreeningTimes(movieID, selectedDate);
 
-      if (fetchedData.length === 0) {
+      if (fetchedData?.length === 0) {
         const noScreeningTimes = ["No available times"];
 
         setScreeningTimes(noScreeningTimes);
         setSelectedTime(noScreeningTimes[0]);
       } else {
         const screeningStartTimes = fetchedData.map((data) =>
-          data.attributes.startTime.slice(11, 16)
+          data?.attributes?.startTime?.slice(11, 16),
         );
 
         //to sort screening times in ascending order

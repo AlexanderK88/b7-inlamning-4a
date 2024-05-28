@@ -105,9 +105,9 @@ export default function PaymentAsUser({ setBookingState, isModalOpen }) {
         </div>
       </form>
 
-      {newPayment && <NewPaymentForm />}
+      {/* {newPayment && <NewPaymentForm />} */}
       {savedPayment && <SavedPaymentForm />}
-      {updatePayment && <UpdatePaymentForm />}
+      {/* {updatePayment && <UpdatePaymentForm />} */}
     </>
   );
 }

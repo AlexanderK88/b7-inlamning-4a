@@ -23,7 +23,7 @@ export default function ScreeningDates({ movieID, setSelectedDate, selectedDate 
         const todaysYear = todaysDate.getFullYear();
         const screeningDays = new Set();
 
-        fetchedData.forEach((screening) => {
+        fetchedData?.forEach((screening) => {
           const date = new Date(screening.attributes.date);
           const day = date.getDate();
           const month = date.getMonth() + 1;

@@ -22,11 +22,16 @@ const Modal = ({
   seatsToBook,
   uuid,
   userID,
+  session,
+  movieName,
+  selectedDate,
+  selectedTime,
+  setSeatsToBook,
 }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-hidden flex items-center justify-center bg-black bg-opacity-50">
       <div className="flex flex-col items-center justify-center w-full max-w-screen-lg mx-auto px-4 py-8">
-        <div className="bg-[#7E6969] text-white rounded-lg shadow-lg p-6 w-[96vw] md:w-[50vw]">
+        <div className="bg-[#7E6969] text-white rounded-lg shadow-lg p-6 w-[96v] md:min-w-[30vw] md:w-fit ">
           <BookingModal
             isModalOpen={isModalOpen}
             isLogin={isLogin}
@@ -36,6 +41,11 @@ const Modal = ({
             seatsToBook={seatsToBook}
             uuid={uuid}
             userID={userID}
+            session={session}
+            movieName={movieName}
+            time={selectedTime}
+            date={selectedDate}
+            setSeatsToBook={setSeatsToBook}
           />
         </div>
       </div>
@@ -56,6 +66,7 @@ export default function Page({ params }) {
   const [selectedTime, setSelectedTime] = useState(null);
   const [uuid, setUuid] = useState(null);
   const [oldSeats, setOldSeats] = useState(null);
+  const [movieName, setMovieName] = useState();
   const movieID = params.movieID;
   let userID;
 
@@ -87,6 +98,7 @@ export default function Page({ params }) {
               selectedTime,
               session?.user?.id,
             );
+            // console.log('movie ',movieID,'seats ', seatsToBook[0], 'time ',  selectedTime,'date ', selectedDate, 'session ', session?.user?.id);
             setResponse(data);
             setUuid(data.uuid);
             setOldSeats(true);
@@ -106,7 +118,7 @@ export default function Page({ params }) {
     <div className="flex flex-col h-screen m-0 w-[80vw] m-auto">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
         <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-fit">
-          <MovieDetails movieID={movieID} />
+          <MovieDetails movieID={movieID} setMovieName={setMovieName} />
         </div>
 
         <div className="md:col-span-3 flex flex-row align-center justify-center border p-2 ">
@@ -184,6 +196,11 @@ export default function Page({ params }) {
           seatsToBook={seatsToBook}
           uuid={uuid}
           userID={userID}
+          session={session}
+          selectedTime={selectedTime}
+          selectedDate={selectedDate}
+          movieName={movieName}
+          setSeatsToBook={setSeatsToBook}
         />
       )}
     </div>
