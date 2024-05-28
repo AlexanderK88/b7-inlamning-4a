@@ -15,9 +15,9 @@ import { v4 as uuidv4 } from "uuid";
 
 export async function POST(req) {
   const uuid = uuidv4();
+  const { movieID, userID, date, time, seats } = await req.json();
 
   try {
-    const { movieID, userID, date, time, seats } = await req.json();
     await connectToDb();
     // Log the data being passed to .create()
 

@@ -98,6 +98,7 @@ export default function Page({ params }) {
               selectedTime,
               session?.user?.id,
             );
+            // console.log('movie ',movieID,'seats ', seatsToBook[0], 'time ',  selectedTime,'date ', selectedDate, 'session ', session?.user?.id);
             setResponse(data);
             setUuid(data.uuid);
             setOldSeats(true);
