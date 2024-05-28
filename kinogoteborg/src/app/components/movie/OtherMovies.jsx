@@ -39,13 +39,13 @@ export default function Movies({ id }) {
             href={`/movies/${movie1?.id}`}
             className="flex flex-col items-center text-center text-xl text-stone-200 hover:text-stone-100 justify-center mb-5"
           >
-            <div className="relative w-[180px] h-[270px]">
+            <div className="w-[180px] h-[270px]">
               <Image
                 src={movie1?.attributes?.image?.url}
                 alt={movie1?.attributes?.image?.alt}
                 className="rounded-md"
-                layout="fill"
-                objectFit="cover"
+                width={180}
+                height={270}
               />
             </div>
 
@@ -57,13 +57,13 @@ export default function Movies({ id }) {
             href={`/movies/${movie2?.id}`}
             className="flex flex-col items-center text-center text-xl text-stone-200 hover:text-stone-100 justify-center mb-5"
           >
-            <div className="relative w-[180px] h-[270px]">
+            <div className="w-[180px] h-[270px]">
               <Image
                 src={movie2?.attributes?.image?.url}
                 alt={movie2?.attributes?.image?.alt}
                 className="rounded-md"
-                layout="fill"
-                objectFit="cover"
+                width={180}
+                height={270}
               />
             </div>
 
