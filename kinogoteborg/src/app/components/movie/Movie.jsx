@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Reviews from "./Reviews";
 import ReviewForm from "./ReviewForm";
+import Image from "next/image";
 
 export default function Movies({ id }) {
   const [movie, setMovie] = useState(null);
@@ -26,10 +27,12 @@ export default function Movies({ id }) {
   return (
     <div className="flex flex-col-reverse lg:flex-row justify-center items-center gap-8 pb-8 mb-12">
       <div className=" w-5/6 sm:w-4/6 lg:w-1/4 xl:w-1/4 2xl:w-1/6 rounded-md ">
-        <img
+        <Image
           className="rounded-md"
           src={movie?.attributes?.image?.url}
           alt={movie?.attributes?.image?.alt}
+          width={256}
+          height={384}
         />
       </div>
       <div className="text-stone-200 flex flex-col mt-auto w-5/6 sm:w-4/6 lg:w-2/6 gap-8 ">
