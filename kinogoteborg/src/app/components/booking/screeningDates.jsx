@@ -28,15 +28,18 @@ export default function ScreeningDates({ movieID, setSelectedDate, selectedDate 
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
-          if (year === todaysYear && month === todaysMonth) {
+          if (year === todaysYear && (month === todaysMonth || month === (todaysMonth + 1))) {
+            const rightFormatDate = date.toISOString().split('T')[0];
+            if (!screeningDays.has(rightFormatDate)) {
+            }
             screeningDays.add(`${day} ${createMonthName(month)}`);
           }
         });
 
         //to sort screening dates in ascending order
         const sortedScreeningDates = Array.from(screeningDays).sort((a, b) => {
-          const [dayA] = a.split(" ");
-          const [dayB] = b.split(" ");
+          const dayA = new Date(a.rightFormatDate);
+          const dayB = new Date(b.rightFormatDate);
           return Number(dayA) - Number(dayB);
         });
 
@@ -75,8 +78,8 @@ function createMonthName(monthIndex) {
     "Mar",
     "Apr",
     "May",
-    "June",
-    "July",
+    "Jun",
+    "Jul",
     "Aug",
     "Sep",
     "Oct",

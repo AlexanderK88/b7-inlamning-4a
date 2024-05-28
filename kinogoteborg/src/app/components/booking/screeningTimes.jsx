@@ -22,8 +22,12 @@ export default function ScreeningTimes({ movieID, setSelectedTime, selectedTime,
 
         //to sort screening times in ascending order
         const sortedScreeningTimes = Array.from(screeningStartTimes).sort((a, b) => {
-          const [timeA] = a.split(" ");
-          const [timeB] = b.split(" ");
+          const [hourA, minuteA] = a.split(":").map(Number);
+          const [hourB, minuteB] = b.split(":").map(Number);
+          const timeA = new Date();
+          const timeB = new Date();
+          timeA.setHours(hourA, minuteA);
+          timeB.setHours(hourB, minuteB);
           return Number(timeA) - Number(timeB);
         });
 
