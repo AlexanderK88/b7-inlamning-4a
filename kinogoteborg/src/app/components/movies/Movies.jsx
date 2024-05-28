@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
@@ -22,10 +23,12 @@ export default function Movies() {
             key={movie.id}
             className="rounded-md bg-stone-800 w-5/5 max-w-64 m-4 flex flex-col justify-between items-center"
           >
-            <img
+            <Image
               className="w-64 h-96 rounded-md shadow-md"
               src={movie.attributes.image.url}
               alt={movie.attributes.image.alt}
+              width={256}
+              height={384}
             />
             <h2
               className={`${
