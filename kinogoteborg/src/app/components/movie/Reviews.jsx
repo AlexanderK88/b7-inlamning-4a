@@ -27,7 +27,7 @@ export default function Reviews({ isVisible, onClose, setShowReviewForm, setShow
         </button>
         <div className="bg-stone-800 text-stone-200 min-h-[500px] p-10 rounded-lg">
           <h2 className="text-xl text-center">Reviews</h2>
-          <div className="border-solid border-y-2 border-gray-600 max-h-[450px] overflow-scroll">
+          <div className="border-solid border-y-2 border-gray-600 max-h-[450px] overflow-y-auto overflow-x-hidden">
             {reviews.map((review) => {
               return (
                 <div key={review.id} className="border-b-2 border-solid border-gray-500 p-4 ">
