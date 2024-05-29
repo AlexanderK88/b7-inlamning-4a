@@ -115,7 +115,7 @@ export default function Page({ params }) {
   }, [seatsToBook]);
 
   return (
-    <div className="flex flex-col h-screen m-0 w-[80vw] m-auto">
+    <div className="flex flex-col h-screen w-[80vw] m-auto mb-8">
       <div className="grid md:grid-cols-4 md:grid-rows-8 gap-4">
         <div className="md:row-span-6 md:col-start-4 md:row-start-1 border h-fit">
           <MovieDetails movieID={movieID} setMovieName={setMovieName} />
